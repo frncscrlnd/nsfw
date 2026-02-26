@@ -512,16 +512,7 @@ function renderResults(data) {
       <div class="stat-card-label" style="color:${fc.text}">${fw}</div>
       <div class="stat-card-count" style="color:${fc.bg}">${ids.length}</div>
     `;
-    const iw = document.createElement("div"); iw.className = "stat-card-ids";
-    ids.slice(0, 5).forEach(id => iw.appendChild(makeBadge(fw, id, true, () => doSearch(id))));
-    if (ids.length > 5) {
-      const more = document.createElement("span");
-      more.className = "badge sm";
-      more.style.cssText = `background:#111;color:#444;border-color:#222;`;
-      more.textContent = `+${ids.length - 5} more`;
-      iw.appendChild(more);
-    }
-    card.appendChild(iw);
+
     sc.appendChild(card);
   });
 
