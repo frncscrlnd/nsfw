@@ -205,11 +205,6 @@
         <thead>
           <tr>
             <th>ID</th><th>FRAMEWORK</th>
-            <th style="color:#fde047">CVE</th>
-            <th style="color:#60a5fa">CWE</th>
-            <th style="color:#ffbb44">CAPEC</th>
-            <th style="color:#ff8888">ATT&amp;CK</th>
-            <th style="color:#5eead4">D3FEND</th>
           </tr>
         </thead>
         <tbody id="result-tbody"></tbody>
@@ -564,16 +559,6 @@ function renderTable(data) {
       <td><span class="clickable" style="color:${fc.text}" onclick="doSearch('${row.id}')">${row.id}</span></td>
       <td><span class="badge sm" style="background:${fc.dim};color:${fc.text}">${row.f}</span></td>
     `;
-    FW.forEach(f => {
-      const td = document.createElement("td");
-      td.style.textAlign = "center";
-      td.innerHTML = row.f === f
-        ? `<span style="color:${fc.bg}">●</span>`
-        : (data.result[f]||[]).length > 0
-          ? `<span style="color:#333">✓</span>`
-          : `<span style="color:#111">·</span>`;
-      tr.appendChild(td);
-    });
     tb.appendChild(tr);
   });
 }
