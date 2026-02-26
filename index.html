@@ -285,6 +285,7 @@ async function loadDatabases() {
       lines[k].className = 'boot-log-line ok';
     } catch(e) {
       lines[k].className = 'boot-log-line';
+      await new Promise(r => setTimeout(r, 400));
       lines[k].textContent = `[ERR] ${DATA_FILES[k]} — ${e.message}`;
     }
     bootFill.style.width = `${Math.round((i+1)/keys.length*80)}%`;
