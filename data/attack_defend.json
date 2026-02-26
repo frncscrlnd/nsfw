@@ -1,0 +1,4536 @@
+{
+    "T1659": [
+        "D3-DENCR",
+        "D3-DNSAL",
+        "D3-DNSDL",
+        "D3-ET",
+        "D3-FA",
+        "D3-FE",
+        "D3-ITF",
+        "D3-MENCR",
+        "D3-NTA",
+        "D3-OTF",
+        "D3-UA"
+    ],
+    "T1595": [
+        "D3-DE",
+        "D3-DO"
+    ],
+    "T1205.001": [
+        "D3-NI"
+    ],
+    "T1566.002": [
+        "D3-ACH",
+        "D3-CP",
+        "D3-DAM",
+        "D3-DNSAL",
+        "D3-DNSDL",
+        "D3-FA",
+        "D3-ITF",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-NTA",
+        "D3-OTF",
+        "D3-SCF",
+        "D3-SCP",
+        "D3-SFA",
+        "D3-UA"
+    ],
+    "T1562.003": [
+        "D3-ACH",
+        "D3-PH",
+        "D3-SFA"
+    ],
+    "T1053.005": [
+        "D3-DAM",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-PH",
+        "D3-SCF",
+        "D3-SCP",
+        "D3-SFA",
+        "D3-SPP"
+    ],
+    "T1580": [
+        "D3-LFP",
+        "D3-SCF",
+        "D3-SCP"
+    ],
+    "T1542": [
+        "D3-BA",
+        "D3-DAM",
+        "D3-LAM",
+        "D3-NI",
+        "D3-SFA",
+        "D3-SPP",
+        "D3-SU",
+        "D3-TBI"
+    ],
+    "T1599.001": [
+        "D3-DAM",
+        "D3-HBPI",
+        "D3-LAM",
+        "D3-MFA",
+        "D3-NI",
+        "D3-OTP",
+        "D3-SPP"
+    ],
+    "T1505": [
+        "D3-ACH",
+        "D3-BA",
+        "D3-DAM",
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-SBV",
+        "D3-SCF",
+        "D3-SCP",
+        "D3-SFA",
+        "D3-SPP",
+        "D3-TBI"
+    ],
+    "T1591": [
+        "D3-DE",
+        "D3-DO"
+    ],
+    "T1547.007": [
+        "D3-ACH",
+        "D3-EDL",
+        "D3-SCF"
+    ],
+    "T1021.004": [
+        "D3-ACH",
+        "D3-EDL",
+        "D3-LFP",
+        "D3-MFA",
+        "D3-SCF",
+        "D3-SCP"
+    ],
+    "T1036.005": [
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-LFP",
+        "D3-PSEP",
+        "D3-SBV"
+    ],
+    "T1557": [
+        "D3-ACH",
+        "D3-BDI",
+        "D3-DENCR",
+        "D3-EDL",
+        "D3-ET",
+        "D3-FE",
+        "D3-ISVA",
+        "D3-ITF",
+        "D3-MENCR",
+        "D3-NI",
+        "D3-NTA",
+        "D3-OTF",
+        "D3-SCF"
+    ],
+    "T1484": [
+        "D3-DAM",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-SCF",
+        "D3-SCP",
+        "D3-SFA",
+        "D3-SPP"
+    ],
+    "T1677": [
+        "D3-ACH",
+        "D3-CP",
+        "D3-LFP",
+        "D3-SCF",
+        "D3-SCP"
+    ],
+    "T1219.001": [
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-PSEP"
+    ],
+    "T1550.003": [
+        "D3-ANCI",
+        "D3-DAM",
+        "D3-DTP",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-OTP",
+        "D3-SCF",
+        "D3-SCP",
+        "D3-SPP",
+        "D3-UAP"
+    ],
+    "T1216.002": [
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-PSEP"
+    ],
+    "T1558": [
+        "D3-ANCI",
+        "D3-DAM",
+        "D3-DENCR",
+        "D3-DTP",
+        "D3-ET",
+        "D3-FE",
+        "D3-HBPI",
+        "D3-LAM",
+        "D3-MENCR",
+        "D3-OTP",
+        "D3-SFA",
+        "D3-SPP",
+        "D3-UAP"
+    ],
+    "T1671": [
+        "D3-ACH",
+        "D3-DAM",
+        "D3-EDL",
+        "D3-LAM",
+        "D3-SCF",
+        "D3-SFA"
+    ],
+    "T1059.006": [
+        "D3-DAM",
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-FCR",
+        "D3-FH",
+        "D3-LAM",
+        "D3-PA",
+        "D3-PSEP",
+        "D3-SFA"
+    ],
+    "T1021.005": [
+        "D3-ACH",
+        "D3-DAM",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-LAM",
+        "D3-NI",
+        "D3-SCF",
+        "D3-SFA"
+    ],
+    "T1036": [
+        "D3-ANET",
+        "D3-AZET",
+        "D3-DAM",
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-FCR",
+        "D3-FH",
+        "D3-JFAPA",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-PA",
+        "D3-PSEP",
+        "D3-RAPA",
+        "D3-SBV",
+        "D3-SCF",
+        "D3-SCP",
+        "D3-SDA",
+        "D3-SFA",
+        "D3-UDTA",
+        "D3-UGLPA",
+        "D3-WSAA"
+    ],
+    "T1555.006": [
+        "D3-DAM",
+        "D3-LAM",
+        "D3-SPP"
+    ],
+    "T1482": [
+        "D3-BDI",
+        "D3-DAM",
+        "D3-ET",
+        "D3-ISVA",
+        "D3-ITF",
+        "D3-LAM",
+        "D3-SFA"
+    ],
+    "T1219.003": [
+        "D3-IOPR"
+    ],
+    "T1098.001": [
+        "D3-ACH",
+        "D3-BDI",
+        "D3-DAM",
+        "D3-EDL",
+        "D3-ET",
+        "D3-ISVA",
+        "D3-ITF",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-MFA",
+        "D3-SCF",
+        "D3-SCP",
+        "D3-SPP"
+    ],
+    "T1585.003": [
+        "D3-DE",
+        "D3-DO"
+    ],
+    "T1078.002": [
+        "D3-DAM",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-MFA",
+        "D3-OTP",
+        "D3-SCF",
+        "D3-SCP",
+        "D3-SPP"
+    ],
+    "T1505.004": [
+        "D3-DAM",
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-LAM",
+        "D3-PSEP",
+        "D3-SBV",
+        "D3-SFA",
+        "D3-SPP"
+    ],
+    "T1672": [
+        "D3-ACH",
+        "D3-CP"
+    ],
+    "T1556.005": [
+        "D3-DAM",
+        "D3-LAM",
+        "D3-OTP",
+        "D3-SPP"
+    ],
+    "T1053.003": [
+        "D3-DAM",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-SCF",
+        "D3-SCP",
+        "D3-SFA"
+    ],
+    "T1210": [
+        "D3-ACH",
+        "D3-AH",
+        "D3-BDI",
+        "D3-DA",
+        "D3-DAM",
+        "D3-EDL",
+        "D3-EHPV",
+        "D3-ET",
+        "D3-HBPI",
+        "D3-ISVA",
+        "D3-ITF",
+        "D3-LAM",
+        "D3-SCF",
+        "D3-SPP",
+        "D3-SSC",
+        "D3-SU"
+    ],
+    "T1552": [
+        "D3-ANCI",
+        "D3-DAM",
+        "D3-DENCR",
+        "D3-DTP",
+        "D3-ET",
+        "D3-FE",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-MENCR",
+        "D3-NI",
+        "D3-OTP",
+        "D3-PH",
+        "D3-SFA",
+        "D3-SPP",
+        "D3-SU",
+        "D3-UAP"
+    ],
+    "T1543": [
+        "D3-ACH",
+        "D3-ANET",
+        "D3-AZET",
+        "D3-CP",
+        "D3-DAM",
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-JFAPA",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-PH",
+        "D3-RAPA",
+        "D3-SBV",
+        "D3-SCF",
+        "D3-SCP",
+        "D3-SDA",
+        "D3-SFA",
+        "D3-SPP",
+        "D3-UDTA",
+        "D3-UGLPA",
+        "D3-WSAA"
+    ],
+    "T1040": [
+        "D3-BDI",
+        "D3-DENCR",
+        "D3-ET",
+        "D3-FE",
+        "D3-ISVA",
+        "D3-ITF",
+        "D3-LFP",
+        "D3-MENCR",
+        "D3-MFA",
+        "D3-SCF",
+        "D3-SCP"
+    ],
+    "T1557.002": [
+        "D3-ACH",
+        "D3-DENCR",
+        "D3-EDL",
+        "D3-ET",
+        "D3-FE",
+        "D3-ITF",
+        "D3-MENCR",
+        "D3-NI",
+        "D3-NTA",
+        "D3-OTF",
+        "D3-SCF"
+    ],
+    "T1574.006": [
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-PH",
+        "D3-PSEP"
+    ],
+    "T1195": [
+        "D3-BA",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-LFP",
+        "D3-SCF",
+        "D3-SCP",
+        "D3-SU",
+        "D3-TBI"
+    ],
+    "T1553.003": [
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-LFP",
+        "D3-PSEP",
+        "D3-SCP"
+    ],
+    "T1176.001": [
+        "D3-DAM",
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-LAM",
+        "D3-PSEP",
+        "D3-SFA",
+        "D3-SU"
+    ],
+    "T1547.003": [
+        "D3-LFP",
+        "D3-SCP"
+    ],
+    "T1059.010": [
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-PSEP"
+    ],
+    "T1572": [
+        "D3-ITF",
+        "D3-NI",
+        "D3-NTA",
+        "D3-OTF"
+    ],
+    "T1036.008": [
+        "D3-ANET",
+        "D3-AZET",
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-FCR",
+        "D3-FH",
+        "D3-JFAPA",
+        "D3-PA",
+        "D3-PSEP",
+        "D3-RAPA",
+        "D3-SDA",
+        "D3-UDTA",
+        "D3-UGLPA",
+        "D3-WSAA"
+    ],
+    "T1574.005": [
+        "D3-DAM",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-SCF",
+        "D3-SCP",
+        "D3-SFA"
+    ],
+    "T1543.003": [
+        "D3-ANET",
+        "D3-AZET",
+        "D3-DAM",
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-JFAPA",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-PH",
+        "D3-RAPA",
+        "D3-SBV",
+        "D3-SCF",
+        "D3-SCP",
+        "D3-SDA",
+        "D3-SFA",
+        "D3-UDTA",
+        "D3-UGLPA",
+        "D3-WSAA"
+    ],
+    "T1588.006": [
+        "D3-DE",
+        "D3-DO"
+    ],
+    "T1555": [
+        "D3-DAM",
+        "D3-LAM",
+        "D3-OTP",
+        "D3-SPP",
+        "D3-SU"
+    ],
+    "T1588.007": [
+        "D3-DE",
+        "D3-DO"
+    ],
+    "T1027.015": [
+        "D3-FCR",
+        "D3-FH",
+        "D3-PA"
+    ],
+    "T1505.005": [
+        "D3-DAM",
+        "D3-LAM",
+        "D3-SCP",
+        "D3-SFA"
+    ],
+    "T1578": [
+        "D3-DAM",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-SCF",
+        "D3-SCP",
+        "D3-SFA"
+    ],
+    "T1550.002": [
+        "D3-DAM",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-SCF",
+        "D3-SCP",
+        "D3-SPP",
+        "D3-SU"
+    ],
+    "T1568": [
+        "D3-DNSAL",
+        "D3-DNSDL",
+        "D3-FA",
+        "D3-ITF",
+        "D3-NTA",
+        "D3-OTF",
+        "D3-UA"
+    ],
+    "T1574.012": [
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-LFP",
+        "D3-PSEP",
+        "D3-SCF",
+        "D3-SCP"
+    ],
+    "T1190": [
+        "D3-AH",
+        "D3-BDI",
+        "D3-DA",
+        "D3-DAM",
+        "D3-EHPV",
+        "D3-ET",
+        "D3-HBPI",
+        "D3-ISVA",
+        "D3-ITF",
+        "D3-LAM",
+        "D3-NI",
+        "D3-SCF",
+        "D3-SPP",
+        "D3-SSC",
+        "D3-SU"
+    ],
+    "T1102.002": [
+        "D3-DNSAL",
+        "D3-DNSDL",
+        "D3-FA",
+        "D3-ITF",
+        "D3-NTA",
+        "D3-OTF",
+        "D3-UA"
+    ],
+    "T1588.004": [
+        "D3-DE",
+        "D3-DO"
+    ],
+    "T1072": [
+        "D3-ANCI",
+        "D3-BDI",
+        "D3-DAM",
+        "D3-DTP",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-ET",
+        "D3-ISVA",
+        "D3-ITF",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-MFA",
+        "D3-OTP",
+        "D3-SCF",
+        "D3-SCP",
+        "D3-SPP",
+        "D3-SU",
+        "D3-UAP"
+    ],
+    "T1055.002": [
+        "D3-ANET",
+        "D3-AZET",
+        "D3-JFAPA",
+        "D3-RAPA",
+        "D3-SDA",
+        "D3-UDTA",
+        "D3-UGLPA",
+        "D3-WSAA"
+    ],
+    "T1542.001": [
+        "D3-BA",
+        "D3-DAM",
+        "D3-LAM",
+        "D3-SPP",
+        "D3-SU",
+        "D3-TBI"
+    ],
+    "T1059.005": [
+        "D3-ACH",
+        "D3-ANET",
+        "D3-AZET",
+        "D3-DLIC",
+        "D3-DNSAL",
+        "D3-DNSDL",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-FA",
+        "D3-FCR",
+        "D3-FH",
+        "D3-ITF",
+        "D3-JFAPA",
+        "D3-NTA",
+        "D3-OTF",
+        "D3-PA",
+        "D3-PSEP",
+        "D3-RAPA",
+        "D3-SCF",
+        "D3-SDA",
+        "D3-UA",
+        "D3-UDTA",
+        "D3-UGLPA",
+        "D3-WSAA"
+    ],
+    "T1565.003": [
+        "D3-BDI",
+        "D3-ET",
+        "D3-ISVA",
+        "D3-ITF",
+        "D3-LFP"
+    ],
+    "T1037.001": [
+        "D3-SCP"
+    ],
+    "T1574.008": [
+        "D3-DAM",
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-PSEP",
+        "D3-SFA"
+    ],
+    "T1550.004": [
+        "D3-ACH",
+        "D3-CP"
+    ],
+    "T1055.004": [
+        "D3-ANET",
+        "D3-AZET",
+        "D3-JFAPA",
+        "D3-RAPA",
+        "D3-SDA",
+        "D3-UDTA",
+        "D3-UGLPA",
+        "D3-WSAA"
+    ],
+    "T1027.014": [
+        "D3-ANET",
+        "D3-AZET",
+        "D3-FCR",
+        "D3-FH",
+        "D3-JFAPA",
+        "D3-PA",
+        "D3-RAPA",
+        "D3-SDA",
+        "D3-UDTA",
+        "D3-UGLPA",
+        "D3-WSAA"
+    ],
+    "T1569.002": [
+        "D3-ANET",
+        "D3-AZET",
+        "D3-DAM",
+        "D3-JFAPA",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-RAPA",
+        "D3-SDA",
+        "D3-SPP",
+        "D3-UDTA",
+        "D3-UGLPA",
+        "D3-WSAA"
+    ],
+    "T1563.002": [
+        "D3-ACH",
+        "D3-BDI",
+        "D3-DAM",
+        "D3-EDL",
+        "D3-ET",
+        "D3-ISVA",
+        "D3-ITF",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-NI",
+        "D3-PH",
+        "D3-SCF",
+        "D3-SCP",
+        "D3-SFA",
+        "D3-SPP"
+    ],
+    "T1562.013": [
+        "D3-DAM",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-SCF",
+        "D3-SCP",
+        "D3-SFA",
+        "D3-SU"
+    ],
+    "T1021.008": [
+        "D3-ACH",
+        "D3-EDL",
+        "D3-LFP",
+        "D3-SCF",
+        "D3-SCP"
+    ],
+    "T1565.001": [
+        "D3-DENCR",
+        "D3-ET",
+        "D3-FE",
+        "D3-LFP",
+        "D3-MENCR"
+    ],
+    "T1574.010": [
+        "D3-DAM",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-SCF",
+        "D3-SCP",
+        "D3-SFA"
+    ],
+    "T1566.003": [
+        "D3-DAM",
+        "D3-DNSAL",
+        "D3-DNSDL",
+        "D3-FA",
+        "D3-FCR",
+        "D3-FH",
+        "D3-ITF",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-NTA",
+        "D3-OTF",
+        "D3-PA",
+        "D3-SCF",
+        "D3-SCP",
+        "D3-SFA",
+        "D3-UA"
+    ],
+    "T1037.004": [
+        "D3-LFP"
+    ],
+    "T1546.002": [
+        "D3-ACH",
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-PSEP",
+        "D3-SCF"
+    ],
+    "T1595.003": [
+        "D3-ACH",
+        "D3-DE",
+        "D3-DO",
+        "D3-EDL",
+        "D3-SCF"
+    ],
+    "T1542.005": [
+        "D3-BA",
+        "D3-DAM",
+        "D3-ITF",
+        "D3-LAM",
+        "D3-NI",
+        "D3-NTA",
+        "D3-OTF",
+        "D3-PH",
+        "D3-SFA",
+        "D3-SPP",
+        "D3-TBI"
+    ],
+    "T1078.004": [
+        "D3-AL",
+        "D3-ANCI",
+        "D3-ANET",
+        "D3-AZET",
+        "D3-DAM",
+        "D3-DTP",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-MFA",
+        "D3-OTP",
+        "D3-SCF",
+        "D3-SCP",
+        "D3-SPP",
+        "D3-UAP"
+    ],
+    "T1213.004": [
+        "D3-ACH",
+        "D3-CP",
+        "D3-DAM",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-SCF",
+        "D3-SCP",
+        "D3-SFA"
+    ],
+    "T1564.003": [
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-PSEP"
+    ],
+    "T1566": [
+        "D3-ACH",
+        "D3-CP",
+        "D3-DAM",
+        "D3-DNSAL",
+        "D3-DNSDL",
+        "D3-FA",
+        "D3-FCR",
+        "D3-FH",
+        "D3-ITF",
+        "D3-LAM",
+        "D3-NTA",
+        "D3-OTF",
+        "D3-PA",
+        "D3-SFA",
+        "D3-UA"
+    ],
+    "T1583.002": [
+        "D3-DE",
+        "D3-DO"
+    ],
+    "T1087.001": [
+        "D3-PH"
+    ],
+    "T1505.002": [
+        "D3-DAM",
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-LAM",
+        "D3-SBV",
+        "D3-SFA",
+        "D3-SPP"
+    ],
+    "T1552.005": [
+        "D3-ACH",
+        "D3-EDL",
+        "D3-NI",
+        "D3-SCF"
+    ],
+    "T1008": [
+        "D3-ITF",
+        "D3-NTA",
+        "D3-OTF"
+    ],
+    "T1583.004": [
+        "D3-DE",
+        "D3-DO"
+    ],
+    "T1553": [
+        "D3-ACH",
+        "D3-CP",
+        "D3-DAM",
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-LAM",
+        "D3-PH",
+        "D3-PSEP",
+        "D3-SCP",
+        "D3-SPP"
+    ],
+    "T1587.002": [
+        "D3-DE",
+        "D3-DO"
+    ],
+    "T1027.006": [
+        "D3-DA",
+        "D3-HBPI",
+        "D3-SCF"
+    ],
+    "T1212": [
+        "D3-AH",
+        "D3-DA",
+        "D3-EHPV",
+        "D3-HBPI",
+        "D3-ITF",
+        "D3-SCF",
+        "D3-SSC",
+        "D3-SU"
+    ],
+    "T1021.006": [
+        "D3-ACH",
+        "D3-BDI",
+        "D3-DAM",
+        "D3-EDL",
+        "D3-ET",
+        "D3-ISVA",
+        "D3-ITF",
+        "D3-LAM",
+        "D3-SCF",
+        "D3-SPP"
+    ],
+    "T1204.003": [
+        "D3-DAM",
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-ITF",
+        "D3-LAM",
+        "D3-NTA",
+        "D3-OTF",
+        "D3-SBV",
+        "D3-SFA"
+    ],
+    "T1176.002": [
+        "D3-DAM",
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-LAM",
+        "D3-PSEP",
+        "D3-SFA",
+        "D3-SU"
+    ],
+    "T1578.005": [
+        "D3-DAM",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-SCF",
+        "D3-SCP",
+        "D3-SFA"
+    ],
+    "T1222.002": [
+        "D3-DAM",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-SPP"
+    ],
+    "T1559": [
+        "D3-ACH",
+        "D3-ANET",
+        "D3-AZET",
+        "D3-CP",
+        "D3-DA",
+        "D3-DAM",
+        "D3-EDL",
+        "D3-HBPI",
+        "D3-JFAPA",
+        "D3-LAM",
+        "D3-RAPA",
+        "D3-SCF",
+        "D3-SDA",
+        "D3-SPP",
+        "D3-UDTA",
+        "D3-UGLPA",
+        "D3-WSAA"
+    ],
+    "T1612": [
+        "D3-BDI",
+        "D3-DAM",
+        "D3-ET",
+        "D3-ISVA",
+        "D3-ITF",
+        "D3-LAM",
+        "D3-NI",
+        "D3-SFA",
+        "D3-SPP"
+    ],
+    "T1590.006": [
+        "D3-DE",
+        "D3-DO"
+    ],
+    "T1648": [
+        "D3-AL",
+        "D3-ANCI",
+        "D3-ANET",
+        "D3-AZET",
+        "D3-LFP",
+        "D3-SCF",
+        "D3-SCP"
+    ],
+    "T1590.003": [
+        "D3-DE",
+        "D3-DO"
+    ],
+    "T1596.001": [
+        "D3-DE",
+        "D3-DO"
+    ],
+    "T1070.002": [
+        "D3-DENCR",
+        "D3-ET",
+        "D3-FE",
+        "D3-LFP",
+        "D3-MENCR"
+    ],
+    "T1052": [
+        "D3-ACH",
+        "D3-EDL",
+        "D3-IOPR",
+        "D3-SCF"
+    ],
+    "T1587": [
+        "D3-DE",
+        "D3-DO"
+    ],
+    "T1218.015": [
+        "D3-ACH",
+        "D3-AH",
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-EHPV",
+        "D3-ITF",
+        "D3-PSEP",
+        "D3-SCF",
+        "D3-SSC"
+    ],
+    "T1218.005": [
+        "D3-ACH",
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-PSEP",
+        "D3-SCF"
+    ],
+    "T1537": [
+        "D3-ACH",
+        "D3-CP",
+        "D3-LFP",
+        "D3-NI",
+        "D3-SCF",
+        "D3-SCP"
+    ],
+    "T1070": [
+        "D3-DENCR",
+        "D3-ET",
+        "D3-FE",
+        "D3-LFP",
+        "D3-MENCR"
+    ],
+    "T1499.003": [
+        "D3-NI"
+    ],
+    "T1584.004": [
+        "D3-DE",
+        "D3-DO"
+    ],
+    "T1484.001": [
+        "D3-DAM",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-SCF",
+        "D3-SCP",
+        "D3-SFA"
+    ],
+    "T1071": [
+        "D3-ITF",
+        "D3-NI",
+        "D3-NTA",
+        "D3-OTF"
+    ],
+    "T1048.003": [
+        "D3-BDI",
+        "D3-ET",
+        "D3-ISVA",
+        "D3-ITF",
+        "D3-NI",
+        "D3-NTA",
+        "D3-OTF"
+    ],
+    "T1098.004": [
+        "D3-ACH",
+        "D3-EDL",
+        "D3-LFP",
+        "D3-SCF",
+        "D3-SCP"
+    ],
+    "T1539": [
+        "D3-ACH",
+        "D3-CP",
+        "D3-DAM",
+        "D3-DNSAL",
+        "D3-DNSDL",
+        "D3-FA",
+        "D3-ITF",
+        "D3-LAM",
+        "D3-MFA",
+        "D3-NTA",
+        "D3-OTF",
+        "D3-SFA",
+        "D3-SU",
+        "D3-UA"
+    ],
+    "T1619": [
+        "D3-LFP",
+        "D3-SCF",
+        "D3-SCP"
+    ],
+    "T1556.008": [
+        "D3-DAM",
+        "D3-LAM",
+        "D3-PH",
+        "D3-SCP",
+        "D3-SFA"
+    ],
+    "T1548.002": [
+        "D3-DAM",
+        "D3-LAM",
+        "D3-SCF",
+        "D3-SFA",
+        "D3-SPP",
+        "D3-SU"
+    ],
+    "T1505.001": [
+        "D3-DAM",
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-LAM",
+        "D3-SBV",
+        "D3-SFA",
+        "D3-SPP"
+    ],
+    "T1602.001": [
+        "D3-ACH",
+        "D3-BDI",
+        "D3-CP",
+        "D3-DENCR",
+        "D3-ET",
+        "D3-FE",
+        "D3-ISVA",
+        "D3-ITF",
+        "D3-MENCR",
+        "D3-NI",
+        "D3-NTA",
+        "D3-OTF",
+        "D3-SU"
+    ],
+    "T1204": [
+        "D3-ANET",
+        "D3-AZET",
+        "D3-DLIC",
+        "D3-DNSAL",
+        "D3-DNSDL",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-FA",
+        "D3-ITF",
+        "D3-JFAPA",
+        "D3-NTA",
+        "D3-OTF",
+        "D3-PSEP",
+        "D3-RAPA",
+        "D3-SDA",
+        "D3-UA",
+        "D3-UDTA",
+        "D3-UGLPA",
+        "D3-WSAA"
+    ],
+    "T1613": [
+        "D3-BDI",
+        "D3-ET",
+        "D3-ISVA",
+        "D3-ITF",
+        "D3-LFP",
+        "D3-NI",
+        "D3-SCF",
+        "D3-SCP"
+    ],
+    "T1053": [
+        "D3-DAM",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-PH",
+        "D3-SCF",
+        "D3-SCP",
+        "D3-SFA",
+        "D3-SPP"
+    ],
+    "T1137.006": [
+        "D3-ANET",
+        "D3-AZET",
+        "D3-JFAPA",
+        "D3-RAPA",
+        "D3-SDA",
+        "D3-UDTA",
+        "D3-UGLPA",
+        "D3-WSAA"
+    ],
+    "T1589.001": [
+        "D3-DE",
+        "D3-DO"
+    ],
+    "T1592.002": [
+        "D3-DE",
+        "D3-DO"
+    ],
+    "T1105": [
+        "D3-ITF",
+        "D3-NI",
+        "D3-NTA",
+        "D3-OTF"
+    ],
+    "T1047": [
+        "D3-ANET",
+        "D3-AZET",
+        "D3-DAM",
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-JFAPA",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-PSEP",
+        "D3-RAPA",
+        "D3-SCF",
+        "D3-SCP",
+        "D3-SDA",
+        "D3-SPP",
+        "D3-UDTA",
+        "D3-UGLPA",
+        "D3-WSAA"
+    ],
+    "T1132": [
+        "D3-ITF",
+        "D3-NTA",
+        "D3-OTF"
+    ],
+    "T1136.001": [
+        "D3-DAM",
+        "D3-LAM",
+        "D3-MFA",
+        "D3-SPP"
+    ],
+    "T1213.003": [
+        "D3-DAM",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-MFA",
+        "D3-SCF",
+        "D3-SCP",
+        "D3-SFA"
+    ],
+    "T1568.002": [
+        "D3-DNSAL",
+        "D3-DNSDL",
+        "D3-FA",
+        "D3-ITF",
+        "D3-NTA",
+        "D3-OTF",
+        "D3-UA"
+    ],
+    "T1189": [
+        "D3-AH",
+        "D3-DA",
+        "D3-DNSAL",
+        "D3-DNSDL",
+        "D3-EHPV",
+        "D3-FA",
+        "D3-HBPI",
+        "D3-ITF",
+        "D3-NTA",
+        "D3-OTF",
+        "D3-SCF",
+        "D3-SSC",
+        "D3-SU",
+        "D3-UA"
+    ],
+    "T1552.002": [
+        "D3-DAM",
+        "D3-LAM",
+        "D3-OTP",
+        "D3-SFA",
+        "D3-SPP"
+    ],
+    "T1564.006": [
+        "D3-ACH",
+        "D3-DAM",
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-LAM",
+        "D3-PSEP",
+        "D3-SCF",
+        "D3-SFA"
+    ],
+    "T1669": [
+        "D3-BDI",
+        "D3-DENCR",
+        "D3-ET",
+        "D3-FE",
+        "D3-ISVA",
+        "D3-ITF",
+        "D3-MENCR",
+        "D3-MFA"
+    ],
+    "T1218": [
+        "D3-ACH",
+        "D3-AH",
+        "D3-DAM",
+        "D3-DLIC",
+        "D3-DNSAL",
+        "D3-DNSDL",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-EHPV",
+        "D3-FA",
+        "D3-ITF",
+        "D3-LAM",
+        "D3-NI",
+        "D3-NTA",
+        "D3-OTF",
+        "D3-PSEP",
+        "D3-SCF",
+        "D3-SPP",
+        "D3-SSC",
+        "D3-UA"
+    ],
+    "T1055.009": [
+        "D3-ANET",
+        "D3-AZET",
+        "D3-JFAPA",
+        "D3-LFP",
+        "D3-RAPA",
+        "D3-SDA",
+        "D3-UDTA",
+        "D3-UGLPA",
+        "D3-WSAA"
+    ],
+    "T1053.002": [
+        "D3-DAM",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-PH",
+        "D3-SCF",
+        "D3-SCP",
+        "D3-SFA",
+        "D3-SPP"
+    ],
+    "T1556": [
+        "D3-BA",
+        "D3-DAM",
+        "D3-DLIC",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-MFA",
+        "D3-OTP",
+        "D3-PH",
+        "D3-PSEP",
+        "D3-SCF",
+        "D3-SCP",
+        "D3-SFA",
+        "D3-SPP"
+    ],
+    "T1588.002": [
+        "D3-DE",
+        "D3-DO"
+    ],
+    "T1562.002": [
+        "D3-DAM",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-SCF",
+        "D3-SCP",
+        "D3-SFA"
+    ],
+    "T1204.005": [
+        "D3-EAL",
+        "D3-EDL",
+        "D3-ITF",
+        "D3-NTA",
+        "D3-OTF"
+    ],
+    "T1574": [
+        "D3-ANET",
+        "D3-AZET",
+        "D3-DAM",
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-JFAPA",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-PSEP",
+        "D3-RAPA",
+        "D3-SCF",
+        "D3-SCP",
+        "D3-SDA",
+        "D3-SFA",
+        "D3-SU",
+        "D3-UDTA",
+        "D3-UGLPA",
+        "D3-WSAA"
+    ],
+    "T1556.006": [
+        "D3-DAM",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-MFA",
+        "D3-SCF",
+        "D3-SCP",
+        "D3-SFA"
+    ],
+    "T1114.001": [
+        "D3-DENCR",
+        "D3-ET",
+        "D3-FE",
+        "D3-MENCR"
+    ],
+    "T1218.004": [
+        "D3-ACH",
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-PSEP",
+        "D3-SCF"
+    ],
+    "T1098": [
+        "D3-ACH",
+        "D3-BDI",
+        "D3-DAM",
+        "D3-EDL",
+        "D3-ET",
+        "D3-ISVA",
+        "D3-ITF",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-MFA",
+        "D3-PH",
+        "D3-SCF",
+        "D3-SCP",
+        "D3-SPP"
+    ],
+    "T1556.003": [
+        "D3-DAM",
+        "D3-LAM",
+        "D3-MFA",
+        "D3-SPP"
+    ],
+    "T1574.001": [
+        "D3-DAM",
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-LAM",
+        "D3-PSEP",
+        "D3-SCF",
+        "D3-SFA",
+        "D3-SU"
+    ],
+    "T1068": [
+        "D3-AH",
+        "D3-DA",
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-EHPV",
+        "D3-HBPI",
+        "D3-ITF",
+        "D3-PSEP",
+        "D3-SCF",
+        "D3-SSC",
+        "D3-SU"
+    ],
+    "T1530": [
+        "D3-DAM",
+        "D3-DENCR",
+        "D3-ET",
+        "D3-FE",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-MENCR",
+        "D3-MFA",
+        "D3-NI",
+        "D3-SCF",
+        "D3-SCP",
+        "D3-SFA"
+    ],
+    "T1221": [
+        "D3-ACH",
+        "D3-EDL",
+        "D3-FCR",
+        "D3-FH",
+        "D3-ITF",
+        "D3-NTA",
+        "D3-OTF",
+        "D3-PA",
+        "D3-SCF"
+    ],
+    "T1584.001": [
+        "D3-DE",
+        "D3-DO"
+    ],
+    "T1555.005": [
+        "D3-ACH",
+        "D3-CP",
+        "D3-LFP",
+        "D3-OTP",
+        "D3-SCF",
+        "D3-SCP",
+        "D3-SPP",
+        "D3-SU"
+    ],
+    "T1027.010": [
+        "D3-ANET",
+        "D3-AZET",
+        "D3-FCR",
+        "D3-FH",
+        "D3-JFAPA",
+        "D3-PA",
+        "D3-RAPA",
+        "D3-SDA",
+        "D3-UDTA",
+        "D3-UGLPA",
+        "D3-WSAA"
+    ],
+    "T1525": [
+        "D3-DAM",
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-LAM",
+        "D3-SBV",
+        "D3-SFA",
+        "D3-SPP"
+    ],
+    "T1213.006": [
+        "D3-ACH",
+        "D3-CP",
+        "D3-DAM",
+        "D3-DENCR",
+        "D3-ET",
+        "D3-FE",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-MENCR",
+        "D3-SCF",
+        "D3-SCP",
+        "D3-SFA"
+    ],
+    "T1528": [
+        "D3-DAM",
+        "D3-DNSAL",
+        "D3-DNSDL",
+        "D3-FA",
+        "D3-ITF",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-NTA",
+        "D3-OTF",
+        "D3-SCF",
+        "D3-SCP",
+        "D3-SFA",
+        "D3-UA"
+    ],
+    "T1059.002": [
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-PSEP",
+        "D3-SBV"
+    ],
+    "T1542.003": [
+        "D3-BA",
+        "D3-DAM",
+        "D3-LAM",
+        "D3-SPP",
+        "D3-TBI"
+    ],
+    "T1495": [
+        "D3-BA",
+        "D3-DAM",
+        "D3-LAM",
+        "D3-SPP",
+        "D3-SU",
+        "D3-TBI"
+    ],
+    "T1055.012": [
+        "D3-ANET",
+        "D3-AZET",
+        "D3-JFAPA",
+        "D3-RAPA",
+        "D3-SDA",
+        "D3-UDTA",
+        "D3-UGLPA",
+        "D3-WSAA"
+    ],
+    "T1098.003": [
+        "D3-DAM",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-MFA",
+        "D3-SCF",
+        "D3-SCP",
+        "D3-SPP"
+    ],
+    "T1136": [
+        "D3-BDI",
+        "D3-DAM",
+        "D3-ET",
+        "D3-ISVA",
+        "D3-ITF",
+        "D3-LAM",
+        "D3-MFA",
+        "D3-PH",
+        "D3-SPP"
+    ],
+    "T1610": [
+        "D3-BDI",
+        "D3-DAM",
+        "D3-ET",
+        "D3-ISVA",
+        "D3-ITF",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-NI",
+        "D3-SCF",
+        "D3-SCP",
+        "D3-SFA"
+    ],
+    "T1557.003": [
+        "D3-ITF",
+        "D3-NI",
+        "D3-NTA",
+        "D3-OTF"
+    ],
+    "T1547.008": [
+        "D3-BA",
+        "D3-DLIC",
+        "D3-HBPI",
+        "D3-PSEP",
+        "D3-SCF"
+    ],
+    "T1566.001": [
+        "D3-ACH",
+        "D3-CP",
+        "D3-DAM",
+        "D3-DNSAL",
+        "D3-DNSDL",
+        "D3-FA",
+        "D3-FCR",
+        "D3-FH",
+        "D3-ITF",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-NTA",
+        "D3-OTF",
+        "D3-PA",
+        "D3-SCF",
+        "D3-SCP",
+        "D3-SFA",
+        "D3-UA"
+    ],
+    "T1204.004": [
+        "D3-DLIC",
+        "D3-DNSAL",
+        "D3-DNSDL",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-FA",
+        "D3-ITF",
+        "D3-NTA",
+        "D3-OTF",
+        "D3-PSEP",
+        "D3-UA"
+    ],
+    "T1197": [
+        "D3-LFP",
+        "D3-NI",
+        "D3-PH",
+        "D3-SCF",
+        "D3-SCP"
+    ],
+    "T1037.005": [
+        "D3-LFP"
+    ],
+    "T1110.001": [
+        "D3-AL",
+        "D3-ANCI",
+        "D3-ANET",
+        "D3-AZET",
+        "D3-MFA",
+        "D3-OTP",
+        "D3-SPP",
+        "D3-SU"
+    ],
+    "T1195.001": [
+        "D3-EAL",
+        "D3-EDL",
+        "D3-SU"
+    ],
+    "T1059": [
+        "D3-ACH",
+        "D3-ANET",
+        "D3-AZET",
+        "D3-DAM",
+        "D3-DLIC",
+        "D3-DNSAL",
+        "D3-DNSDL",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-FA",
+        "D3-FCR",
+        "D3-FH",
+        "D3-ITF",
+        "D3-JFAPA",
+        "D3-LAM",
+        "D3-NTA",
+        "D3-OTF",
+        "D3-PA",
+        "D3-PSEP",
+        "D3-RAPA",
+        "D3-SBV",
+        "D3-SCF",
+        "D3-SDA",
+        "D3-SFA",
+        "D3-SPP",
+        "D3-UA",
+        "D3-UDTA",
+        "D3-UGLPA",
+        "D3-WSAA"
+    ],
+    "T1553.004": [
+        "D3-ACH",
+        "D3-CP",
+        "D3-PH"
+    ],
+    "T1562.008": [
+        "D3-LFP",
+        "D3-SCF",
+        "D3-SCP"
+    ],
+    "T1222.001": [
+        "D3-DAM",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-SPP"
+    ],
+    "T1674": [
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-IOPR",
+        "D3-PSEP"
+    ],
+    "T1611": [
+        "D3-ACH",
+        "D3-DA",
+        "D3-DAM",
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-HBPI",
+        "D3-LAM",
+        "D3-PSEP",
+        "D3-SCF",
+        "D3-SPP",
+        "D3-SU"
+    ],
+    "T1213": [
+        "D3-ACH",
+        "D3-CP",
+        "D3-DAM",
+        "D3-DENCR",
+        "D3-ET",
+        "D3-FE",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-MENCR",
+        "D3-MFA",
+        "D3-SCF",
+        "D3-SCP",
+        "D3-SFA"
+    ],
+    "T1053.006": [
+        "D3-DAM",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-SCF",
+        "D3-SCP",
+        "D3-SPP"
+    ],
+    "T1129": [
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-PSEP"
+    ],
+    "T1574.009": [
+        "D3-DAM",
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-PSEP",
+        "D3-SFA"
+    ],
+    "T1564": [
+        "D3-DAM",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-FCR",
+        "D3-FH",
+        "D3-LAM",
+        "D3-PA",
+        "D3-SFA"
+    ],
+    "T1552.004": [
+        "D3-DAM",
+        "D3-DENCR",
+        "D3-ET",
+        "D3-FE",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-MENCR",
+        "D3-OTP",
+        "D3-SFA",
+        "D3-SPP"
+    ],
+    "T1090.004": [
+        "D3-NTA"
+    ],
+    "T1218.009": [
+        "D3-ACH",
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-PSEP",
+        "D3-SCF"
+    ],
+    "T1584.007": [
+        "D3-DE",
+        "D3-DO"
+    ],
+    "T1218.002": [
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-LFP",
+        "D3-PSEP"
+    ],
+    "T1134.005": [
+        "D3-ANCI",
+        "D3-DTP",
+        "D3-UAP"
+    ],
+    "T1027.009": [
+        "D3-ANET",
+        "D3-AZET",
+        "D3-FCR",
+        "D3-FH",
+        "D3-JFAPA",
+        "D3-PA",
+        "D3-RAPA",
+        "D3-SDA",
+        "D3-UDTA",
+        "D3-UGLPA",
+        "D3-WSAA"
+    ],
+    "T1498.002": [
+        "D3-NI"
+    ],
+    "T1556.009": [
+        "D3-LFP",
+        "D3-SCF",
+        "D3-SCP"
+    ],
+    "T1557.001": [
+        "D3-ACH",
+        "D3-BDI",
+        "D3-EDL",
+        "D3-ET",
+        "D3-ISVA",
+        "D3-ITF",
+        "D3-NI",
+        "D3-NTA",
+        "D3-OTF",
+        "D3-SCF"
+    ],
+    "T1070.007": [
+        "D3-SCP"
+    ],
+    "T1102": [
+        "D3-DNSAL",
+        "D3-DNSDL",
+        "D3-FA",
+        "D3-ITF",
+        "D3-NTA",
+        "D3-OTF",
+        "D3-UA"
+    ],
+    "T1059.007": [
+        "D3-ACH",
+        "D3-ANET",
+        "D3-AZET",
+        "D3-DLIC",
+        "D3-DNSAL",
+        "D3-DNSDL",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-FA",
+        "D3-ITF",
+        "D3-JFAPA",
+        "D3-NTA",
+        "D3-OTF",
+        "D3-PSEP",
+        "D3-RAPA",
+        "D3-SCF",
+        "D3-SDA",
+        "D3-UA",
+        "D3-UDTA",
+        "D3-UGLPA",
+        "D3-WSAA"
+    ],
+    "T1591.003": [
+        "D3-DE",
+        "D3-DO"
+    ],
+    "T1606.002": [
+        "D3-ANCI",
+        "D3-DAM",
+        "D3-DTP",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-SCF",
+        "D3-SCP",
+        "D3-SFA",
+        "D3-SPP",
+        "D3-UAP"
+    ],
+    "T1046": [
+        "D3-ACH",
+        "D3-BDI",
+        "D3-EDL",
+        "D3-ET",
+        "D3-ISVA",
+        "D3-ITF",
+        "D3-NTA",
+        "D3-OTF",
+        "D3-SCF"
+    ],
+    "T1127.002": [
+        "D3-ACH",
+        "D3-DLIC",
+        "D3-DNSAL",
+        "D3-DNSDL",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-FA",
+        "D3-ITF",
+        "D3-NTA",
+        "D3-OTF",
+        "D3-SBV",
+        "D3-SCF",
+        "D3-UA"
+    ],
+    "T1041": [
+        "D3-ITF",
+        "D3-NTA",
+        "D3-OTF"
+    ],
+    "T1588.003": [
+        "D3-DE",
+        "D3-DO"
+    ],
+    "T1649": [
+        "D3-ACH",
+        "D3-ANCI",
+        "D3-DAM",
+        "D3-DENCR",
+        "D3-DTP",
+        "D3-EDL",
+        "D3-ET",
+        "D3-FE",
+        "D3-LAM",
+        "D3-MENCR",
+        "D3-SCF",
+        "D3-SFA",
+        "D3-UAP"
+    ],
+    "T1599": [
+        "D3-DAM",
+        "D3-HBPI",
+        "D3-LAM",
+        "D3-MFA",
+        "D3-NI",
+        "D3-OTP",
+        "D3-SPP"
+    ],
+    "T1548": [
+        "D3-DAM",
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-PH",
+        "D3-PSEP",
+        "D3-SCF",
+        "D3-SCP",
+        "D3-SFA",
+        "D3-SPP",
+        "D3-SU"
+    ],
+    "T1211": [
+        "D3-AH",
+        "D3-DA",
+        "D3-EHPV",
+        "D3-HBPI",
+        "D3-ITF",
+        "D3-SCF",
+        "D3-SSC",
+        "D3-SU"
+    ],
+    "T1548.004": [
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-PSEP"
+    ],
+    "T1589": [
+        "D3-DE",
+        "D3-DO"
+    ],
+    "T1070.001": [
+        "D3-DENCR",
+        "D3-ET",
+        "D3-FE",
+        "D3-LFP",
+        "D3-MENCR"
+    ],
+    "T1558.002": [
+        "D3-DAM",
+        "D3-DENCR",
+        "D3-ET",
+        "D3-FE",
+        "D3-LAM",
+        "D3-MENCR",
+        "D3-OTP",
+        "D3-SPP"
+    ],
+    "T1596": [
+        "D3-DE",
+        "D3-DO"
+    ],
+    "T1021.001": [
+        "D3-ACH",
+        "D3-BDI",
+        "D3-DAM",
+        "D3-EDL",
+        "D3-ET",
+        "D3-ISVA",
+        "D3-ITF",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-MFA",
+        "D3-NI",
+        "D3-PH",
+        "D3-SCF",
+        "D3-SCP",
+        "D3-SFA",
+        "D3-SPP"
+    ],
+    "T1574.004": [
+        "D3-LFP"
+    ],
+    "T1114": [
+        "D3-DAM",
+        "D3-DENCR",
+        "D3-ET",
+        "D3-FE",
+        "D3-LAM",
+        "D3-MENCR",
+        "D3-MFA",
+        "D3-SFA"
+    ],
+    "T1137.002": [
+        "D3-ACH",
+        "D3-ANET",
+        "D3-AZET",
+        "D3-CP",
+        "D3-JFAPA",
+        "D3-RAPA",
+        "D3-SDA",
+        "D3-UDTA",
+        "D3-UGLPA",
+        "D3-WSAA"
+    ],
+    "T1548.001": [
+        "D3-PH"
+    ],
+    "T1559.002": [
+        "D3-ACH",
+        "D3-ANET",
+        "D3-AZET",
+        "D3-CP",
+        "D3-DA",
+        "D3-EDL",
+        "D3-HBPI",
+        "D3-JFAPA",
+        "D3-RAPA",
+        "D3-SCF",
+        "D3-SDA",
+        "D3-UDTA",
+        "D3-UGLPA",
+        "D3-WSAA"
+    ],
+    "T1602.002": [
+        "D3-ACH",
+        "D3-BDI",
+        "D3-CP",
+        "D3-DENCR",
+        "D3-ET",
+        "D3-FE",
+        "D3-ISVA",
+        "D3-ITF",
+        "D3-MENCR",
+        "D3-NI",
+        "D3-NTA",
+        "D3-OTF",
+        "D3-SU"
+    ],
+    "T1216.001": [
+        "D3-ANET",
+        "D3-AZET",
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-JFAPA",
+        "D3-PSEP",
+        "D3-RAPA",
+        "D3-SDA",
+        "D3-UDTA",
+        "D3-UGLPA",
+        "D3-WSAA"
+    ],
+    "T1037.003": [
+        "D3-LFP"
+    ],
+    "T1546.003": [
+        "D3-ANET",
+        "D3-AZET",
+        "D3-DAM",
+        "D3-JFAPA",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-RAPA",
+        "D3-SCF",
+        "D3-SCP",
+        "D3-SDA",
+        "D3-SPP",
+        "D3-UDTA",
+        "D3-UGLPA",
+        "D3-WSAA"
+    ],
+    "T1114.003": [
+        "D3-ACH",
+        "D3-DAM",
+        "D3-DENCR",
+        "D3-EDL",
+        "D3-ET",
+        "D3-FE",
+        "D3-LAM",
+        "D3-MENCR",
+        "D3-SCF",
+        "D3-SFA"
+    ],
+    "T1547.009": [
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-LFP",
+        "D3-PSEP",
+        "D3-SCF",
+        "D3-SCP"
+    ],
+    "T1578.003": [
+        "D3-DAM",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-SCF",
+        "D3-SCP",
+        "D3-SFA"
+    ],
+    "T1137.004": [
+        "D3-ANET",
+        "D3-AZET",
+        "D3-JFAPA",
+        "D3-RAPA",
+        "D3-SDA",
+        "D3-SU",
+        "D3-UDTA",
+        "D3-UGLPA",
+        "D3-WSAA"
+    ],
+    "T1021": [
+        "D3-ACH",
+        "D3-DAM",
+        "D3-EDL",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-MFA",
+        "D3-NI",
+        "D3-OTP",
+        "D3-SCF",
+        "D3-SCP",
+        "D3-SFA",
+        "D3-SPP"
+    ],
+    "T1104": [
+        "D3-ITF",
+        "D3-NTA",
+        "D3-OTF"
+    ],
+    "T1621": [
+        "D3-AL",
+        "D3-ANCI",
+        "D3-ANET",
+        "D3-AZET",
+        "D3-MFA"
+    ],
+    "T1569": [
+        "D3-ANET",
+        "D3-AZET",
+        "D3-DAM",
+        "D3-JFAPA",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-RAPA",
+        "D3-SCF",
+        "D3-SCP",
+        "D3-SDA",
+        "D3-SPP",
+        "D3-UDTA",
+        "D3-UGLPA",
+        "D3-WSAA"
+    ],
+    "T1585": [
+        "D3-DE",
+        "D3-DO"
+    ],
+    "T1590.005": [
+        "D3-DE",
+        "D3-DO"
+    ],
+    "T1564.008": [
+        "D3-DAM",
+        "D3-LAM",
+        "D3-SFA"
+    ],
+    "T1134": [
+        "D3-DAM",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-SCF",
+        "D3-SCP",
+        "D3-SPP"
+    ],
+    "T1090.002": [
+        "D3-ITF",
+        "D3-NTA",
+        "D3-OTF"
+    ],
+    "T1059.011": [
+        "D3-DAM",
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-LAM",
+        "D3-PSEP",
+        "D3-SFA"
+    ],
+    "T1203": [
+        "D3-AH",
+        "D3-DA",
+        "D3-EHPV",
+        "D3-HBPI",
+        "D3-ITF",
+        "D3-SCF",
+        "D3-SSC",
+        "D3-SU"
+    ],
+    "T1564.012": [
+        "D3-FCR",
+        "D3-FH",
+        "D3-PA"
+    ],
+    "T1666": [
+        "D3-ACH",
+        "D3-CP",
+        "D3-DAM",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-SCF",
+        "D3-SCP",
+        "D3-SFA"
+    ],
+    "T1558.004": [
+        "D3-DAM",
+        "D3-DENCR",
+        "D3-ET",
+        "D3-FE",
+        "D3-LAM",
+        "D3-MENCR",
+        "D3-OTP",
+        "D3-SFA",
+        "D3-SPP"
+    ],
+    "T1598": [
+        "D3-ACH",
+        "D3-CP"
+    ],
+    "T1027.011": [
+        "D3-DAM",
+        "D3-LAM",
+        "D3-SFA"
+    ],
+    "T1078.001": [
+        "D3-MFA",
+        "D3-OTP",
+        "D3-SPP"
+    ],
+    "T1003": [
+        "D3-ANCI",
+        "D3-ANET",
+        "D3-AZET",
+        "D3-BA",
+        "D3-DAM",
+        "D3-DENCR",
+        "D3-DLIC",
+        "D3-DTP",
+        "D3-ET",
+        "D3-FE",
+        "D3-HBPI",
+        "D3-JFAPA",
+        "D3-LAM",
+        "D3-MENCR",
+        "D3-OTP",
+        "D3-PH",
+        "D3-PSEP",
+        "D3-RAPA",
+        "D3-SCF",
+        "D3-SDA",
+        "D3-SPP",
+        "D3-UAP",
+        "D3-UDTA",
+        "D3-UGLPA",
+        "D3-WSAA"
+    ],
+    "T1036.001": [
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-SBV"
+    ],
+    "T1176": [
+        "D3-DAM",
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-LAM",
+        "D3-PSEP",
+        "D3-SFA",
+        "D3-SU"
+    ],
+    "T1011": [
+        "D3-ACH",
+        "D3-EDL",
+        "D3-PH",
+        "D3-SCF"
+    ],
+    "T1136.003": [
+        "D3-BDI",
+        "D3-DAM",
+        "D3-ET",
+        "D3-ISVA",
+        "D3-ITF",
+        "D3-LAM",
+        "D3-MFA",
+        "D3-SPP"
+    ],
+    "T1489": [
+        "D3-BDI",
+        "D3-ET",
+        "D3-ISVA",
+        "D3-ITF",
+        "D3-LFP",
+        "D3-SCF",
+        "D3-SCP"
+    ],
+    "T1546.013": [
+        "D3-ACH",
+        "D3-CP",
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-LFP",
+        "D3-SBV"
+    ],
+    "T1095": [
+        "D3-BDI",
+        "D3-DAM",
+        "D3-ET",
+        "D3-ISVA",
+        "D3-ITF",
+        "D3-LAM",
+        "D3-NI",
+        "D3-NTA",
+        "D3-OTF",
+        "D3-SFA"
+    ],
+    "T1550.001": [
+        "D3-AL",
+        "D3-ANCI",
+        "D3-ANET",
+        "D3-AZET",
+        "D3-DAM",
+        "D3-DENCR",
+        "D3-DNSAL",
+        "D3-DNSDL",
+        "D3-ET",
+        "D3-FA",
+        "D3-FE",
+        "D3-ITF",
+        "D3-LAM",
+        "D3-MENCR",
+        "D3-NTA",
+        "D3-OTF",
+        "D3-SFA",
+        "D3-UA"
+    ],
+    "T1218.012": [
+        "D3-ACH",
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-NI",
+        "D3-PSEP",
+        "D3-SCF"
+    ],
+    "T1601.001": [
+        "D3-BA",
+        "D3-DAM",
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-HBPI",
+        "D3-LAM",
+        "D3-MFA",
+        "D3-OTP",
+        "D3-SBV",
+        "D3-SPP",
+        "D3-TBI"
+    ],
+    "T1003.008": [
+        "D3-DAM",
+        "D3-LAM",
+        "D3-OTP",
+        "D3-SPP"
+    ],
+    "T1106": [
+        "D3-ANET",
+        "D3-AZET",
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-JFAPA",
+        "D3-PSEP",
+        "D3-RAPA",
+        "D3-SDA",
+        "D3-UDTA",
+        "D3-UGLPA",
+        "D3-WSAA"
+    ],
+    "T1547.005": [
+        "D3-BA",
+        "D3-DLIC",
+        "D3-PSEP",
+        "D3-SCF"
+    ],
+    "T1601": [
+        "D3-BA",
+        "D3-DAM",
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-HBPI",
+        "D3-LAM",
+        "D3-MFA",
+        "D3-OTP",
+        "D3-SBV",
+        "D3-SPP",
+        "D3-TBI"
+    ],
+    "T1071.004": [
+        "D3-ITF",
+        "D3-NI",
+        "D3-NTA",
+        "D3-OTF"
+    ],
+    "T1602": [
+        "D3-ACH",
+        "D3-BDI",
+        "D3-CP",
+        "D3-DENCR",
+        "D3-ET",
+        "D3-FE",
+        "D3-ISVA",
+        "D3-ITF",
+        "D3-MENCR",
+        "D3-NI",
+        "D3-NTA",
+        "D3-OTF",
+        "D3-SU"
+    ],
+    "T1586.001": [
+        "D3-DE",
+        "D3-DO"
+    ],
+    "T1574.011": [
+        "D3-SCP"
+    ],
+    "T1090.003": [
+        "D3-NI"
+    ],
+    "T1003.003": [
+        "D3-DAM",
+        "D3-DENCR",
+        "D3-ET",
+        "D3-FE",
+        "D3-LAM",
+        "D3-MENCR",
+        "D3-OTP",
+        "D3-SPP"
+    ],
+    "T1553.006": [
+        "D3-BA",
+        "D3-DAM",
+        "D3-LAM",
+        "D3-SCP",
+        "D3-SPP",
+        "D3-TBI"
+    ],
+    "T1048": [
+        "D3-BDI",
+        "D3-ET",
+        "D3-ISVA",
+        "D3-ITF",
+        "D3-LFP",
+        "D3-NI",
+        "D3-NTA",
+        "D3-OTF",
+        "D3-SCF",
+        "D3-SCP"
+    ],
+    "T1558.003": [
+        "D3-DAM",
+        "D3-DENCR",
+        "D3-ET",
+        "D3-FE",
+        "D3-LAM",
+        "D3-MENCR",
+        "D3-OTP",
+        "D3-SPP"
+    ],
+    "T1589.003": [
+        "D3-DE",
+        "D3-DO"
+    ],
+    "T1543.004": [
+        "D3-DAM",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-SCF",
+        "D3-SCP",
+        "D3-SFA"
+    ],
+    "T1547.006": [
+        "D3-DAM",
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-FCR",
+        "D3-FH",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-PA",
+        "D3-PSEP",
+        "D3-SCF",
+        "D3-SCP",
+        "D3-SPP"
+    ],
+    "T1134.003": [
+        "D3-DAM",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-SCF",
+        "D3-SCP",
+        "D3-SPP"
+    ],
+    "T1550": [
+        "D3-AL",
+        "D3-ANCI",
+        "D3-ANET",
+        "D3-AZET",
+        "D3-DAM",
+        "D3-DTP",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-OTP",
+        "D3-SCF",
+        "D3-SCP",
+        "D3-SFA",
+        "D3-SPP",
+        "D3-UAP"
+    ],
+    "T1552.006": [
+        "D3-ANCI",
+        "D3-DAM",
+        "D3-DTP",
+        "D3-LAM",
+        "D3-SFA",
+        "D3-SU",
+        "D3-UAP"
+    ],
+    "T1213.001": [
+        "D3-DAM",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-SCF",
+        "D3-SCP",
+        "D3-SFA"
+    ],
+    "T1127.003": [
+        "D3-ACH",
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-PSEP",
+        "D3-SCF"
+    ],
+    "T1134.001": [
+        "D3-DAM",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-SCF",
+        "D3-SCP",
+        "D3-SPP"
+    ],
+    "T1205": [
+        "D3-ACH",
+        "D3-EDL",
+        "D3-NI",
+        "D3-SCF"
+    ],
+    "T1110.004": [
+        "D3-AL",
+        "D3-ANCI",
+        "D3-ANET",
+        "D3-AZET",
+        "D3-LFP",
+        "D3-MFA",
+        "D3-OTP",
+        "D3-SCF",
+        "D3-SCP",
+        "D3-SPP"
+    ],
+    "T1565.002": [
+        "D3-DENCR",
+        "D3-ET",
+        "D3-FE",
+        "D3-MENCR"
+    ],
+    "T1594": [
+        "D3-DE",
+        "D3-DO"
+    ],
+    "T1048.001": [
+        "D3-BDI",
+        "D3-ET",
+        "D3-ISVA",
+        "D3-ITF",
+        "D3-NI",
+        "D3-NTA",
+        "D3-OTF"
+    ],
+    "T1609": [
+        "D3-ACH",
+        "D3-DAM",
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-NI",
+        "D3-PSEP",
+        "D3-SCF",
+        "D3-SCP",
+        "D3-SPP"
+    ],
+    "T1119": [
+        "D3-DENCR",
+        "D3-ET",
+        "D3-FE",
+        "D3-MENCR"
+    ],
+    "T1071.003": [
+        "D3-ITF",
+        "D3-NI",
+        "D3-NTA",
+        "D3-OTF"
+    ],
+    "T1136.002": [
+        "D3-BDI",
+        "D3-DAM",
+        "D3-ET",
+        "D3-ISVA",
+        "D3-ITF",
+        "D3-LAM",
+        "D3-MFA",
+        "D3-PH",
+        "D3-SPP"
+    ],
+    "T1078": [
+        "D3-AL",
+        "D3-ANCI",
+        "D3-ANET",
+        "D3-AZET",
+        "D3-DAM",
+        "D3-DTP",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-MFA",
+        "D3-OTP",
+        "D3-SCF",
+        "D3-SCP",
+        "D3-SPP",
+        "D3-UAP"
+    ],
+    "T1078.003": [
+        "D3-DAM",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-MFA",
+        "D3-OTP",
+        "D3-SCF",
+        "D3-SCP",
+        "D3-SPP"
+    ],
+    "T1048.002": [
+        "D3-BDI",
+        "D3-ET",
+        "D3-ISVA",
+        "D3-ITF",
+        "D3-NI",
+        "D3-NTA",
+        "D3-OTF"
+    ],
+    "T1055.014": [
+        "D3-ANET",
+        "D3-AZET",
+        "D3-JFAPA",
+        "D3-RAPA",
+        "D3-SDA",
+        "D3-UDTA",
+        "D3-UGLPA",
+        "D3-WSAA"
+    ],
+    "T1055.013": [
+        "D3-ANET",
+        "D3-AZET",
+        "D3-JFAPA",
+        "D3-RAPA",
+        "D3-SDA",
+        "D3-UDTA",
+        "D3-UGLPA",
+        "D3-WSAA"
+    ],
+    "T1654": [
+        "D3-LFP",
+        "D3-SCF",
+        "D3-SCP"
+    ],
+    "T1565": [
+        "D3-BDI",
+        "D3-DENCR",
+        "D3-ET",
+        "D3-FE",
+        "D3-ISVA",
+        "D3-ITF",
+        "D3-LFP",
+        "D3-MENCR"
+    ],
+    "T1003.001": [
+        "D3-ANET",
+        "D3-AZET",
+        "D3-BA",
+        "D3-DAM",
+        "D3-DLIC",
+        "D3-HBPI",
+        "D3-JFAPA",
+        "D3-LAM",
+        "D3-OTP",
+        "D3-PH",
+        "D3-PSEP",
+        "D3-RAPA",
+        "D3-SCF",
+        "D3-SDA",
+        "D3-SPP",
+        "D3-UDTA",
+        "D3-UGLPA",
+        "D3-WSAA"
+    ],
+    "T1218.001": [
+        "D3-DLIC",
+        "D3-DNSAL",
+        "D3-DNSDL",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-FA",
+        "D3-ITF",
+        "D3-NTA",
+        "D3-OTF",
+        "D3-PSEP",
+        "D3-UA"
+    ],
+    "T1606.001": [
+        "D3-ACH",
+        "D3-CP",
+        "D3-DAM",
+        "D3-LAM",
+        "D3-SFA"
+    ],
+    "T1498": [
+        "D3-NI"
+    ],
+    "T1546.011": [
+        "D3-SCF",
+        "D3-SU"
+    ],
+    "T1484.002": [
+        "D3-DAM",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-SCF",
+        "D3-SCP",
+        "D3-SPP"
+    ],
+    "T1098.002": [
+        "D3-ACH",
+        "D3-DAM",
+        "D3-EDL",
+        "D3-LAM",
+        "D3-MFA",
+        "D3-SCF",
+        "D3-SPP"
+    ],
+    "T1562.011": [
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-PSEP"
+    ],
+    "T1219": [
+        "D3-ACH",
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-IOPR",
+        "D3-ITF",
+        "D3-NI",
+        "D3-NTA",
+        "D3-OTF",
+        "D3-PSEP",
+        "D3-SCF"
+    ],
+    "T1608.006": [
+        "D3-DE",
+        "D3-DO"
+    ],
+    "T1216": [
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-PSEP"
+    ],
+    "T1052.001": [
+        "D3-ACH",
+        "D3-EDL",
+        "D3-IOPR",
+        "D3-SCF"
+    ],
+    "T1055.003": [
+        "D3-ANET",
+        "D3-AZET",
+        "D3-JFAPA",
+        "D3-RAPA",
+        "D3-SDA",
+        "D3-UDTA",
+        "D3-UGLPA",
+        "D3-WSAA"
+    ],
+    "T1553.005": [
+        "D3-ACH",
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-PSEP",
+        "D3-SCF"
+    ],
+    "T1053.007": [
+        "D3-DAM",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-SCF",
+        "D3-SCP",
+        "D3-SPP"
+    ],
+    "T1098.005": [
+        "D3-MFA"
+    ],
+    "T1587.003": [
+        "D3-DE",
+        "D3-DO"
+    ],
+    "T1597.001": [
+        "D3-DE",
+        "D3-DO"
+    ],
+    "T1059.013": [
+        "D3-DAM",
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-LAM",
+        "D3-PSEP",
+        "D3-SPP"
+    ],
+    "T1562.010": [
+        "D3-ACH",
+        "D3-CP",
+        "D3-EDL",
+        "D3-SCF"
+    ],
+    "T1110.002": [
+        "D3-MFA",
+        "D3-OTP",
+        "D3-SPP"
+    ],
+    "T1598.003": [
+        "D3-ACH",
+        "D3-CP"
+    ],
+    "T1059.001": [
+        "D3-ACH",
+        "D3-DAM",
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-FCR",
+        "D3-FH",
+        "D3-LAM",
+        "D3-PA",
+        "D3-PSEP",
+        "D3-SBV",
+        "D3-SCF",
+        "D3-SPP"
+    ],
+    "T1574.007": [
+        "D3-DAM",
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-PSEP",
+        "D3-SFA"
+    ],
+    "T1218.008": [
+        "D3-ACH",
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-PSEP",
+        "D3-SCF"
+    ],
+    "T1091": [
+        "D3-ACH",
+        "D3-ANET",
+        "D3-AZET",
+        "D3-EDL",
+        "D3-IOPR",
+        "D3-JFAPA",
+        "D3-RAPA",
+        "D3-SCF",
+        "D3-SDA",
+        "D3-UDTA",
+        "D3-UGLPA",
+        "D3-WSAA"
+    ],
+    "T1562.006": [
+        "D3-ACH",
+        "D3-CP",
+        "D3-LFP",
+        "D3-SCF",
+        "D3-SCP"
+    ],
+    "T1562": [
+        "D3-ACH",
+        "D3-CP",
+        "D3-DAM",
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-PSEP",
+        "D3-SCF",
+        "D3-SCP",
+        "D3-SFA"
+    ],
+    "T1499.002": [
+        "D3-NI"
+    ],
+    "T1585.001": [
+        "D3-DE",
+        "D3-DO"
+    ],
+    "T1499": [
+        "D3-NI"
+    ],
+    "T1213.005": [
+        "D3-DAM",
+        "D3-LAM",
+        "D3-SFA"
+    ],
+    "T1547.013": [
+        "D3-EAL",
+        "D3-EDL",
+        "D3-LFP",
+        "D3-SCF",
+        "D3-SCP"
+    ],
+    "T1102.001": [
+        "D3-DNSAL",
+        "D3-DNSDL",
+        "D3-FA",
+        "D3-ITF",
+        "D3-NTA",
+        "D3-OTF",
+        "D3-UA"
+    ],
+    "T1204.002": [
+        "D3-ANET",
+        "D3-AZET",
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-JFAPA",
+        "D3-PSEP",
+        "D3-RAPA",
+        "D3-SDA",
+        "D3-UDTA",
+        "D3-UGLPA",
+        "D3-WSAA"
+    ],
+    "T1546.006": [
+        "D3-DAM",
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-LAM",
+        "D3-PSEP",
+        "D3-SBV",
+        "D3-SFA"
+    ],
+    "T1589.002": [
+        "D3-DE",
+        "D3-DO"
+    ],
+    "T1087": [
+        "D3-LFP",
+        "D3-PH",
+        "D3-SCF",
+        "D3-SCP"
+    ],
+    "T1134.002": [
+        "D3-DAM",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-SCF",
+        "D3-SCP",
+        "D3-SPP"
+    ],
+    "T1137": [
+        "D3-ACH",
+        "D3-ANET",
+        "D3-AZET",
+        "D3-CP",
+        "D3-EDL",
+        "D3-JFAPA",
+        "D3-RAPA",
+        "D3-SCF",
+        "D3-SDA",
+        "D3-SU",
+        "D3-UDTA",
+        "D3-UGLPA",
+        "D3-WSAA"
+    ],
+    "T1593.002": [
+        "D3-DE",
+        "D3-DO"
+    ],
+    "T1110.003": [
+        "D3-AL",
+        "D3-ANCI",
+        "D3-ANET",
+        "D3-AZET",
+        "D3-MFA",
+        "D3-OTP",
+        "D3-SPP"
+    ],
+    "T1562.012": [
+        "D3-DAM",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-SCF",
+        "D3-SCP",
+        "D3-SFA"
+    ],
+    "T1570": [
+        "D3-ITF",
+        "D3-NI",
+        "D3-NTA",
+        "D3-OTF"
+    ],
+    "T1200": [
+        "D3-IOPR",
+        "D3-NI"
+    ],
+    "T1573.001": [
+        "D3-ITF",
+        "D3-NTA",
+        "D3-OTF"
+    ],
+    "T1187": [
+        "D3-NI",
+        "D3-OTP",
+        "D3-SPP"
+    ],
+    "T1583.007": [
+        "D3-DE",
+        "D3-DO"
+    ],
+    "T1546.010": [
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-PSEP",
+        "D3-SU"
+    ],
+    "T1027.012": [
+        "D3-ANET",
+        "D3-AZET",
+        "D3-FCR",
+        "D3-FH",
+        "D3-JFAPA",
+        "D3-PA",
+        "D3-RAPA",
+        "D3-SDA",
+        "D3-UDTA",
+        "D3-UGLPA",
+        "D3-WSAA"
+    ],
+    "T1606": [
+        "D3-ACH",
+        "D3-CP",
+        "D3-DAM",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-SCF",
+        "D3-SCP",
+        "D3-SFA",
+        "D3-SPP"
+    ],
+    "T1558.005": [
+        "D3-DAM",
+        "D3-HBPI",
+        "D3-LAM",
+        "D3-SFA"
+    ],
+    "T1559.001": [
+        "D3-DA",
+        "D3-DAM",
+        "D3-HBPI",
+        "D3-LAM",
+        "D3-SCF",
+        "D3-SPP"
+    ],
+    "T1564.004": [
+        "D3-LFP"
+    ],
+    "T1195.003": [
+        "D3-BA",
+        "D3-TBI"
+    ],
+    "T1543.001": [
+        "D3-LFP"
+    ],
+    "T1003.006": [
+        "D3-ANCI",
+        "D3-DAM",
+        "D3-DTP",
+        "D3-LAM",
+        "D3-OTP",
+        "D3-SPP",
+        "D3-UAP"
+    ],
+    "T1554": [
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-SBV"
+    ],
+    "T1499.004": [
+        "D3-NI"
+    ],
+    "T1213.002": [
+        "D3-DAM",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-SCF",
+        "D3-SCP",
+        "D3-SFA"
+    ],
+    "T1071.002": [
+        "D3-ITF",
+        "D3-NI",
+        "D3-NTA",
+        "D3-OTF"
+    ],
+    "T1542.004": [
+        "D3-BA",
+        "D3-DAM",
+        "D3-ITF",
+        "D3-LAM",
+        "D3-NTA",
+        "D3-OTF",
+        "D3-SFA",
+        "D3-TBI"
+    ],
+    "T1587.001": [
+        "D3-DE",
+        "D3-DO"
+    ],
+    "T1003.005": [
+        "D3-ANCI",
+        "D3-DAM",
+        "D3-DTP",
+        "D3-LAM",
+        "D3-OTP",
+        "D3-PH",
+        "D3-SPP",
+        "D3-UAP"
+    ],
+    "T1003.002": [
+        "D3-DAM",
+        "D3-LAM",
+        "D3-OTP",
+        "D3-PH",
+        "D3-SPP"
+    ],
+    "T1601.002": [
+        "D3-BA",
+        "D3-DAM",
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-HBPI",
+        "D3-LAM",
+        "D3-MFA",
+        "D3-OTP",
+        "D3-SBV",
+        "D3-SPP",
+        "D3-TBI"
+    ],
+    "T1059.004": [
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-PSEP"
+    ],
+    "T1578.001": [
+        "D3-DAM",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-SCF",
+        "D3-SCP",
+        "D3-SFA"
+    ],
+    "T1021.003": [
+        "D3-ACH",
+        "D3-BDI",
+        "D3-DA",
+        "D3-DAM",
+        "D3-EDL",
+        "D3-ET",
+        "D3-HBPI",
+        "D3-ISVA",
+        "D3-ITF",
+        "D3-LAM",
+        "D3-SCF",
+        "D3-SPP"
+    ],
+    "T1535": [
+        "D3-ACH",
+        "D3-CP"
+    ],
+    "T1557.004": [
+        "D3-ITF",
+        "D3-NTA",
+        "D3-OTF"
+    ],
+    "T1204.001": [
+        "D3-DNSAL",
+        "D3-DNSDL",
+        "D3-FA",
+        "D3-ITF",
+        "D3-NTA",
+        "D3-OTF",
+        "D3-UA"
+    ],
+    "T1133": [
+        "D3-ACH",
+        "D3-BDI",
+        "D3-DNSAL",
+        "D3-DNSDL",
+        "D3-EDL",
+        "D3-ET",
+        "D3-FA",
+        "D3-ISVA",
+        "D3-ITF",
+        "D3-MFA",
+        "D3-NI",
+        "D3-NTA",
+        "D3-OTF",
+        "D3-SCF",
+        "D3-UA"
+    ],
+    "T1608.001": [
+        "D3-DE",
+        "D3-DO"
+    ],
+    "T1552.008": [
+        "D3-DAM",
+        "D3-LAM",
+        "D3-SFA"
+    ],
+    "T1070.003": [
+        "D3-ACH",
+        "D3-LFP",
+        "D3-SFA"
+    ],
+    "T1543.002": [
+        "D3-DAM",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-SCF",
+        "D3-SCP",
+        "D3-SPP"
+    ],
+    "T1485.001": [
+        "D3-LFP",
+        "D3-SCF",
+        "D3-SCP"
+    ],
+    "T1003.004": [
+        "D3-DAM",
+        "D3-LAM",
+        "D3-OTP",
+        "D3-SPP"
+    ],
+    "T1586.002": [
+        "D3-DE",
+        "D3-DO"
+    ],
+    "T1562.001": [
+        "D3-DAM",
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-PSEP",
+        "D3-SCF",
+        "D3-SCP",
+        "D3-SFA"
+    ],
+    "T1556.007": [
+        "D3-DAM",
+        "D3-LAM",
+        "D3-MFA",
+        "D3-SFA",
+        "D3-SPP"
+    ],
+    "T1137.001": [
+        "D3-ACH",
+        "D3-ANET",
+        "D3-AZET",
+        "D3-EDL",
+        "D3-JFAPA",
+        "D3-RAPA",
+        "D3-SCF",
+        "D3-SDA",
+        "D3-UDTA",
+        "D3-UGLPA",
+        "D3-WSAA"
+    ],
+    "T1114.002": [
+        "D3-DENCR",
+        "D3-ET",
+        "D3-FE",
+        "D3-MENCR",
+        "D3-MFA"
+    ],
+    "T1590": [
+        "D3-DE",
+        "D3-DO"
+    ],
+    "T1055": [
+        "D3-ANET",
+        "D3-AZET",
+        "D3-DAM",
+        "D3-JFAPA",
+        "D3-LAM",
+        "D3-RAPA",
+        "D3-SDA",
+        "D3-SPP",
+        "D3-UDTA",
+        "D3-UGLPA",
+        "D3-WSAA"
+    ],
+    "T1222": [
+        "D3-DAM",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-SPP"
+    ],
+    "T1547.004": [
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-LFP",
+        "D3-PSEP",
+        "D3-SCF",
+        "D3-SCP"
+    ],
+    "T1563.001": [
+        "D3-ACH",
+        "D3-DAM",
+        "D3-EDL",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-OTP",
+        "D3-SCF",
+        "D3-SPP"
+    ],
+    "T1070.008": [
+        "D3-DAM",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-SFA"
+    ],
+    "T1681": [
+        "D3-DE",
+        "D3-DO"
+    ],
+    "T1608.004": [
+        "D3-DE",
+        "D3-DO"
+    ],
+    "T1003.007": [
+        "D3-DAM",
+        "D3-LAM",
+        "D3-OTP",
+        "D3-SPP"
+    ],
+    "T1556.001": [
+        "D3-BA",
+        "D3-DAM",
+        "D3-DLIC",
+        "D3-LAM",
+        "D3-MFA",
+        "D3-PSEP",
+        "D3-SCF",
+        "D3-SPP"
+    ],
+    "T1001.001": [
+        "D3-ITF",
+        "D3-NTA",
+        "D3-OTF"
+    ],
+    "T1548.003": [
+        "D3-DAM",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-PH",
+        "D3-SPP"
+    ],
+    "T1552.007": [
+        "D3-BDI",
+        "D3-DAM",
+        "D3-ET",
+        "D3-ISVA",
+        "D3-ITF",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-NI",
+        "D3-SCF",
+        "D3-SCP",
+        "D3-SPP"
+    ],
+    "T1070.009": [
+        "D3-LFP"
+    ],
+    "T1547.002": [
+        "D3-BA",
+        "D3-DLIC",
+        "D3-PSEP",
+        "D3-SCF"
+    ],
+    "T1553.001": [
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-PSEP"
+    ],
+    "T1112": [
+        "D3-SCP"
+    ],
+    "T1563": [
+        "D3-ACH",
+        "D3-BDI",
+        "D3-DAM",
+        "D3-EDL",
+        "D3-ET",
+        "D3-ISVA",
+        "D3-ITF",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-OTP",
+        "D3-SCF",
+        "D3-SCP",
+        "D3-SPP"
+    ],
+    "T1001": [
+        "D3-ITF",
+        "D3-NTA",
+        "D3-OTF"
+    ],
+    "T1583.005": [
+        "D3-DE",
+        "D3-DO"
+    ],
+    "T1571": [
+        "D3-BDI",
+        "D3-ET",
+        "D3-ISVA",
+        "D3-ITF",
+        "D3-NTA",
+        "D3-OTF"
+    ],
+    "T1555.004": [
+        "D3-ACH",
+        "D3-EDL",
+        "D3-SCF"
+    ],
+    "T1092": [
+        "D3-ACH",
+        "D3-EDL",
+        "D3-PH",
+        "D3-SCF"
+    ],
+    "T1027.013": [
+        "D3-ANET",
+        "D3-AZET",
+        "D3-FCR",
+        "D3-FH",
+        "D3-JFAPA",
+        "D3-PA",
+        "D3-RAPA",
+        "D3-SDA",
+        "D3-UDTA",
+        "D3-UGLPA",
+        "D3-WSAA"
+    ],
+    "T1090.001": [
+        "D3-ITF",
+        "D3-NTA",
+        "D3-OTF"
+    ],
+    "T1574.013": [
+        "D3-ANET",
+        "D3-AZET",
+        "D3-JFAPA",
+        "D3-RAPA",
+        "D3-SDA",
+        "D3-UDTA",
+        "D3-UGLPA",
+        "D3-WSAA"
+    ],
+    "T1596.004": [
+        "D3-DE",
+        "D3-DO"
+    ],
+    "T1597": [
+        "D3-DE",
+        "D3-DO"
+    ],
+    "T1199": [
+        "D3-BDI",
+        "D3-ET",
+        "D3-ISVA",
+        "D3-ITF",
+        "D3-LFP",
+        "D3-MFA",
+        "D3-SCF",
+        "D3-SCP"
+    ],
+    "T1567": [
+        "D3-DNSAL",
+        "D3-DNSDL",
+        "D3-FA",
+        "D3-ITF",
+        "D3-NTA",
+        "D3-OTF",
+        "D3-UA"
+    ],
+    "T1543.005": [
+        "D3-ACH",
+        "D3-CP",
+        "D3-LFP",
+        "D3-SCF",
+        "D3-SCP"
+    ],
+    "T1087.004": [
+        "D3-DAM",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-SCF",
+        "D3-SCP",
+        "D3-SFA"
+    ],
+    "T1591.001": [
+        "D3-DE",
+        "D3-DO"
+    ],
+    "T1218.013": [
+        "D3-ACH",
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-PSEP",
+        "D3-SCF"
+    ],
+    "T1205.002": [
+        "D3-NI"
+    ],
+    "T1127": [
+        "D3-ACH",
+        "D3-DLIC",
+        "D3-DNSAL",
+        "D3-DNSDL",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-FA",
+        "D3-ITF",
+        "D3-NTA",
+        "D3-OTF",
+        "D3-PSEP",
+        "D3-SCF",
+        "D3-UA"
+    ],
+    "T1675": [
+        "D3-LFP",
+        "D3-SCF",
+        "D3-SCP"
+    ],
+    "T1185": [
+        "D3-LFP",
+        "D3-SCF",
+        "D3-SCP"
+    ],
+    "T1055.011": [
+        "D3-ANET",
+        "D3-AZET",
+        "D3-JFAPA",
+        "D3-RAPA",
+        "D3-SDA",
+        "D3-UDTA",
+        "D3-UGLPA",
+        "D3-WSAA"
+    ],
+    "T1555.001": [
+        "D3-OTP",
+        "D3-SPP"
+    ],
+    "T1657": [
+        "D3-LFP",
+        "D3-SCF",
+        "D3-SCP"
+    ],
+    "T1583.006": [
+        "D3-DE",
+        "D3-DO"
+    ],
+    "T1490": [
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-LFP",
+        "D3-PH",
+        "D3-PSEP",
+        "D3-SCF",
+        "D3-SCP"
+    ],
+    "T1219.002": [
+        "D3-ACH",
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-NI",
+        "D3-PSEP",
+        "D3-SCF"
+    ],
+    "T1498.001": [
+        "D3-NI"
+    ],
+    "T1552.001": [
+        "D3-DAM",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-OTP",
+        "D3-SFA",
+        "D3-SPP"
+    ],
+    "T1021.002": [
+        "D3-DAM",
+        "D3-LAM",
+        "D3-NI",
+        "D3-OTP",
+        "D3-SPP"
+    ],
+    "T1560.001": [
+        "D3-DAM",
+        "D3-LAM",
+        "D3-SFA"
+    ],
+    "T1036.007": [
+        "D3-PH"
+    ],
+    "T1059.008": [
+        "D3-DAM",
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-PSEP",
+        "D3-SCF",
+        "D3-SCP",
+        "D3-SPP"
+    ],
+    "T1137.005": [
+        "D3-ANET",
+        "D3-AZET",
+        "D3-JFAPA",
+        "D3-RAPA",
+        "D3-SDA",
+        "D3-SU",
+        "D3-UDTA",
+        "D3-UGLPA",
+        "D3-WSAA"
+    ],
+    "T1584.005": [
+        "D3-DE",
+        "D3-DO"
+    ],
+    "T1595.001": [
+        "D3-DE",
+        "D3-DO"
+    ],
+    "T1036.012": [
+        "D3-DAM",
+        "D3-LAM",
+        "D3-SFA"
+    ],
+    "T1548.006": [
+        "D3-DAM",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-SFA",
+        "D3-SPP"
+    ],
+    "T1584.003": [
+        "D3-DE",
+        "D3-DO"
+    ],
+    "T1029": [
+        "D3-ITF",
+        "D3-NTA",
+        "D3-OTF"
+    ],
+    "T1597.002": [
+        "D3-DE",
+        "D3-DO"
+    ],
+    "T1592.004": [
+        "D3-DE",
+        "D3-DO"
+    ],
+    "T1592": [
+        "D3-DE",
+        "D3-DO"
+    ],
+    "T1564.014": [
+        "D3-ANET",
+        "D3-AZET",
+        "D3-JFAPA",
+        "D3-RAPA",
+        "D3-SDA",
+        "D3-UDTA",
+        "D3-UGLPA",
+        "D3-WSAA"
+    ],
+    "T1562.007": [
+        "D3-DAM",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-SCF",
+        "D3-SCP",
+        "D3-SFA"
+    ],
+    "T1218.011": [
+        "D3-AH",
+        "D3-EHPV",
+        "D3-ITF",
+        "D3-SSC"
+    ],
+    "T1486": [
+        "D3-ANET",
+        "D3-AZET",
+        "D3-JFAPA",
+        "D3-RAPA",
+        "D3-SDA",
+        "D3-UDTA",
+        "D3-UGLPA",
+        "D3-WSAA"
+    ],
+    "T1556.002": [
+        "D3-PH"
+    ],
+    "T1218.007": [
+        "D3-ACH",
+        "D3-DAM",
+        "D3-EDL",
+        "D3-LAM",
+        "D3-SCF",
+        "D3-SPP"
+    ],
+    "T1560": [
+        "D3-DAM",
+        "D3-LAM",
+        "D3-SFA"
+    ],
+    "T1590.002": [
+        "D3-ACH",
+        "D3-CP"
+    ],
+    "T1037": [
+        "D3-LFP",
+        "D3-SCP"
+    ],
+    "T1585.002": [
+        "D3-DE",
+        "D3-DO"
+    ],
+    "T1087.002": [
+        "D3-PH"
+    ],
+    "T1564.007": [
+        "D3-ACH",
+        "D3-EDL",
+        "D3-SCF"
+    ],
+    "T1071.005": [
+        "D3-ITF",
+        "D3-NI",
+        "D3-NTA",
+        "D3-OTF"
+    ],
+    "T1027": [
+        "D3-ANET",
+        "D3-AZET",
+        "D3-DAM",
+        "D3-FCR",
+        "D3-FH",
+        "D3-JFAPA",
+        "D3-LAM",
+        "D3-PA",
+        "D3-RAPA",
+        "D3-SDA",
+        "D3-SFA",
+        "D3-UDTA",
+        "D3-UGLPA",
+        "D3-WSAA"
+    ],
+    "T1562.009": [
+        "D3-ACH",
+        "D3-CP",
+        "D3-DAM",
+        "D3-LAM",
+        "D3-SPP"
+    ],
+    "T1037.002": [
+        "D3-LFP"
+    ],
+    "T1030": [
+        "D3-ITF",
+        "D3-NTA",
+        "D3-OTF"
+    ],
+    "T1027.017": [
+        "D3-DA",
+        "D3-HBPI",
+        "D3-SCF"
+    ],
+    "T1080": [
+        "D3-AH",
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-EHPV",
+        "D3-FCR",
+        "D3-FH",
+        "D3-ITF",
+        "D3-LFP",
+        "D3-PA",
+        "D3-PSEP",
+        "D3-SSC"
+    ],
+    "T1555.003": [
+        "D3-DNSAL",
+        "D3-DNSDL",
+        "D3-FA",
+        "D3-ITF",
+        "D3-LFP",
+        "D3-NTA",
+        "D3-OTF",
+        "D3-OTP",
+        "D3-SCF",
+        "D3-SCP",
+        "D3-SPP",
+        "D3-SU",
+        "D3-UA"
+    ],
+    "T1546": [
+        "D3-DAM",
+        "D3-LAM",
+        "D3-SPP",
+        "D3-SU"
+    ],
+    "T1090": [
+        "D3-ITF",
+        "D3-NI",
+        "D3-NTA",
+        "D3-OTF"
+    ],
+    "T1499.001": [
+        "D3-NI"
+    ],
+    "T1027.002": [
+        "D3-FCR",
+        "D3-FH",
+        "D3-PA"
+    ],
+    "T1564.002": [
+        "D3-PH"
+    ],
+    "T1598.002": [
+        "D3-ACH",
+        "D3-CP"
+    ],
+    "T1027.016": [
+        "D3-FCR",
+        "D3-FH",
+        "D3-PA"
+    ],
+    "T1573.002": [
+        "D3-ITF",
+        "D3-NTA",
+        "D3-OTF"
+    ],
+    "T1127.001": [
+        "D3-ACH",
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-PSEP",
+        "D3-SCF"
+    ],
+    "T1558.001": [
+        "D3-ANCI",
+        "D3-DAM",
+        "D3-DTP",
+        "D3-LAM",
+        "D3-SPP",
+        "D3-UAP"
+    ],
+    "T1059.003": [
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-PSEP"
+    ],
+    "T1011.001": [
+        "D3-ACH",
+        "D3-EDL",
+        "D3-PH",
+        "D3-SCF"
+    ],
+    "T1593.003": [
+        "D3-DAM",
+        "D3-LAM",
+        "D3-SFA"
+    ],
+    "T1552.003": [
+        "D3-PH"
+    ],
+    "T1218.014": [
+        "D3-ACH",
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-PSEP",
+        "D3-SCF"
+    ],
+    "T1578.002": [
+        "D3-DAM",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-SCF",
+        "D3-SCP",
+        "D3-SFA"
+    ],
+    "T1485": [
+        "D3-LFP",
+        "D3-MFA",
+        "D3-SCF",
+        "D3-SCP"
+    ],
+    "T1056.003": [
+        "D3-DAM",
+        "D3-LAM",
+        "D3-SPP"
+    ],
+    "T1595.002": [
+        "D3-DE",
+        "D3-DO"
+    ],
+    "T1562.004": [
+        "D3-DAM",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-SCF",
+        "D3-SCP",
+        "D3-SFA"
+    ],
+    "T1583": [
+        "D3-DE",
+        "D3-DO"
+    ],
+    "T1220": [
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-PSEP"
+    ],
+    "T1098.006": [
+        "D3-LFP",
+        "D3-MFA",
+        "D3-SCF",
+        "D3-SCP"
+    ],
+    "T1135": [
+        "D3-PH"
+    ],
+    "T1546.014": [
+        "D3-ACH",
+        "D3-EDL",
+        "D3-SCF"
+    ],
+    "T1591.002": [
+        "D3-DE",
+        "D3-DO"
+    ],
+    "T1218.010": [
+        "D3-AH",
+        "D3-EHPV",
+        "D3-ITF",
+        "D3-SSC"
+    ],
+    "T1102.003": [
+        "D3-DNSAL",
+        "D3-DNSDL",
+        "D3-FA",
+        "D3-ITF",
+        "D3-NTA",
+        "D3-OTF",
+        "D3-UA"
+    ],
+    "T1055.008": [
+        "D3-ANET",
+        "D3-AZET",
+        "D3-DAM",
+        "D3-JFAPA",
+        "D3-LAM",
+        "D3-RAPA",
+        "D3-SDA",
+        "D3-SPP",
+        "D3-UDTA",
+        "D3-UGLPA",
+        "D3-WSAA"
+    ],
+    "T1059.009": [
+        "D3-DAM",
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-LAM",
+        "D3-PSEP",
+        "D3-SPP"
+    ],
+    "T1110": [
+        "D3-AL",
+        "D3-ANCI",
+        "D3-ANET",
+        "D3-AZET",
+        "D3-LFP",
+        "D3-MFA",
+        "D3-OTP",
+        "D3-SCF",
+        "D3-SCP",
+        "D3-SPP"
+    ],
+    "T1548.005": [
+        "D3-LFP",
+        "D3-SCF",
+        "D3-SCP"
+    ],
+    "T1592.001": [
+        "D3-DE",
+        "D3-DO"
+    ],
+    "T1538": [
+        "D3-LFP",
+        "D3-SCF",
+        "D3-SCP"
+    ],
+    "T1584.002": [
+        "D3-DE",
+        "D3-DO"
+    ],
+    "T1556.004": [
+        "D3-DAM",
+        "D3-LAM",
+        "D3-MFA",
+        "D3-SPP"
+    ],
+    "T1584.006": [
+        "D3-DE",
+        "D3-DO"
+    ],
+    "T1590.004": [
+        "D3-DE",
+        "D3-DO"
+    ],
+    "T1546.004": [
+        "D3-LFP"
+    ],
+    "T1505.003": [
+        "D3-ACH",
+        "D3-EDL",
+        "D3-LFP",
+        "D3-SCF",
+        "D3-SCP"
+    ],
+    "T1569.003": [
+        "D3-LFP",
+        "D3-SCF",
+        "D3-SCP"
+    ],
+    "T1586.003": [
+        "D3-DE",
+        "D3-DO"
+    ],
+    "T1071.001": [
+        "D3-ITF",
+        "D3-NI",
+        "D3-NTA",
+        "D3-OTF"
+    ],
+    "T1573": [
+        "D3-ITF",
+        "D3-NTA",
+        "D3-OTF"
+    ],
+    "T1001.002": [
+        "D3-ITF",
+        "D3-NTA",
+        "D3-OTF"
+    ],
+    "T1583.001": [
+        "D3-DE",
+        "D3-DO"
+    ],
+    "T1574.014": [
+        "D3-LFP"
+    ],
+    "T1590.001": [
+        "D3-DE",
+        "D3-DO"
+    ],
+    "T1006": [
+        "D3-ANET",
+        "D3-AZET",
+        "D3-JFAPA",
+        "D3-LFP",
+        "D3-RAPA",
+        "D3-SCF",
+        "D3-SCP",
+        "D3-SDA",
+        "D3-UDTA",
+        "D3-UGLPA",
+        "D3-WSAA"
+    ],
+    "T1608.003": [
+        "D3-DE",
+        "D3-DO"
+    ],
+    "T1021.007": [
+        "D3-DAM",
+        "D3-LAM",
+        "D3-MFA",
+        "D3-SPP"
+    ],
+    "T1583.003": [
+        "D3-DE",
+        "D3-DO"
+    ],
+    "T1587.004": [
+        "D3-DE",
+        "D3-DO"
+    ],
+    "T1001.003": [
+        "D3-ITF",
+        "D3-NTA",
+        "D3-OTF"
+    ],
+    "T1588.001": [
+        "D3-DE",
+        "D3-DO"
+    ],
+    "T1546.008": [
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-NI",
+        "D3-PH",
+        "D3-PSEP"
+    ],
+    "T1653": [
+        "D3-DAM",
+        "D3-LAM",
+        "D3-SFA"
+    ],
+    "T1020.001": [
+        "D3-DENCR",
+        "D3-ET",
+        "D3-FE",
+        "D3-LFP",
+        "D3-MENCR",
+        "D3-SCF",
+        "D3-SCP"
+    ],
+    "T1542.002": [
+        "D3-SU"
+    ],
+    "T1036.010": [
+        "D3-DAM",
+        "D3-LAM",
+        "D3-LFP",
+        "D3-SCF",
+        "D3-SCP",
+        "D3-SFA"
+    ],
+    "T1547.012": [
+        "D3-LFP",
+        "D3-SCF",
+        "D3-SCP"
+    ],
+    "T1567.002": [
+        "D3-DNSAL",
+        "D3-DNSDL",
+        "D3-FA",
+        "D3-ITF",
+        "D3-NTA",
+        "D3-OTF",
+        "D3-UA"
+    ],
+    "T1137.003": [
+        "D3-ANET",
+        "D3-AZET",
+        "D3-JFAPA",
+        "D3-RAPA",
+        "D3-SDA",
+        "D3-SU",
+        "D3-UDTA",
+        "D3-UGLPA",
+        "D3-WSAA"
+    ],
+    "T1586": [
+        "D3-DE",
+        "D3-DO"
+    ],
+    "T1505.006": [
+        "D3-BA",
+        "D3-DAM",
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-LAM",
+        "D3-SBV",
+        "D3-SFA",
+        "D3-TBI"
+    ],
+    "T1588": [
+        "D3-DE",
+        "D3-DO"
+    ],
+    "T1596.003": [
+        "D3-DE",
+        "D3-DO"
+    ],
+    "T1592.003": [
+        "D3-DE",
+        "D3-DO"
+    ],
+    "T1546.009": [
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-PSEP"
+    ],
+    "T1583.008": [
+        "D3-DE",
+        "D3-DO"
+    ],
+    "T1567.001": [
+        "D3-DNSAL",
+        "D3-DNSDL",
+        "D3-FA",
+        "D3-ITF",
+        "D3-NTA",
+        "D3-OTF",
+        "D3-UA"
+    ],
+    "T1567.003": [
+        "D3-DNSAL",
+        "D3-DNSDL",
+        "D3-FA",
+        "D3-ITF",
+        "D3-NTA",
+        "D3-OTF",
+        "D3-UA"
+    ],
+    "T1195.002": [
+        "D3-SU"
+    ],
+    "T1201": [
+        "D3-OTP",
+        "D3-SPP"
+    ],
+    "T1608.005": [
+        "D3-DE",
+        "D3-DO"
+    ],
+    "T1569.001": [
+        "D3-LFP",
+        "D3-SCF",
+        "D3-SCP"
+    ],
+    "T1596.002": [
+        "D3-DE",
+        "D3-DO"
+    ],
+    "T1588.005": [
+        "D3-DE",
+        "D3-DO"
+    ],
+    "T1218.003": [
+        "D3-ACH",
+        "D3-DLIC",
+        "D3-EAL",
+        "D3-EDL",
+        "D3-PSEP",
+        "D3-SCF"
+    ],
+    "T1593": [
+        "D3-DAM",
+        "D3-LAM",
+        "D3-SFA"
+    ],
+    "T1608": [
+        "D3-DE",
+        "D3-DO"
+    ],
+    "T1036.003": [
+        "D3-LFP"
+    ],
+    "T1055.005": [
+        "D3-ANET",
+        "D3-AZET",
+        "D3-JFAPA",
+        "D3-RAPA",
+        "D3-SDA",
+        "D3-UDTA",
+        "D3-UGLPA",
+        "D3-WSAA"
+    ],
+    "T1584.008": [
+        "D3-DE",
+        "D3-DO"
+    ],
+    "T1591.004": [
+        "D3-DE",
+        "D3-DO"
+    ],
+    "T1667": [
+        "D3-ACH",
+        "D3-CP"
+    ],
+    "T1132.001": [
+        "D3-ITF",
+        "D3-NTA",
+        "D3-OTF"
+    ],
+    "T1584": [
+        "D3-DE",
+        "D3-DO"
+    ],
+    "T1055.001": [
+        "D3-ANET",
+        "D3-AZET",
+        "D3-JFAPA",
+        "D3-RAPA",
+        "D3-SDA",
+        "D3-UDTA",
+        "D3-UGLPA",
+        "D3-WSAA"
+    ],
+    "T1132.002": [
+        "D3-ITF",
+        "D3-NTA",
+        "D3-OTF"
+    ],
+    "T1651": [
+        "D3-DAM",
+        "D3-LAM",
+        "D3-SPP"
+    ],
+    "T1596.005": [
+        "D3-DE",
+        "D3-DO"
+    ],
+    "T1593.001": [
+        "D3-DE",
+        "D3-DO"
+    ],
+    "T1650": [
+        "D3-DE",
+        "D3-DO"
+    ],
+    "T1608.002": [
+        "D3-DE",
+        "D3-DO"
+    ],
+    "T1055.015": [
+        "D3-ANET",
+        "D3-AZET",
+        "D3-JFAPA",
+        "D3-RAPA",
+        "D3-SDA",
+        "D3-UDTA",
+        "D3-UGLPA",
+        "D3-WSAA"
+    ]
+}
