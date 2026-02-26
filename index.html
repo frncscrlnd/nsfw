@@ -402,17 +402,17 @@ function getRelated(inputId) {
 //  SEARCH LOGIC 
 // ─────────────────────────────────────────────
 function searchIds(queryIds) {
-  if (!queryIds.length) return { error: "Nessun ID fornito" };
+  if (!queryIds.length) return { error: "No ID was given" };
 
   const firstId = queryIds[0];
   let finalR = getRelated(firstId);
-  if (!finalR) return { error: `ID non riconosciuto: ${firstId}` };
+  if (!finalR) return { error: `Unrecognized ID: ${firstId}` };
 
   for (const nextId of queryIds.slice(1)) {
     const existsInGraph = FW.some(fw => finalR[fw].has(nextId));
     if (!existsInGraph) {
       return {
-        error: `L'ID ${nextId} non è correlato alla selezione attuale e non può essere aggiunto.`,
+        error: `ID ${nextId} is not linked to the current selection.`,
         popLast: true,
       };
     }
@@ -423,7 +423,7 @@ function searchIds(queryIds) {
   }
 
   const total = FW.reduce((s, fw) => s + finalR[fw].size, 0);
-  if (total === 0) return { error: "La combinazione di questi ID non produce risultati comuni." };
+  if (total === 0) return { error: "Combining these IDs produces no results" };
 
   return {
     ids_cercati: queryIds,
@@ -504,7 +504,7 @@ function renderTags() {
 }
 
 function renderResults(data) {
-  $("result-total").textContent = `${data.total} risultati totali`;
+  $("result-total").textContent = `${data.total} total results`;
 
   // Stat cards
   const sc = $("stat-cards"); sc.innerHTML = "";
