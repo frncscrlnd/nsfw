@@ -27,7 +27,6 @@
     overflow-x: hidden;
   }
 
-  /* scanlines overlay */
   body::before {
     content: '';
     position: fixed;
@@ -60,7 +59,7 @@
   .boot-bar-fill { height: 100%; background: var(--green); width: 0%; transition: width 0.3s ease; }
 
   /* ── layout ── */
-  .main { max-width: 1200px; margin: 0 auto; padding: 48px 36px; }
+  .main { max-width: 1400px; margin: 0 auto; padding: 48px 36px; }
 
   .header-sub   { color: var(--green); font-size: 0.62rem; letter-spacing: 0.25em; margin-bottom: 8px; }
   .header-title {
@@ -137,24 +136,94 @@
   }
   .stat-card-label  { font-size: 0.7rem; letter-spacing: 0.15em; font-weight: 700; margin-bottom: 8px; }
   .stat-card-count  { font-size: 2rem; font-weight: 900; line-height: 1; margin-bottom: 12px; }
-  .stat-card-ids    { display: flex; gap: 6px; flex-wrap: wrap; }
 
-  .filter-tabs { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
-  .filter-btn {
-    background: transparent; border: 1px solid #2a2a2a; color: #666;
-    border-radius: 4px; padding: 6px 16px; cursor: pointer;
-    font-size: 0.75rem; font-family: inherit; transition: all 0.15s;
+  /* ── COLUMNAR TABLE ── */
+  .col-table-wrap {
+    overflow-x: auto;
+    border-radius: 8px;
+    border: 1px solid var(--border);
   }
-  .filter-btn.active { border-color: var(--green); color: var(--green); }
 
-  .table-wrap { overflow-x: auto; border-radius: 8px; border: 1px solid var(--border); }
-  table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
-  th {
-    padding: 14px; text-align: left; color: #445;
-    font-size: 0.7rem; letter-spacing: 0.1em;
-    background: #0d1117; border-bottom: 1px solid var(--border);
+  .col-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.82rem;
+    table-layout: fixed;
   }
-  td { padding: 12px 14px; border-bottom: 1px solid #111; }
+
+  .col-table thead tr th {
+    padding: 14px 12px;
+    text-align: left;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    font-weight: 900;
+    background: #0d1117;
+    border-bottom: 2px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 2;
+  }
+
+  .col-table thead tr th .col-header-inner {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .col-header-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+    flex-shrink: 0;
+  }
+
+  .col-header-count {
+    margin-left: auto;
+    font-size: 0.65rem;
+    font-weight: 400;
+    opacity: 0.6;
+    background: rgba(255,255,255,0.05);
+    border-radius: 3px;
+    padding: 2px 6px;
+  }
+
+  .col-table tbody tr td {
+    padding: 8px 12px;
+    border-bottom: 1px solid #0f1118;
+    border-right: 1px solid #111620;
+    vertical-align: top;
+  }
+
+  .col-table tbody tr td:last-child {
+    border-right: none;
+  }
+
+  /* alternating row tint per column - done via cell background */
+  .col-table tbody tr:hover td {
+    background: rgba(255,255,255,0.015);
+  }
+
+  .col-cell-id {
+    display: block;
+    font-size: 0.78rem;
+    padding: 3px 0;
+    cursor: pointer;
+    transition: color 0.12s;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .col-cell-id:hover {
+    filter: brightness(1.4);
+    text-decoration: underline;
+  }
+
+  .col-empty {
+    color: #222;
+    font-size: 0.7rem;
+    font-style: italic;
+  }
 
   /* ── empty state ── */
   .empty-state { text-align: center; color: #1a2a1a; margin-top: 100px; }
@@ -199,15 +268,13 @@
       <div style="color:#555;font-size:0.75rem;" id="result-total"></div>
     </div>
     <div class="stat-cards" id="stat-cards"></div>
-    <div class="filter-tabs" id="filter-tabs"></div>
-    <div class="table-wrap">
-      <table>
+
+    <div class="col-table-wrap">
+      <table class="col-table" id="col-table">
         <thead>
-          <tr>
-            <th>ID</th><th>FRAMEWORK</th>
-          </tr>
+          <tr id="col-thead-row"></tr>
         </thead>
-        <tbody id="result-tbody"></tbody>
+        <tbody id="col-tbody"></tbody>
       </table>
     </div>
   </div>
@@ -245,11 +312,10 @@ const FW_CFG = {
 // ─────────────────────────────────────────────
 //  STATE
 // ─────────────────────────────────────────────
-let DB = {};           // raw JSON maps
-let INV = {};          // inverted maps
-let ALL_IDS = [];      // all known IDs for autocomplete
+let DB = {};
+let INV = {};
+let ALL_IDS = [];
 let selectedIds = [];
-let activeFilter = "ALL";
 let acTimeout = null;
 
 // ─────────────────────────────────────────────
@@ -286,7 +352,6 @@ async function loadDatabases() {
     bootFill.style.width = `${Math.round((i+1)/keys.length*80)}%`;
   }
 
-  // Build inverted maps
   const invertLine = bootLine('building index...');
   DB.cve_cwe      = DB.cve_cwe      || {};
   DB.cwe_capec    = DB.cwe_capec    || {};
@@ -310,7 +375,6 @@ async function loadDatabases() {
 
   await new Promise(r => setTimeout(r, 400));
 
-  // Fade out boot screen
   const bs = document.getElementById('boot-screen');
   bs.classList.add('hidden');
   document.getElementById('app').style.display = 'block';
@@ -499,7 +563,7 @@ function renderTags() {
 }
 
 function renderResults(data) {
-  $("result-total").textContent = `${data.total} total results`;
+  $("result-total").textContent = `${data.total} total ${data.total === 1 ? 'result' : 'results'}`;
 
   // Stat cards
   const sc = $("stat-cards"); sc.innerHTML = "";
@@ -515,42 +579,69 @@ function renderResults(data) {
     sc.appendChild(card);
   });
 
-  renderFilterTabs(data);
-  renderTable(data);
+  renderColumnarTable(data);
   rs.style.display = "block";
   es.style.display = "none";
 }
 
-function renderFilterTabs(data) {
-  const ft = $("filter-tabs"); ft.innerHTML = "";
-  const allRows = [];
-  FW.forEach(f => (data.result[f]||[]).forEach(id => allRows.push({id, f})));
+// ─────────────────────────────────────────────
+//  COLUMNAR TABLE
+// ─────────────────────────────────────────────
+function renderColumnarTable(data) {
+  // Build header
+  const thead = $("col-thead-row");
+  thead.innerHTML = "";
 
-  ["ALL", ...FW].forEach(f => {
-    const count = f === "ALL" ? allRows.length : (data.result[f]||[]).length;
-    const btn = document.createElement("button");
-    btn.className = "filter-btn" + (activeFilter === f ? " active" : "");
-    btn.textContent = `${f} (${count})`;
-    btn.onclick = () => { activeFilter = f; renderFilterTabs(data); renderTable(data); };
-    ft.appendChild(btn);
-  });
-}
-
-function renderTable(data) {
-  const tb = $("result-tbody"); tb.innerHTML = "";
-  const rows = [];
-  FW.forEach(f => (data.result[f]||[]).forEach(id => rows.push({f, id})));
-  const filtered = activeFilter === "ALL" ? rows : rows.filter(r => r.f === activeFilter);
-
-  filtered.forEach(row => {
-    const tr = document.createElement("tr");
-    const fc = FW_CFG[row.f];
-    tr.innerHTML = `
-      <td><span class="clickable" style="color:${fc.text}" onclick="doSearch('${row.id}')">${row.id}</span></td>
-      <td><span class="badge sm" style="background:${fc.dim};color:${fc.text}">${row.f}</span></td>
+  FW.forEach(fw => {
+    const fc = FW_CFG[fw];
+    const ids = data.result[fw] || [];
+    const th = document.createElement("th");
+    th.style.cssText = `color:${fc.text}; border-top: 3px solid ${fc.bg}; border-right: 1px solid #111620;`;
+    th.innerHTML = `
+      <div class="col-header-inner">
+        <span class="col-header-dot" style="background:${fc.bg}"></span>
+        <span>${fw}</span>
+        <span class="col-header-count">${ids.length}</span>
+      </div>
     `;
-    tb.appendChild(tr);
+    thead.appendChild(th);
   });
+
+  // Find max column length
+  const cols = FW.map(fw => data.result[fw] || []);
+  const maxRows = Math.max(...cols.map(c => c.length));
+
+  const tbody = $("col-tbody");
+  tbody.innerHTML = "";
+
+  if (maxRows === 0) return;
+
+  for (let i = 0; i < maxRows; i++) {
+    const tr = document.createElement("tr");
+
+    FW.forEach((fw, colIdx) => {
+      const fc = FW_CFG[fw];
+      const id = cols[colIdx][i];
+      const td = document.createElement("td");
+      td.style.borderRight = "1px solid #111620";
+
+      if (id) {
+        const span = document.createElement("span");
+        span.className = "col-cell-id";
+        span.style.color = fc.text;
+        span.textContent = id;
+        span.title = id;
+        span.onclick = () => doSearch(id);
+        td.appendChild(span);
+      } else {
+        td.innerHTML = `<span class="col-empty">—</span>`;
+      }
+
+      tr.appendChild(td);
+    });
+
+    tbody.appendChild(tr);
+  }
 }
 
 // ─────────────────────────────────────────────
