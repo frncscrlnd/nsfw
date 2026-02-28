@@ -106,7 +106,7 @@
   .loading span { animation: pulse 1s infinite; }
 
   /* ── result header ── */
-  .result-header { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+  .result-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
 
   /* ── table ── */
   .col-table-wrap {
@@ -141,19 +141,15 @@
     align-items: center;
     gap: 9px;
     padding: 7px 12px;
-    cursor: pointer;
-    transition: background 0.1s;
     user-select: none;
     min-height: 34px;
+    transition: background 0.1s;
   }
-  .cell-item:hover { background: rgba(255,255,255,0.035); }
+  .cell-item:hover { background: rgba(255,255,255,0.025); }
+  .cell-item.checked { background: var(--cell-dim); }
+  .cell-item.checked:hover { filter: brightness(1.1); }
 
-  .cell-item.checked {
-    background: var(--cell-dim);
-  }
-  .cell-item.checked:hover { filter: brightness(1.12); }
-
-  /* custom checkbox */
+  /* custom checkbox — clickable zone */
   .cell-cb {
     flex-shrink: 0;
     width: 13px; height: 13px;
@@ -163,6 +159,14 @@
     transition: background 0.12s, border-color 0.12s;
     font-size: 9px; font-weight: 900; color: #000;
     background: transparent;
+    cursor: pointer;
+    /* larger hit area */
+    padding: 2px;
+    margin: -2px;
+  }
+  .cell-cb:hover {
+    border-color: var(--cell-color) !important;
+    background: rgba(255,255,255,0.06);
   }
   .cell-item.checked .cell-cb {
     background: var(--cell-color);
@@ -170,14 +174,20 @@
   }
   .cell-item.checked .cell-cb::after { content: '✓'; }
 
+  /* ID label — clickable, opens external link */
   .cell-id {
     font-size: 0.78rem;
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-    color: var(--cell-text, #555);
-    transition: color 0.12s, opacity 0.12s;
+    transition: color 0.12s;
+    cursor: pointer;
+    text-decoration: none;
+    flex: 1;
   }
   .cell-item:not(.checked) .cell-id { color: #444; }
-  .cell-item:not(.checked):hover .cell-id { color: var(--cell-text); }
+  .cell-item:not(.checked) .cell-id:hover { color: var(--cell-text); text-decoration: underline; }
+  .cell-item.checked .cell-id { color: var(--cell-text); }
+  .cell-item.checked .cell-id:hover { text-decoration: underline; }
+  .cell-id:hover::after { opacity: 0.6; }
 
   .col-empty {
     color: #1e1e1e; font-size: 0.7rem; font-style: italic;
@@ -260,17 +270,37 @@ const FW_CFG = {
 };
 
 // ─────────────────────────────────────────────
+//  URL RESOLVERS
+// ─────────────────────────────────────────────
+function getUrl(id, type) {
+  switch (type) {
+    case "CVE":
+      return `https://www.cve.org/CVERecord?id=${id}`;
+    case "CWE":
+      return `https://cwe.mitre.org/data/definitions/${id.replace('CWE-','')}.html`;
+    case "CAPEC":
+      return `https://capec.mitre.org/data/definitions/${id.replace('CAPEC-','')}.html`;
+    case "ATT&CK":
+      // sub-technique: T1234.001 → techniques/T1234/001
+      if (id.includes('.')) {
+        const [base, sub] = id.split('.');
+        return `https://attack.mitre.org/techniques/${base}/${sub}/`;
+      }
+      return `https://attack.mitre.org/techniques/${id}/`;
+    case "D3FEND":
+      return `https://d3fend.mitre.org/technique/${id}/`;
+    default:
+      return null;
+  }
+}
+
+// ─────────────────────────────────────────────
 //  STATE
 // ─────────────────────────────────────────────
 let DB  = {}, INV = {}, ALL_IDS = [];
-
-// universe: the current table content { CVE:[...], CWE:[...], ... }
-// It's always the intersection of all checked IDs.
 let universe   = null;
-// checkedIds: Set — IDs currently checked = active filter
 let checkedIds = new Set();
-
-let acTimeout = null;
+let acTimeout  = null;
 
 // ─────────────────────────────────────────────
 //  BOOT
@@ -404,7 +434,6 @@ function getRelated(inputId) {
   return r;
 }
 
-// Compute intersection of all checked IDs → universe
 function computeUniverse() {
   const ids = [...checkedIds];
   if (!ids.length) return null;
@@ -431,7 +460,7 @@ const si = $("search-input"), sb = $("search-btn"), ac = $("autocomplete");
 const eb = $("error-box"), ld = $("loading"), rs = $("results"), es = $("empty-state");
 
 // ─────────────────────────────────────────────
-//  SEARCH: add a new ID from the searchbar
+//  SEARCH
 // ─────────────────────────────────────────────
 function doSearch(q) {
   const val = (q || si.value).trim().toUpperCase();
@@ -440,8 +469,6 @@ function doSearch(q) {
   ac.classList.remove("show");
 
   if (!detectType(val)) { setError(`Unrecognized ID: "${val}"`); return; }
-
-  // If already checked, nothing to do
   if (checkedIds.has(val)) return;
 
   setError("");
@@ -461,38 +488,28 @@ function doSearch(q) {
     universe = u;
     setLoading(false);
     renderTable();
-    updateFilterBar();
   }, 10);
 }
 
 // ─────────────────────────────────────────────
-//  TOGGLE: check/uncheck a cell
+//  TOGGLE CHECKBOX
 // ─────────────────────────────────────────────
 function toggleCheck(id) {
   const wasChecked = checkedIds.has(id);
-
-  if (wasChecked) {
-    checkedIds.delete(id);
-  } else {
-    checkedIds.add(id);
-  }
+  if (wasChecked) checkedIds.delete(id); else checkedIds.add(id);
 
   setLoading(true);
-
   setTimeout(() => {
     if (checkedIds.size === 0) {
       universe = null;
       rs.style.display = "none";
       es.style.display = "block";
       setLoading(false);
-      updateFilterBar();
       return;
     }
 
     const u = computeUniverse();
-
     if (!u || FW.every(fw => u[fw].length === 0)) {
-      // Revert
       if (wasChecked) checkedIds.add(id); else checkedIds.delete(id);
       setLoading(false);
       setError(`No results for this combination — reverted.`);
@@ -503,7 +520,6 @@ function toggleCheck(id) {
     universe = u;
     setLoading(false);
     renderTable();
-    updateFilterBar();
   }, 10);
 }
 
@@ -550,6 +566,7 @@ function renderTable() {
 
       if (id) {
         const checked = checkedIds.has(id);
+        const url     = getUrl(id, fw);
 
         const item = document.createElement("div");
         item.className = "cell-item" + (checked ? " checked" : "");
@@ -557,19 +574,31 @@ function renderTable() {
         item.style.setProperty('--cell-text',   fc.text);
         item.style.setProperty('--cell-border', fc.bg + "55");
         item.style.setProperty('--cell-dim',    fc.dim);
-        item.title = checked ? "Uncheck to remove from filter" : "Check to narrow filter";
 
+        // Checkbox — click toggles filter
         const cb = document.createElement("div");
         cb.className = "cell-cb";
+        cb.title = checked ? "Remove from filter" : "Add to filter";
+        cb.addEventListener("click", e => {
+          e.stopPropagation();
+          toggleCheck(id);
+        });
 
-        const label = document.createElement("span");
+        // ID label — click opens MITRE page
+        const label = document.createElement("a");
         label.className = "cell-id";
         label.textContent = id;
-        label.title = id;
+        label.title = `Open ${id} on MITRE`;
+        if (url) {
+          label.href = url;
+          label.target = "_blank";
+          label.rel = "noopener noreferrer";
+        }
+        // prevent the anchor from affecting item background on click
+        label.addEventListener("click", e => e.stopPropagation());
 
         item.appendChild(cb);
         item.appendChild(label);
-        item.addEventListener("click", () => toggleCheck(id));
         td.appendChild(item);
       } else {
         td.innerHTML = `<span class="col-empty">—</span>`;
