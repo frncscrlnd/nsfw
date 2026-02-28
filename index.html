@@ -129,14 +129,6 @@
   /* ── results ── */
   .result-header { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; }
 
-  .stat-cards { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 32px; }
-  .stat-card {
-    background: var(--surface); border-radius: 6px; padding: 18px;
-    min-width: 180px; flex: 1; border: 1px solid transparent; border-top-width: 3px;
-  }
-  .stat-card-label  { font-size: 0.7rem; letter-spacing: 0.15em; font-weight: 700; margin-bottom: 8px; }
-  .stat-card-count  { font-size: 2rem; font-weight: 900; line-height: 1; margin-bottom: 12px; }
-
   /* ── COLUMNAR TABLE ── */
   .col-table-wrap {
     overflow-x: auto;
@@ -267,7 +259,6 @@
     <div class="result-header">
       <div style="color:#555;font-size:0.75rem;" id="result-total"></div>
     </div>
-    <div class="stat-cards" id="stat-cards"></div>
 
     <div class="col-table-wrap">
       <table class="col-table" id="col-table">
@@ -564,20 +555,6 @@ function renderTags() {
 
 function renderResults(data) {
   $("result-total").textContent = `${data.total} total ${data.total === 1 ? 'result' : 'results'}`;
-
-  // Stat cards
-  const sc = $("stat-cards"); sc.innerHTML = "";
-  FW.forEach(fw => {
-    const ids = data.result[fw] || [];
-    const fc = FW_CFG[fw];
-    const card = document.createElement("div"); card.className = "stat-card";
-    card.style.cssText = `border-color:${fc.bg}33; border-top-color:${fc.bg};`;
-    card.innerHTML = `
-      <div class="stat-card-label" style="color:${fc.text}">${fw}</div>
-      <div class="stat-card-count" style="color:${fc.bg}">${ids.length}</div>
-    `;
-    sc.appendChild(card);
-  });
 
   renderColumnarTable(data);
   rs.style.display = "block";
