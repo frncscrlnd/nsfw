@@ -29,49 +29,40 @@
 
   body::before {
     content: '';
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 9999;
+    position: fixed; inset: 0; pointer-events: none; z-index: 9999;
     background: repeating-linear-gradient(
-      0deg,
-      transparent, transparent 2px,
+      0deg, transparent, transparent 2px,
       rgba(0,255,100,0.012) 2px, rgba(0,255,100,0.012) 4px
     );
   }
 
-  /* ── loading screen ── */
+  /* ── boot ── */
   #boot-screen {
-    position: fixed; inset: 0; z-index: 1000;
-    background: var(--bg);
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    gap: 16px;
-    transition: opacity 0.5s;
+    position: fixed; inset: 0; z-index: 1000; background: var(--bg);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 16px; transition: opacity 0.5s;
   }
   #boot-screen.hidden { opacity: 0; pointer-events: none; }
   .boot-title { font-size: 3rem; font-weight: 900; color: var(--green); letter-spacing: 0.15em; }
   .boot-log { font-size: 0.72rem; color: #3a6a4a; width: 340px; }
   .boot-log-line { padding: 2px 0; }
-  .boot-log-line.ok::before { content: '[OK] '; color: var(--green); }
+  .boot-log-line.ok::before   { content: '[OK] '; color: var(--green); }
   .boot-log-line.wait::before { content: '[..] '; color: #555; }
   .boot-bar { width: 340px; height: 2px; background: #1a2a1a; border-radius: 2px; overflow: hidden; }
   .boot-bar-fill { height: 100%; background: var(--green); width: 0%; transition: width 0.3s ease; }
 
   /* ── layout ── */
   .main { max-width: 1400px; margin: 0 auto; padding: 48px 36px; }
-
   .header-sub   { color: var(--green); font-size: 0.62rem; letter-spacing: 0.25em; margin-bottom: 8px; }
   .header-title {
     font-size: 2.8rem; font-weight: 900; letter-spacing: 0.08em;
     color: #fff; line-height: 1;
-    text-shadow: 0 0 40px rgba(0,204,119,0.3);
-    margin-bottom: 8px;
+    text-shadow: 0 0 40px rgba(0,204,119,0.3); margin-bottom: 8px;
   }
   .header-desc { color: #2a4a3a; font-size: 0.75rem; margin-bottom: 40px; }
 
   /* ── search ── */
-  .search-wrap { position: relative; margin-bottom: 12px; }
+  .search-wrap { position: relative; margin-bottom: 24px; }
   .search-box {
     display: flex; border: 1px solid #1a3a2a; border-radius: 6px;
     overflow: hidden; box-shadow: 0 0 30px rgba(0,204,119,0.05);
@@ -104,18 +95,6 @@
   }
   .ac-item:hover { background: #0d1a12; }
 
-  #active-tags { margin-top: 15px; margin-bottom: 20px; display: flex; gap: 8px; flex-wrap: wrap; }
-
-  /* ── badge ── */
-  .badge {
-    display: inline-block; border-radius: 4px; padding: 4px 12px;
-    font-size: 0.75rem; font-family: inherit;
-    border: 1px solid transparent; transition: all 0.15s; white-space: nowrap;
-  }
-  .badge.sm { padding: 2px 8px; font-size: 0.7rem; }
-  .clickable { cursor: pointer; }
-  .clickable:hover { filter: brightness(1.3); }
-
   /* ── feedback ── */
   .error-box {
     padding: 14px 20px; background: #1a0808;
@@ -126,95 +105,83 @@
   @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
   .loading span { animation: pulse 1s infinite; }
 
-  /* ── results ── */
-  .result-header { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; }
+  /* ── result header ── */
+  .result-header { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
 
-  /* ── COLUMNAR TABLE ── */
+  /* ── table ── */
   .col-table-wrap {
-    overflow-x: auto;
-    border-radius: 8px;
-    border: 1px solid var(--border);
+    overflow-x: auto; border-radius: 8px; border: 1px solid var(--border);
   }
-
   .col-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.82rem;
-    table-layout: fixed;
+    width: 100%; border-collapse: collapse; font-size: 0.82rem; table-layout: fixed;
   }
-
   .col-table thead tr th {
-    padding: 14px 12px;
-    text-align: left;
-    font-size: 0.72rem;
-    letter-spacing: 0.12em;
-    font-weight: 900;
-    background: #0d1117;
-    border-bottom: 2px solid var(--border);
-    position: sticky;
-    top: 0;
-    z-index: 2;
+    padding: 14px 12px; text-align: left;
+    font-size: 0.72rem; letter-spacing: 0.12em; font-weight: 900;
+    background: #0d1117; border-bottom: 2px solid var(--border);
+    position: sticky; top: 0; z-index: 2;
   }
-
-  .col-table thead tr th .col-header-inner {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .col-header-dot {
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    display: inline-block;
-    flex-shrink: 0;
-  }
-
+  .col-header-inner { display: flex; align-items: center; gap: 8px; }
+  .col-header-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
   .col-header-count {
-    margin-left: auto;
-    font-size: 0.65rem;
-    font-weight: 400;
-    opacity: 0.6;
-    background: rgba(255,255,255,0.05);
-    border-radius: 3px;
-    padding: 2px 6px;
+    margin-left: auto; font-size: 0.65rem; font-weight: 400; opacity: 0.6;
+    background: rgba(255,255,255,0.05); border-radius: 3px; padding: 2px 6px;
   }
-
   .col-table tbody tr td {
-    padding: 8px 12px;
-    border-bottom: 1px solid #0f1118;
-    border-right: 1px solid #111620;
+    padding: 0;
+    border-bottom: 1px solid #0f1118; border-right: 1px solid #111620;
     vertical-align: top;
   }
+  .col-table tbody tr td:last-child { border-right: none; }
+  .col-table tbody tr:hover td { background: rgba(255,255,255,0.008); }
 
-  .col-table tbody tr td:last-child {
-    border-right: none;
-  }
-
-  /* alternating row tint per column - done via cell background */
-  .col-table tbody tr:hover td {
-    background: rgba(255,255,255,0.015);
-  }
-
-  .col-cell-id {
-    display: block;
-    font-size: 0.78rem;
-    padding: 3px 0;
+  /* ── cell item ── */
+  .cell-item {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 7px 12px;
     cursor: pointer;
-    transition: color 0.12s;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    transition: background 0.1s;
+    user-select: none;
+    min-height: 34px;
   }
+  .cell-item:hover { background: rgba(255,255,255,0.035); }
 
-  .col-cell-id:hover {
-    filter: brightness(1.4);
-    text-decoration: underline;
+  .cell-item.checked {
+    background: var(--cell-dim);
   }
+  .cell-item.checked:hover { filter: brightness(1.12); }
+
+  /* custom checkbox */
+  .cell-cb {
+    flex-shrink: 0;
+    width: 13px; height: 13px;
+    border-radius: 2px;
+    border: 1px solid var(--cell-border, #2a2a2a);
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.12s, border-color 0.12s;
+    font-size: 9px; font-weight: 900; color: #000;
+    background: transparent;
+  }
+  .cell-item.checked .cell-cb {
+    background: var(--cell-color);
+    border-color: var(--cell-color);
+  }
+  .cell-item.checked .cell-cb::after { content: '✓'; }
+
+  .cell-id {
+    font-size: 0.78rem;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    color: var(--cell-text, #555);
+    transition: color 0.12s, opacity 0.12s;
+  }
+  .cell-item:not(.checked) .cell-id { color: #444; }
+  .cell-item:not(.checked):hover .cell-id { color: var(--cell-text); }
 
   .col-empty {
-    color: #222;
-    font-size: 0.7rem;
-    font-style: italic;
+    color: #1e1e1e; font-size: 0.7rem; font-style: italic;
+    padding: 7px 12px; display: block; min-height: 34px; line-height: 20px;
   }
 
   /* ── empty state ── */
@@ -227,7 +194,6 @@
 </head>
 <body>
 
-<!-- Boot screen -->
 <div id="boot-screen">
   <div class="boot-title">NSFW</div>
   <div class="boot-log" id="boot-log"></div>
@@ -250,8 +216,6 @@
     <div class="autocomplete" id="autocomplete"></div>
   </div>
 
-  <div id="active-tags"></div>
-
   <div class="error-box" id="error-box" style="display:none;"></div>
   <div class="loading"   id="loading"   style="display:none;"><span>&#9658;&#9658;&#9658; processing...</span></div>
 
@@ -262,9 +226,7 @@
 
     <div class="col-table-wrap">
       <table class="col-table" id="col-table">
-        <thead>
-          <tr id="col-thead-row"></tr>
-        </thead>
+        <thead><tr id="col-thead-row"></tr></thead>
         <tbody id="col-tbody"></tbody>
       </table>
     </div>
@@ -278,39 +240,40 @@
 
 <script>
 // ─────────────────────────────────────────────
-//  CONFIG 
+//  CONFIG
 // ─────────────────────────────────────────────
-const DATA_BASE = './data/';
+const DATA_BASE  = './data/';
 const DATA_FILES = {
-  cve_cwe:      'cve_cwe.json',
-  cwe_capec:    'cwe_capec.json',
-  capec_attack: 'capec_attack.json',
-  attack_defend:'attack_defend.json',
+  cve_cwe:       'cve_cwe.json',
+  cwe_capec:     'cwe_capec.json',
+  capec_attack:  'capec_attack.json',
+  attack_defend: 'attack_defend.json',
 };
 
-// ─────────────────────────────────────────────
-//  FRAMEWORK CONFIG
-// ─────────────────────────────────────────────
 const FW = ["CVE","CWE","CAPEC","ATT&CK","D3FEND"];
 const FW_CFG = {
-  "CVE":    { bg:"#eab308", text:"#fde047", dim:"#422108" },
-  "CWE":    { bg:"#1e3a8a", text:"#60a5fa", dim:"#0f172a" },
-  "CAPEC":  { bg:"#ff9900", text:"#ffbb44", dim:"#2a1800" },
-  "ATT&CK": { bg:"#ff4444", text:"#ff8888", dim:"#2a0808" },
-  "D3FEND": { bg:"#0d9488", text:"#5eead4", dim:"#0b4a46" },
+  "CVE":    { bg:"#eab308", text:"#fde047", dim:"rgba(234,179,8,0.07)"  },
+  "CWE":    { bg:"#3b82f6", text:"#93c5fd", dim:"rgba(59,130,246,0.07)" },
+  "CAPEC":  { bg:"#f97316", text:"#fdba74", dim:"rgba(249,115,22,0.07)" },
+  "ATT&CK": { bg:"#ef4444", text:"#fca5a5", dim:"rgba(239,68,68,0.07)"  },
+  "D3FEND": { bg:"#14b8a6", text:"#5eead4", dim:"rgba(20,184,166,0.07)" },
 };
 
 // ─────────────────────────────────────────────
 //  STATE
 // ─────────────────────────────────────────────
-let DB = {};
-let INV = {};
-let ALL_IDS = [];
-let selectedIds = [];
+let DB  = {}, INV = {}, ALL_IDS = [];
+
+// universe: the current table content { CVE:[...], CWE:[...], ... }
+// It's always the intersection of all checked IDs.
+let universe   = null;
+// checkedIds: Set — IDs currently checked = active filter
+let checkedIds = new Set();
+
 let acTimeout = null;
 
 // ─────────────────────────────────────────────
-//  BOOT 
+//  BOOT
 // ─────────────────────────────────────────────
 const bootLog  = document.getElementById('boot-log');
 const bootFill = document.getElementById('boot-bar-fill');
@@ -344,15 +307,15 @@ async function loadDatabases() {
   }
 
   const invertLine = bootLine('building index...');
-  DB.cve_cwe      = DB.cve_cwe      || {};
-  DB.cwe_capec    = DB.cwe_capec    || {};
-  DB.capec_attack = DB.capec_attack || {};
-  DB.attack_defend= DB.attack_defend|| {};
+  DB.cve_cwe       = DB.cve_cwe       || {};
+  DB.cwe_capec     = DB.cwe_capec     || {};
+  DB.capec_attack  = DB.capec_attack  || {};
+  DB.attack_defend = DB.attack_defend || {};
 
-  INV.cwe_cve     = invertMap(DB.cve_cwe);
-  INV.capec_cwe   = invertMap(DB.cwe_capec);
-  INV.atk_capec   = invertMap(DB.capec_attack);
-  INV.d3_atk      = invertMap(DB.attack_defend);
+  INV.cwe_cve   = invertMap(DB.cve_cwe);
+  INV.capec_cwe = invertMap(DB.cwe_capec);
+  INV.atk_capec = invertMap(DB.capec_attack);
+  INV.d3_atk    = invertMap(DB.attack_defend);
 
   ALL_IDS = Array.from(new Set([
     ...Object.keys(DB.cve_cwe),
@@ -363,7 +326,6 @@ async function loadDatabases() {
 
   invertLine.className = 'boot-log-line ok';
   bootFill.style.width = '100%';
-
   await new Promise(r => setTimeout(r, 400));
 
   const bs = document.getElementById('boot-screen');
@@ -375,24 +337,18 @@ async function loadDatabases() {
 loadDatabases();
 
 // ─────────────────────────────────────────────
-//  HELPERS 
+//  HELPERS
 // ─────────────────────────────────────────────
 function invertMap(m) {
   const out = {};
-  for (const [k, vals] of Object.entries(m)) {
-    for (const v of vals) {
-      if (!out[v]) out[v] = [];
-      out[v].push(k);
-    }
-  }
+  for (const [k, vals] of Object.entries(m))
+    for (const v of vals) { if (!out[v]) out[v] = []; out[v].push(k); }
   return out;
 }
 
 function expand(ids, mapping) {
   const result = new Set();
-  for (const id of ids) {
-    for (const v of (mapping[id] || [])) result.add(v);
-  }
+  for (const id of ids) for (const v of (mapping[id] || [])) result.add(v);
   return result;
 }
 
@@ -410,7 +366,7 @@ function detectType(id) {
 }
 
 function getRelated(inputId) {
-  const id = inputId.trim().toUpperCase();
+  const id   = inputId.trim().toUpperCase();
   const tipo = detectType(id);
   if (!tipo) return null;
 
@@ -448,168 +404,173 @@ function getRelated(inputId) {
   return r;
 }
 
-// ─────────────────────────────────────────────
-//  SEARCH LOGIC 
-// ─────────────────────────────────────────────
-function searchIds(queryIds) {
-  if (!queryIds.length) return { error: "No ID was given" };
+// Compute intersection of all checked IDs → universe
+function computeUniverse() {
+  const ids = [...checkedIds];
+  if (!ids.length) return null;
 
-  const firstId = queryIds[0];
-  let finalR = getRelated(firstId);
-  if (!finalR) return { error: `Unrecognized ID: ${firstId}` };
+  let result = getRelated(ids[0]);
+  if (!result) return null;
 
-  for (const nextId of queryIds.slice(1)) {
-    const existsInGraph = FW.some(fw => finalR[fw].has(nextId));
-    if (!existsInGraph) {
-      return {
-        error: `ID ${nextId} is not linked to the current selection.`,
-        popLast: true,
-      };
-    }
-    const nextRes = getRelated(nextId);
+  for (const id of ids.slice(1)) {
+    const next = getRelated(id);
+    if (!next) continue;
     FW.forEach(fw => {
-      finalR[fw] = new Set([...finalR[fw]].filter(x => nextRes[fw].has(x)));
+      result[fw] = new Set([...result[fw]].filter(x => next[fw].has(x)));
     });
   }
 
-  const total = FW.reduce((s, fw) => s + finalR[fw].size, 0);
-  if (total === 0) return { error: "Combining these IDs produces no results" };
-
-  return {
-    ids_cercati: queryIds,
-    result: Object.fromEntries(FW.map(fw => [fw, [...finalR[fw]].sort()])),
-    total,
-  };
+  return Object.fromEntries(FW.map(fw => [fw, [...result[fw]].sort()]));
 }
 
 // ─────────────────────────────────────────────
-//  UI
+//  DOM refs
 // ─────────────────────────────────────────────
 const $ = id => document.getElementById(id);
 const si = $("search-input"), sb = $("search-btn"), ac = $("autocomplete");
 const eb = $("error-box"), ld = $("loading"), rs = $("results"), es = $("empty-state");
-const tagsArea = $("active-tags");
 
-function makeBadge(fw, label, small, onClick, removable = false) {
-  const c = FW_CFG[fw] || { bg:"#444", text:"#ccc", dim:"#222" };
-  const el = document.createElement("span");
-  el.className = "badge" + (small ? " sm" : "") + (onClick ? " clickable" : "");
-  el.textContent = removable ? `${label} ✕` : label;
-  el.style.cssText = `background:${c.dim};color:${c.text};border-color:${c.bg}44;`;
-  if (onClick) el.addEventListener("click", e => { e.stopPropagation(); onClick(); });
-  return el;
-}
-
-async function doSearch(q) {
+// ─────────────────────────────────────────────
+//  SEARCH: add a new ID from the searchbar
+// ─────────────────────────────────────────────
+function doSearch(q) {
   const val = (q || si.value).trim().toUpperCase();
   if (!val) return;
-  if (selectedIds.includes(val)) { si.value = ""; return; }
-  if (!detectType(val)) { setError(`ID non riconosciuto: "${val}"`); si.value = ""; return; }
-
-  selectedIds.push(val);
   si.value = "";
   ac.classList.remove("show");
-  updateUI();
-}
 
-function removeId(id) {
-  selectedIds = selectedIds.filter(x => x !== id);
-  if (!selectedIds.length) resetSearch();
-  else updateUI();
-}
+  if (!detectType(val)) { setError(`Unrecognized ID: "${val}"`); return; }
 
-function resetSearch() {
-  selectedIds = [];
-  rs.style.display = "none";
-  es.style.display = "block";
-  tagsArea.innerHTML = "";
-  setError("");
-}
+  // If already checked, nothing to do
+  if (checkedIds.has(val)) return;
 
-function updateUI() {
   setError("");
   setLoading(true);
-  renderTags();
 
   setTimeout(() => {
-    const data = searchIds(selectedIds);
-    setLoading(false);
+    checkedIds.add(val);
+    const u = computeUniverse();
 
-    if (data.error) {
-      setError(data.error);
-      if (data.popLast) { selectedIds.pop(); renderTags(); }
+    if (!u || FW.every(fw => u[fw].length === 0)) {
+      checkedIds.delete(val);
+      setLoading(false);
+      setError(`"${val}" produces no results with the current selection.`);
       return;
     }
 
-    renderResults(data);
+    universe = u;
+    setLoading(false);
+    renderTable();
+    updateFilterBar();
   }, 10);
 }
 
-function renderTags() {
-  tagsArea.innerHTML = "";
-  selectedIds.forEach(id => {
-    const type = detectType(id) || "UNKNOWN";
-    tagsArea.appendChild(makeBadge(type, id, false, () => removeId(id), true));
-  });
-}
+// ─────────────────────────────────────────────
+//  TOGGLE: check/uncheck a cell
+// ─────────────────────────────────────────────
+function toggleCheck(id) {
+  const wasChecked = checkedIds.has(id);
 
-function renderResults(data) {
-  $("result-total").textContent = `${data.total} total ${data.total === 1 ? 'result' : 'results'}`;
+  if (wasChecked) {
+    checkedIds.delete(id);
+  } else {
+    checkedIds.add(id);
+  }
 
-  renderColumnarTable(data);
-  rs.style.display = "block";
-  es.style.display = "none";
+  setLoading(true);
+
+  setTimeout(() => {
+    if (checkedIds.size === 0) {
+      universe = null;
+      rs.style.display = "none";
+      es.style.display = "block";
+      setLoading(false);
+      updateFilterBar();
+      return;
+    }
+
+    const u = computeUniverse();
+
+    if (!u || FW.every(fw => u[fw].length === 0)) {
+      // Revert
+      if (wasChecked) checkedIds.add(id); else checkedIds.delete(id);
+      setLoading(false);
+      setError(`No results for this combination — reverted.`);
+      return;
+    }
+
+    setError("");
+    universe = u;
+    setLoading(false);
+    renderTable();
+    updateFilterBar();
+  }, 10);
 }
 
 // ─────────────────────────────────────────────
-//  COLUMNAR TABLE
+//  RENDER TABLE
 // ─────────────────────────────────────────────
-function renderColumnarTable(data) {
-  // Build header
+function renderTable() {
+  if (!universe) return;
+
+  const cols    = FW.map(fw => universe[fw] || []);
+  const total   = cols.reduce((s, c) => s + c.length, 0);
+  const maxRows = Math.max(...cols.map(c => c.length), 0);
+
+  $("result-total").textContent =
+    `${total} total ${total === 1 ? 'result' : 'results'}`;
+
+  // thead
   const thead = $("col-thead-row");
   thead.innerHTML = "";
-
-  FW.forEach(fw => {
+  FW.forEach((fw, ci) => {
     const fc = FW_CFG[fw];
-    const ids = data.result[fw] || [];
     const th = document.createElement("th");
-    th.style.cssText = `color:${fc.text}; border-top: 3px solid ${fc.bg}; border-right: 1px solid #111620;`;
+    th.style.cssText = `color:${fc.text}; border-top:3px solid ${fc.bg}; border-right:1px solid #111620;`;
     th.innerHTML = `
       <div class="col-header-inner">
         <span class="col-header-dot" style="background:${fc.bg}"></span>
         <span>${fw}</span>
-        <span class="col-header-count">${ids.length}</span>
-      </div>
-    `;
+        <span class="col-header-count">${cols[ci].length}</span>
+      </div>`;
     thead.appendChild(th);
   });
 
-  // Find max column length
-  const cols = FW.map(fw => data.result[fw] || []);
-  const maxRows = Math.max(...cols.map(c => c.length));
-
+  // tbody
   const tbody = $("col-tbody");
   tbody.innerHTML = "";
-
-  if (maxRows === 0) return;
 
   for (let i = 0; i < maxRows; i++) {
     const tr = document.createElement("tr");
 
-    FW.forEach((fw, colIdx) => {
-      const fc = FW_CFG[fw];
-      const id = cols[colIdx][i];
-      const td = document.createElement("td");
-      td.style.borderRight = "1px solid #111620";
+    FW.forEach((fw, ci) => {
+      const fc  = FW_CFG[fw];
+      const id  = cols[ci][i];
+      const td  = document.createElement("td");
 
       if (id) {
-        const span = document.createElement("span");
-        span.className = "col-cell-id";
-        span.style.color = fc.text;
-        span.textContent = id;
-        span.title = id;
-        span.onclick = () => doSearch(id);
-        td.appendChild(span);
+        const checked = checkedIds.has(id);
+
+        const item = document.createElement("div");
+        item.className = "cell-item" + (checked ? " checked" : "");
+        item.style.setProperty('--cell-color',  fc.bg);
+        item.style.setProperty('--cell-text',   fc.text);
+        item.style.setProperty('--cell-border', fc.bg + "55");
+        item.style.setProperty('--cell-dim',    fc.dim);
+        item.title = checked ? "Uncheck to remove from filter" : "Check to narrow filter";
+
+        const cb = document.createElement("div");
+        cb.className = "cell-cb";
+
+        const label = document.createElement("span");
+        label.className = "cell-id";
+        label.textContent = id;
+        label.title = id;
+
+        item.appendChild(cb);
+        item.appendChild(label);
+        item.addEventListener("click", () => toggleCheck(id));
+        td.appendChild(item);
       } else {
         td.innerHTML = `<span class="col-empty">—</span>`;
       }
@@ -619,6 +580,9 @@ function renderColumnarTable(data) {
 
     tbody.appendChild(tr);
   }
+
+  rs.style.display = "block";
+  es.style.display = "none";
 }
 
 // ─────────────────────────────────────────────
@@ -633,10 +597,14 @@ si.addEventListener("input", () => {
     ac.innerHTML = "";
     if (!matches.length) { ac.classList.remove("show"); return; }
     matches.forEach(id => {
-      const div = document.createElement("div"); div.className = "ac-item";
+      const div  = document.createElement("div"); div.className = "ac-item";
       const type = detectType(id) || "?";
-      const fc = FW_CFG[type] || {};
-      div.innerHTML = `<span style="color:${fc.text||'#ccc'}">${id}</span><span class="badge sm" style="background:${fc.dim||'#222'};color:${fc.text||'#ccc'}">${type}</span>`;
+      const fc   = FW_CFG[type] || {};
+      div.innerHTML = `
+        <span style="color:${fc.text||'#ccc'}">${id}</span>
+        <span style="font-size:0.68rem;padding:2px 7px;border-radius:3px;
+          background:rgba(0,0,0,0.4);color:${fc.text||'#ccc'};
+          border:1px solid ${(fc.bg||'#555')+'44'}">${type}</span>`;
       div.onclick = () => doSearch(id);
       ac.appendChild(div);
     });
@@ -650,8 +618,8 @@ document.addEventListener("click", e => {
   if (!e.target.closest(".search-wrap")) ac.classList.remove("show");
 });
 
-function setError(msg)   { eb.textContent = msg; eb.style.display = msg ? "block" : "none"; }
-function setLoading(show){ ld.style.display = show ? "block" : "none"; }
+function setError(msg)    { eb.textContent = msg; eb.style.display = msg ? "block" : "none"; }
+function setLoading(show) { ld.style.display = show ? "block" : "none"; }
 </script>
 </body>
 </html>
