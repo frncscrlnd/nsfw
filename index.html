@@ -352,6 +352,73 @@ const FW_CFG = {
 };
 
 // ─────────────────────────────────────────────
+//  D3FEND: abbreviazione → nome completo per URL
+//  Il JSON contiene le abbreviazioni (es. "D3-DENCR").
+//  Questa tabella converte in nome completo per costruire
+//  l'URL corretto: https://d3fend.mitre.org/technique/d3f:DataEncryption/
+// ─────────────────────────────────────────────
+const D3FEND_ABBR_TO_FULL = {
+  "D3-ACH":   "ApplicationConfigurationHardening",
+  "D3-AH":    "ApplicationHardening",
+  "D3-AL":    "AccessorLogging",
+  "D3-ANCI":  "AuthenticatedNetworkConnectionInspection",
+  "D3-ANET":  "AuthorizedNetworkEnforcement",
+  "D3-AZET":  "AuthorizedZoneEnforcement",
+  "D3-BA":    "BootAuthentication",
+  "D3-BDI":   "BusinessDomainInspection",
+  "D3-CP":    "CredentialPolicyEnforcement",
+  "D3-DA":    "DomainAccountEnforcement",
+  "D3-DAM":   "DomainAccountMonitoring",
+  "D3-DE":    "DecoyEnvironment",
+  "D3-DENCR": "DataEncryption",
+  "D3-DLIC":  "DigitalCertificateIntegrityVerification",
+  "D3-DNSAL": "DNSAllowlisting",
+  "D3-DNSDL": "DNSDenylisting",
+  "D3-DO":    "DecoyObject",
+  "D3-DTP":   "DataTransferPolicyEnforcement",
+  "D3-EAL":   "ExecutableAllowlisting",
+  "D3-EDL":   "ExecutableDenylisting",
+  "D3-EHPV":  "ExchangeHypervisorProcessorVirtualization",
+  "D3-ET":    "EncryptedTunnels",
+  "D3-FA":    "FileAnalysis",
+  "D3-FCR":   "FilesystemContentRules",
+  "D3-FE":    "FileEncryption",
+  "D3-FH":    "FileHashing",
+  "D3-HBPI":  "HardwareBIOSProtectionIntegrity",
+  "D3-IOPR":  "InputOutputPortRestriction",
+  "D3-ISVA":  "InboundSessionVolumeAnalysis",
+  "D3-ITF":   "InboundTrafficFiltering",
+  "D3-JFAPA": "JustInTimeAccessPolicyAdherence",
+  "D3-LAM":   "LocalAccountMonitoring",
+  "D3-LFP":   "LocalFilePermissions",
+  "D3-MENCR": "MessageEncryption",
+  "D3-MFA":   "MultiFactorAuthentication",
+  "D3-NI":    "NetworkIsolation",
+  "D3-NTA":   "NetworkTrafficAnalysis",
+  "D3-OTF":   "OutboundTrafficFiltering",
+  "D3-OTP":   "OneTimePassword",
+  "D3-PA":    "ProcessAnalysis",
+  "D3-PH":    "PlatformHardening",
+  "D3-PSEP":  "ProcessSegmentExecutionPrevention",
+  "D3-RAPA":  "RuntimeApplicationPolicyAdherence",
+  "D3-SBV":   "SystemBinaryVerification",
+  "D3-SCF":   "SystemConfigurationPermissions",
+  "D3-SCP":   "SystemCallFiltering",
+  "D3-SDA":   "SystemDependencyAnalysis",
+  "D3-SFA":   "SystemFileAnalysis",
+  "D3-SFP":   "SystemFilePermissions",
+  "D3-SPP":   "StrongPasswordPolicy",
+  "D3-SSC":   "SystemServiceCallFiltering",
+  "D3-SU":    "SoftwareUpdate",
+  "D3-TBI":   "TrustedBootIntegrity",
+  "D3-UA":    "URLAnalysis",
+  "D3-UAP":   "UserAccountPermissions",
+  "D3-UDTA":  "UserDataTransferAnalysis",
+  "D3-UGLPA": "UserGroupPrivilegeLoggingAndAuditing",
+  "D3-WSAA":  "WebSessionActivityAnalysis",
+};
+
+// ─────────────────────────────────────────────
 //  URL RESOLVERS
 // ─────────────────────────────────────────────
 function getUrl(id, type) {
@@ -362,19 +429,21 @@ function getUrl(id, type) {
     case "ATT&CK":
       if (id.includes('.')) { const [b,s]=id.split('.'); return `https://attack.mitre.org/techniques/${b}/${s}/`; }
       return `https://attack.mitre.org/techniques/${id}/`;
-    case "D3FEND": return `https://d3fend.mitre.org/technique/${id}/`;
-    default:       return null;
+    case "D3FEND": {
+      // id es: "D3-DENCR" → cerca in tabella → "DataEncryption"
+      // fallback: rimuove "D3-" e usa il resto così com'è
+      const fullName = D3FEND_ABBR_TO_FULL[id] || id.replace(/^D3-/, '');
+      return `https://d3fend.mitre.org/technique/d3f:${fullName}/`;
+    }
+    default: return null;
   }
 }
 
 // ─────────────────────────────────────────────
 //  CPE PARSING
-//  cpe:2.3:type:vendor:product:version:...
 // ─────────────────────────────────────────────
 function parseCpe(cpe) {
-  // split on unescaped colons
   const parts = cpe.split(':');
-  // parts[0]=cpe, [1]=2.3, [2]=type, [3]=vendor, [4]=product, [5]=version
   return {
     raw:     cpe,
     type:    parts[2] || '*',
@@ -385,7 +454,6 @@ function parseCpe(cpe) {
 }
 
 function groupCpes(cpes) {
-  // group by vendor:product
   const groups = {};
   for (const cpe of cpes) {
     const p   = parseCpe(cpe);
@@ -402,7 +470,7 @@ function groupCpes(cpes) {
 let DB  = {}, INV = {}, ALL_IDS = [];
 let universe    = null;
 let checkedIds  = new Set();
-let activeCpeCve = null;   // which CVE tab is shown in the CPE panel
+let activeCpeCve = null;
 let acTimeout   = null;
 
 // ─────────────────────────────────────────────
@@ -553,7 +621,6 @@ const cpePanel=$("cpe-panel"), cpeTabs=$("cpe-cve-tabs"), cpeBody=$("cpe-panel-b
 //  CPE PANEL
 // ─────────────────────────────────────────────
 function getCheckedCves() {
-  // return checked CVEs that have CPE data, sorted
   return [...checkedIds]
     .filter(id => detectType(id) === "CVE")
     .sort();
@@ -570,12 +637,10 @@ function renderCpePanel() {
 
   cpePanel.style.display = "block";
 
-  // If current active CVE is no longer checked, pick first
   if (!activeCpeCve || !cves.includes(activeCpeCve)) {
     activeCpeCve = cves[0];
   }
 
-  // Render tabs
   cpeTabs.innerHTML = "";
   cves.forEach(cve => {
     const tab = document.createElement("button");
@@ -588,7 +653,6 @@ function renderCpePanel() {
     cpeTabs.appendChild(tab);
   });
 
-  // Render body for activeCpeCve
   cpeBody.innerHTML = "";
   const cpes = DB.cve_cpe[activeCpeCve];
 
@@ -720,7 +784,8 @@ function renderTable() {
         cb.addEventListener("click", e => { e.stopPropagation(); toggleCheck(id); });
 
         const label=document.createElement("a");
-        label.className="cell-id"; label.textContent=id;
+        label.className="cell-id";
+        label.textContent=id;          // mostra SEMPRE l'abbreviazione (es. D3-DENCR)
         label.title=`Open ${id} on MITRE`;
         if (url) { label.href=url; label.target="_blank"; label.rel="noopener noreferrer"; }
         label.addEventListener("click", e => e.stopPropagation());
