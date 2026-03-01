@@ -751,7 +751,7 @@ function renderTable() {
   const total   = cols.reduce((s, c) => s + c.length, 0);
   const maxRows = Math.max(...cols.map(c => c.length), 0);
 
-  $("result-total").textContent = `${total} total ${total===1?'result':'results'}`;
+  $("result-total").textContent = `${total} ${total===1?'result':'results'}`;
 
   const thead = $("col-thead-row"); thead.innerHTML = "";
   FW.forEach((fw, ci) => {
