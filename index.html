@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NSFW — Navigator for Security Frameworks</title>
+<link rel="icon" type="image/x-icon" href="nsfw.ico">
 <style>
   @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;900&display=swap');
 
@@ -137,61 +138,132 @@
 
   /* ── cell item ── */
   .cell-item {
-    display: flex;
-    align-items: center;
-    gap: 9px;
-    padding: 7px 12px;
-    user-select: none;
-    min-height: 34px;
+    display: flex; align-items: center; gap: 9px;
+    padding: 7px 12px; user-select: none; min-height: 34px;
     transition: background 0.1s;
   }
   .cell-item:hover { background: rgba(255,255,255,0.025); }
   .cell-item.checked { background: var(--cell-dim); }
   .cell-item.checked:hover { filter: brightness(1.1); }
 
-  /* custom checkbox — clickable zone */
   .cell-cb {
-    flex-shrink: 0;
-    width: 13px; height: 13px;
-    border-radius: 2px;
+    flex-shrink: 0; width: 13px; height: 13px; border-radius: 2px;
     border: 1px solid var(--cell-border, #2a2a2a);
     display: flex; align-items: center; justify-content: center;
     transition: background 0.12s, border-color 0.12s;
     font-size: 9px; font-weight: 900; color: #000;
-    background: transparent;
-    cursor: pointer;
-    /* larger hit area */
-    padding: 2px;
-    margin: -2px;
+    background: transparent; cursor: pointer; padding: 2px; margin: -2px;
   }
-  .cell-cb:hover {
-    border-color: var(--cell-color) !important;
-    background: rgba(255,255,255,0.06);
-  }
-  .cell-item.checked .cell-cb {
-    background: var(--cell-color);
-    border-color: var(--cell-color);
-  }
+  .cell-cb:hover { border-color: var(--cell-color) !important; background: rgba(255,255,255,0.06); }
+  .cell-item.checked .cell-cb { background: var(--cell-color); border-color: var(--cell-color); }
   .cell-item.checked .cell-cb::after { content: '✓'; }
 
-  /* ID label — clickable, opens external link */
   .cell-id {
-    font-size: 0.78rem;
-    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-    transition: color 0.12s;
-    cursor: pointer;
-    text-decoration: none;
-    flex: 1;
+    font-size: 0.78rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    transition: color 0.12s; cursor: pointer; text-decoration: none; flex: 1;
   }
   .cell-item:not(.checked) .cell-id { color: #444; }
   .cell-item:not(.checked) .cell-id:hover { color: var(--cell-text); text-decoration: underline; }
   .cell-item.checked .cell-id { color: var(--cell-text); }
   .cell-item.checked .cell-id:hover { text-decoration: underline; }
-  .cell-id:hover::after { opacity: 0.6; }
 
   .col-empty {
     color: #1e1e1e; font-size: 0.7rem; font-style: italic;
     padding: 7px 12px; display: block; min-height: 34px; line-height: 20px;
+  }
+
+  /* ── CPE PANEL ── */
+  #cpe-panel {
+    display: none;
+    margin-top: 28px;
+    border: 1px solid #1a2a1a;
+    border-radius: 8px;
+    overflow: hidden;
+    animation: fadeIn 0.2s ease;
+  }
+  @keyframes fadeIn { from { opacity:0; transform: translateY(6px); } to { opacity:1; transform: translateY(0); } }
+
+  .cpe-panel-header {
+    background: #080f0a;
+    border-bottom: 1px solid #1a2a1a;
+    padding: 12px 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .cpe-panel-title {
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    color: #2a5a3a;
+    font-weight: 900;
+  }
+  .cpe-panel-cve-list {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .cpe-cve-tab {
+    font-size: 0.72rem;
+    padding: 3px 10px;
+    border-radius: 4px;
+    border: 1px solid #eab30844;
+    background: rgba(234,179,8,0.06);
+    color: #eab308;
+    cursor: pointer;
+    transition: background 0.12s, border-color 0.12s;
+    font-family: inherit;
+  }
+  .cpe-cve-tab:hover { background: rgba(234,179,8,0.12); }
+  .cpe-cve-tab.active { background: rgba(234,179,8,0.15); border-color: #eab308; color: #fde047; }
+
+  .cpe-panel-body {
+    padding: 16px 18px;
+    background: #060a08;
+  }
+
+  /* group by vendor/product */
+  .cpe-group { margin-bottom: 18px; }
+  .cpe-group:last-child { margin-bottom: 0; }
+  .cpe-group-header {
+    font-size: 0.68rem;
+    color: #2a5a3a;
+    letter-spacing: 0.15em;
+    margin-bottom: 8px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid #0f1a14;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .cpe-vendor { color: var(--green); }
+  .cpe-product { color: #aaa; }
+  .cpe-sep { color: #2a3a2a; }
+
+  .cpe-versions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .cpe-version-tag {
+    font-size: 0.7rem;
+    padding: 3px 10px;
+    border-radius: 4px;
+    background: #0d1a10;
+    border: 1px solid #1a3020;
+    color: #4a8a5a;
+    white-space: nowrap;
+    transition: border-color 0.12s, color 0.12s;
+  }
+  .cpe-version-tag:hover { border-color: var(--green); color: var(--green); }
+  .cpe-version-tag.wildcard { color: #2a4a3a; border-color: #0f1a14; font-style: italic; }
+
+  .cpe-no-data {
+    color: #2a3a2a;
+    font-size: 0.75rem;
+    font-style: italic;
+    padding: 8px 0;
   }
 
   /* ── empty state ── */
@@ -240,6 +312,15 @@
         <tbody id="col-tbody"></tbody>
       </table>
     </div>
+
+    <!-- CPE panel lives inside #results, below the table -->
+    <div id="cpe-panel">
+      <div class="cpe-panel-header">
+        <span class="cpe-panel-title">&#9658; AFFECTED PRODUCTS (CPE)</span>
+        <div class="cpe-panel-cve-list" id="cpe-cve-tabs"></div>
+      </div>
+      <div class="cpe-panel-body" id="cpe-panel-body"></div>
+    </div>
   </div>
 
   <div class="empty-state" id="empty-state">
@@ -258,6 +339,7 @@ const DATA_FILES = {
   cwe_capec:     'cwe_capec.json',
   capec_attack:  'capec_attack.json',
   attack_defend: 'attack_defend.json',
+  cve_cpe:       'cve_cpe.json',
 };
 
 const FW = ["CVE","CWE","CAPEC","ATT&CK","D3FEND"];
@@ -274,33 +356,54 @@ const FW_CFG = {
 // ─────────────────────────────────────────────
 function getUrl(id, type) {
   switch (type) {
-    case "CVE":
-      return `https://www.cve.org/CVERecord?id=${id}`;
-    case "CWE":
-      return `https://cwe.mitre.org/data/definitions/${id.replace('CWE-','')}.html`;
-    case "CAPEC":
-      return `https://capec.mitre.org/data/definitions/${id.replace('CAPEC-','')}.html`;
+    case "CVE":    return `https://www.cve.org/CVERecord?id=${id}`;
+    case "CWE":    return `https://cwe.mitre.org/data/definitions/${id.replace('CWE-','')}.html`;
+    case "CAPEC":  return `https://capec.mitre.org/data/definitions/${id.replace('CAPEC-','')}.html`;
     case "ATT&CK":
-      // sub-technique: T1234.001 → techniques/T1234/001
-      if (id.includes('.')) {
-        const [base, sub] = id.split('.');
-        return `https://attack.mitre.org/techniques/${base}/${sub}/`;
-      }
+      if (id.includes('.')) { const [b,s]=id.split('.'); return `https://attack.mitre.org/techniques/${b}/${s}/`; }
       return `https://attack.mitre.org/techniques/${id}/`;
-    case "D3FEND":
-      return `https://d3fend.mitre.org/technique/${id}/`;
-    default:
-      return null;
+    case "D3FEND": return `https://d3fend.mitre.org/technique/${id}/`;
+    default:       return null;
   }
+}
+
+// ─────────────────────────────────────────────
+//  CPE PARSING
+//  cpe:2.3:type:vendor:product:version:...
+// ─────────────────────────────────────────────
+function parseCpe(cpe) {
+  // split on unescaped colons
+  const parts = cpe.split(':');
+  // parts[0]=cpe, [1]=2.3, [2]=type, [3]=vendor, [4]=product, [5]=version
+  return {
+    raw:     cpe,
+    type:    parts[2] || '*',
+    vendor:  parts[3] || '*',
+    product: parts[4] || '*',
+    version: parts[5] || '*',
+  };
+}
+
+function groupCpes(cpes) {
+  // group by vendor:product
+  const groups = {};
+  for (const cpe of cpes) {
+    const p   = parseCpe(cpe);
+    const key = `${p.vendor}:::${p.product}`;
+    if (!groups[key]) groups[key] = { vendor: p.vendor, product: p.product, versions: [] };
+    groups[key].versions.push(p.version);
+  }
+  return Object.values(groups);
 }
 
 // ─────────────────────────────────────────────
 //  STATE
 // ─────────────────────────────────────────────
 let DB  = {}, INV = {}, ALL_IDS = [];
-let universe   = null;
-let checkedIds = new Set();
-let acTimeout  = null;
+let universe    = null;
+let checkedIds  = new Set();
+let activeCpeCve = null;   // which CVE tab is shown in the CPE panel
+let acTimeout   = null;
 
 // ─────────────────────────────────────────────
 //  BOOT
@@ -331,7 +434,7 @@ async function loadDatabases() {
     } catch(e) {
       lines[k].className = 'boot-log-line';
       await new Promise(r => setTimeout(r, 400));
-      lines[k].textContent = `[ERR] ${DATA_FILES[k]} — ${e.message}`;
+      lines[k].textContent = `[SKIP] ${DATA_FILES[k]} — ${e.message}`;
     }
     bootFill.style.width = `${Math.round((i+1)/keys.length*80)}%`;
   }
@@ -341,6 +444,7 @@ async function loadDatabases() {
   DB.cwe_capec     = DB.cwe_capec     || {};
   DB.capec_attack  = DB.capec_attack  || {};
   DB.attack_defend = DB.attack_defend || {};
+  DB.cve_cpe       = DB.cve_cpe       || {};
 
   INV.cwe_cve   = invertMap(DB.cve_cwe);
   INV.capec_cwe = invertMap(DB.cwe_capec);
@@ -375,7 +479,6 @@ function invertMap(m) {
     for (const v of vals) { if (!out[v]) out[v] = []; out[v].push(k); }
   return out;
 }
-
 function expand(ids, mapping) {
   const result = new Set();
   for (const id of ids) for (const v of (mapping[id] || [])) result.add(v);
@@ -389,66 +492,52 @@ const PATTERNS = [
   [/^T\d{4}(\.\d{3})?$/i, "ATT&CK"],
   [/^D3-[A-Z]+$/i,        "D3FEND"],
 ];
-
 function detectType(id) {
   for (const [re, t] of PATTERNS) if (re.test(id)) return t;
   return null;
 }
 
 function getRelated(inputId) {
-  const id   = inputId.trim().toUpperCase();
-  const tipo = detectType(id);
+  const id = inputId.trim().toUpperCase(), tipo = detectType(id);
   if (!tipo) return null;
-
-  const r = {};
-  FW.forEach(fw => r[fw] = new Set());
-  r[tipo].add(id);
+  const r = {}; FW.forEach(fw => r[fw] = new Set()); r[tipo].add(id);
 
   if (tipo === "CVE") {
-    const cwes   = expand([id], DB.cve_cwe);       cwes.forEach(x => r["CWE"].add(x));
-    const capecs = expand(cwes, DB.cwe_capec);      capecs.forEach(x => r["CAPEC"].add(x));
-    const atks   = expand(capecs, DB.capec_attack); atks.forEach(x => r["ATT&CK"].add(x));
-    expand(atks, DB.attack_defend).forEach(x => r["D3FEND"].add(x));
+    const cwes=expand([id],DB.cve_cwe); cwes.forEach(x=>r["CWE"].add(x));
+    const capecs=expand(cwes,DB.cwe_capec); capecs.forEach(x=>r["CAPEC"].add(x));
+    const atks=expand(capecs,DB.capec_attack); atks.forEach(x=>r["ATT&CK"].add(x));
+    expand(atks,DB.attack_defend).forEach(x=>r["D3FEND"].add(x));
   } else if (tipo === "CWE") {
-    const capecs = expand([id], DB.cwe_capec);      capecs.forEach(x => r["CAPEC"].add(x));
-    const atks   = expand(capecs, DB.capec_attack); atks.forEach(x => r["ATT&CK"].add(x));
-    expand(atks, DB.attack_defend).forEach(x => r["D3FEND"].add(x));
-    expand([id], INV.cwe_cve).forEach(x => r["CVE"].add(x));
+    const capecs=expand([id],DB.cwe_capec); capecs.forEach(x=>r["CAPEC"].add(x));
+    const atks=expand(capecs,DB.capec_attack); atks.forEach(x=>r["ATT&CK"].add(x));
+    expand(atks,DB.attack_defend).forEach(x=>r["D3FEND"].add(x));
+    expand([id],INV.cwe_cve).forEach(x=>r["CVE"].add(x));
   } else if (tipo === "CAPEC") {
-    const atks = expand([id], DB.capec_attack);     atks.forEach(x => r["ATT&CK"].add(x));
-    expand(atks, DB.attack_defend).forEach(x => r["D3FEND"].add(x));
-    const cwes = expand([id], INV.capec_cwe);       cwes.forEach(x => r["CWE"].add(x));
-    expand(cwes, INV.cwe_cve).forEach(x => r["CVE"].add(x));
+    const atks=expand([id],DB.capec_attack); atks.forEach(x=>r["ATT&CK"].add(x));
+    expand(atks,DB.attack_defend).forEach(x=>r["D3FEND"].add(x));
+    const cwes=expand([id],INV.capec_cwe); cwes.forEach(x=>r["CWE"].add(x));
+    expand(cwes,INV.cwe_cve).forEach(x=>r["CVE"].add(x));
   } else if (tipo === "ATT&CK") {
-    expand([id], DB.attack_defend).forEach(x => r["D3FEND"].add(x));
-    const capecs = expand([id], INV.atk_capec);     capecs.forEach(x => r["CAPEC"].add(x));
-    const cwes   = expand(capecs, INV.capec_cwe);   cwes.forEach(x => r["CWE"].add(x));
-    expand(cwes, INV.cwe_cve).forEach(x => r["CVE"].add(x));
+    expand([id],DB.attack_defend).forEach(x=>r["D3FEND"].add(x));
+    const capecs=expand([id],INV.atk_capec); capecs.forEach(x=>r["CAPEC"].add(x));
+    const cwes=expand(capecs,INV.capec_cwe); cwes.forEach(x=>r["CWE"].add(x));
+    expand(cwes,INV.cwe_cve).forEach(x=>r["CVE"].add(x));
   } else if (tipo === "D3FEND") {
-    const atks   = expand([id], INV.d3_atk);        atks.forEach(x => r["ATT&CK"].add(x));
-    const capecs = expand(atks, INV.atk_capec);     capecs.forEach(x => r["CAPEC"].add(x));
-    const cwes   = expand(capecs, INV.capec_cwe);   cwes.forEach(x => r["CWE"].add(x));
-    expand(cwes, INV.cwe_cve).forEach(x => r["CVE"].add(x));
+    const atks=expand([id],INV.d3_atk); atks.forEach(x=>r["ATT&CK"].add(x));
+    const capecs=expand(atks,INV.atk_capec); capecs.forEach(x=>r["CAPEC"].add(x));
+    const cwes=expand(capecs,INV.capec_cwe); cwes.forEach(x=>r["CWE"].add(x));
+    expand(cwes,INV.cwe_cve).forEach(x=>r["CVE"].add(x));
   }
-
   return r;
 }
 
 function computeUniverse() {
-  const ids = [...checkedIds];
-  if (!ids.length) return null;
-
-  let result = getRelated(ids[0]);
-  if (!result) return null;
-
+  const ids = [...checkedIds]; if (!ids.length) return null;
+  let result = getRelated(ids[0]); if (!result) return null;
   for (const id of ids.slice(1)) {
-    const next = getRelated(id);
-    if (!next) continue;
-    FW.forEach(fw => {
-      result[fw] = new Set([...result[fw]].filter(x => next[fw].has(x)));
-    });
+    const next = getRelated(id); if (!next) continue;
+    FW.forEach(fw => { result[fw] = new Set([...result[fw]].filter(x => next[fw].has(x))); });
   }
-
   return Object.fromEntries(FW.map(fw => [fw, [...result[fw]].sort()]));
 }
 
@@ -456,8 +545,90 @@ function computeUniverse() {
 //  DOM refs
 // ─────────────────────────────────────────────
 const $ = id => document.getElementById(id);
-const si = $("search-input"), sb = $("search-btn"), ac = $("autocomplete");
-const eb = $("error-box"), ld = $("loading"), rs = $("results"), es = $("empty-state");
+const si=$("search-input"), sb=$("search-btn"), ac=$("autocomplete");
+const eb=$("error-box"), ld=$("loading"), rs=$("results"), es=$("empty-state");
+const cpePanel=$("cpe-panel"), cpeTabs=$("cpe-cve-tabs"), cpeBody=$("cpe-panel-body");
+
+// ─────────────────────────────────────────────
+//  CPE PANEL
+// ─────────────────────────────────────────────
+function getCheckedCves() {
+  // return checked CVEs that have CPE data, sorted
+  return [...checkedIds]
+    .filter(id => detectType(id) === "CVE")
+    .sort();
+}
+
+function renderCpePanel() {
+  const cves = getCheckedCves();
+
+  if (!cves.length) {
+    cpePanel.style.display = "none";
+    activeCpeCve = null;
+    return;
+  }
+
+  cpePanel.style.display = "block";
+
+  // If current active CVE is no longer checked, pick first
+  if (!activeCpeCve || !cves.includes(activeCpeCve)) {
+    activeCpeCve = cves[0];
+  }
+
+  // Render tabs
+  cpeTabs.innerHTML = "";
+  cves.forEach(cve => {
+    const tab = document.createElement("button");
+    tab.className = "cpe-cve-tab" + (cve === activeCpeCve ? " active" : "");
+    tab.textContent = cve;
+    tab.addEventListener("click", () => {
+      activeCpeCve = cve;
+      renderCpePanel();
+    });
+    cpeTabs.appendChild(tab);
+  });
+
+  // Render body for activeCpeCve
+  cpeBody.innerHTML = "";
+  const cpes = DB.cve_cpe[activeCpeCve];
+
+  if (!cpes || cpes.length === 0) {
+    const msg = document.createElement("div");
+    msg.className = "cpe-no-data";
+    msg.textContent = `No CPE data available for ${activeCpeCve}`;
+    cpeBody.appendChild(msg);
+    return;
+  }
+
+  const groups = groupCpes(cpes);
+
+  groups.forEach(g => {
+    const grp = document.createElement("div");
+    grp.className = "cpe-group";
+
+    const hdr = document.createElement("div");
+    hdr.className = "cpe-group-header";
+    hdr.innerHTML = `
+      <span class="cpe-vendor">${g.vendor}</span>
+      <span class="cpe-sep">/</span>
+      <span class="cpe-product">${g.product}</span>`;
+    grp.appendChild(hdr);
+
+    const versionWrap = document.createElement("div");
+    versionWrap.className = "cpe-versions";
+
+    g.versions.forEach(v => {
+      const tag = document.createElement("span");
+      tag.className = "cpe-version-tag" + (v === '*' ? " wildcard" : "");
+      tag.textContent = v === '*' ? 'all versions' : v;
+      tag.title = `Version: ${v}`;
+      versionWrap.appendChild(tag);
+    });
+
+    grp.appendChild(versionWrap);
+    cpeBody.appendChild(grp);
+  });
+}
 
 // ─────────────────────────────────────────────
 //  SEARCH
@@ -465,29 +636,21 @@ const eb = $("error-box"), ld = $("loading"), rs = $("results"), es = $("empty-s
 function doSearch(q) {
   const val = (q || si.value).trim().toUpperCase();
   if (!val) return;
-  si.value = "";
-  ac.classList.remove("show");
-
+  si.value = ""; ac.classList.remove("show");
   if (!detectType(val)) { setError(`Unrecognized ID: "${val}"`); return; }
   if (checkedIds.has(val)) return;
-
-  setError("");
-  setLoading(true);
-
+  setError(""); setLoading(true);
   setTimeout(() => {
     checkedIds.add(val);
     const u = computeUniverse();
-
     if (!u || FW.every(fw => u[fw].length === 0)) {
       checkedIds.delete(val);
       setLoading(false);
       setError(`"${val}" produces no results with the current selection.`);
       return;
     }
-
-    universe = u;
-    setLoading(false);
-    renderTable();
+    universe = u; setLoading(false);
+    renderTable(); renderCpePanel();
   }, 10);
 }
 
@@ -497,29 +660,21 @@ function doSearch(q) {
 function toggleCheck(id) {
   const wasChecked = checkedIds.has(id);
   if (wasChecked) checkedIds.delete(id); else checkedIds.add(id);
-
   setLoading(true);
   setTimeout(() => {
     if (checkedIds.size === 0) {
       universe = null;
-      rs.style.display = "none";
-      es.style.display = "block";
-      setLoading(false);
-      return;
+      rs.style.display = "none"; es.style.display = "block";
+      setLoading(false); renderCpePanel(); return;
     }
-
     const u = computeUniverse();
     if (!u || FW.every(fw => u[fw].length === 0)) {
       if (wasChecked) checkedIds.add(id); else checkedIds.delete(id);
       setLoading(false);
-      setError(`No results for this combination — reverted.`);
-      return;
+      setError(`No results for this combination — reverted.`); return;
     }
-
-    setError("");
-    universe = u;
-    setLoading(false);
-    renderTable();
+    setError(""); universe = u; setLoading(false);
+    renderTable(); renderCpePanel();
   }, 10);
 }
 
@@ -528,90 +683,56 @@ function toggleCheck(id) {
 // ─────────────────────────────────────────────
 function renderTable() {
   if (!universe) return;
-
   const cols    = FW.map(fw => universe[fw] || []);
   const total   = cols.reduce((s, c) => s + c.length, 0);
   const maxRows = Math.max(...cols.map(c => c.length), 0);
 
-  $("result-total").textContent =
-    `${total} total ${total === 1 ? 'result' : 'results'}`;
+  $("result-total").textContent = `${total} total ${total===1?'result':'results'}`;
 
-  // thead
-  const thead = $("col-thead-row");
-  thead.innerHTML = "";
+  const thead = $("col-thead-row"); thead.innerHTML = "";
   FW.forEach((fw, ci) => {
-    const fc = FW_CFG[fw];
-    const th = document.createElement("th");
+    const fc = FW_CFG[fw], th = document.createElement("th");
     th.style.cssText = `color:${fc.text}; border-top:3px solid ${fc.bg}; border-right:1px solid #111620;`;
-    th.innerHTML = `
-      <div class="col-header-inner">
-        <span class="col-header-dot" style="background:${fc.bg}"></span>
-        <span>${fw}</span>
-        <span class="col-header-count">${cols[ci].length}</span>
-      </div>`;
+    th.innerHTML = `<div class="col-header-inner">
+      <span class="col-header-dot" style="background:${fc.bg}"></span>
+      <span>${fw}</span>
+      <span class="col-header-count">${cols[ci].length}</span></div>`;
     thead.appendChild(th);
   });
 
-  // tbody
-  const tbody = $("col-tbody");
-  tbody.innerHTML = "";
-
+  const tbody = $("col-tbody"); tbody.innerHTML = "";
   for (let i = 0; i < maxRows; i++) {
     const tr = document.createElement("tr");
-
     FW.forEach((fw, ci) => {
-      const fc  = FW_CFG[fw];
-      const id  = cols[ci][i];
-      const td  = document.createElement("td");
-
+      const fc=FW_CFG[fw], id=cols[ci][i], td=document.createElement("td");
       if (id) {
-        const checked = checkedIds.has(id);
-        const url     = getUrl(id, fw);
+        const checked=checkedIds.has(id), url=getUrl(id,fw);
+        const item=document.createElement("div");
+        item.className="cell-item"+(checked?" checked":"");
+        item.style.setProperty('--cell-color', fc.bg);
+        item.style.setProperty('--cell-text',  fc.text);
+        item.style.setProperty('--cell-border',fc.bg+"55");
+        item.style.setProperty('--cell-dim',   fc.dim);
 
-        const item = document.createElement("div");
-        item.className = "cell-item" + (checked ? " checked" : "");
-        item.style.setProperty('--cell-color',  fc.bg);
-        item.style.setProperty('--cell-text',   fc.text);
-        item.style.setProperty('--cell-border', fc.bg + "55");
-        item.style.setProperty('--cell-dim',    fc.dim);
+        const cb=document.createElement("div");
+        cb.className="cell-cb";
+        cb.title=checked?"Remove from filter":"Add to filter";
+        cb.addEventListener("click", e => { e.stopPropagation(); toggleCheck(id); });
 
-        // Checkbox — click toggles filter
-        const cb = document.createElement("div");
-        cb.className = "cell-cb";
-        cb.title = checked ? "Remove from filter" : "Add to filter";
-        cb.addEventListener("click", e => {
-          e.stopPropagation();
-          toggleCheck(id);
-        });
-
-        // ID label — click opens MITRE page
-        const label = document.createElement("a");
-        label.className = "cell-id";
-        label.textContent = id;
-        label.title = `Open ${id} on MITRE`;
-        if (url) {
-          label.href = url;
-          label.target = "_blank";
-          label.rel = "noopener noreferrer";
-        }
-        // prevent the anchor from affecting item background on click
+        const label=document.createElement("a");
+        label.className="cell-id"; label.textContent=id;
+        label.title=`Open ${id} on MITRE`;
+        if (url) { label.href=url; label.target="_blank"; label.rel="noopener noreferrer"; }
         label.addEventListener("click", e => e.stopPropagation());
 
-        item.appendChild(cb);
-        item.appendChild(label);
-        td.appendChild(item);
-      } else {
-        td.innerHTML = `<span class="col-empty">—</span>`;
-      }
-
+        item.appendChild(cb); item.appendChild(label); td.appendChild(item);
+      } else { td.innerHTML=`<span class="col-empty">—</span>`; }
       tr.appendChild(td);
     });
-
     tbody.appendChild(tr);
   }
 
-  rs.style.display = "block";
-  es.style.display = "none";
+  rs.style.display="block"; es.style.display="none";
 }
 
 // ─────────────────────────────────────────────
@@ -622,33 +743,29 @@ si.addEventListener("input", () => {
   const q = si.value.trim().toUpperCase();
   if (q.length < 2) { ac.classList.remove("show"); return; }
   acTimeout = setTimeout(() => {
-    const matches = ALL_IDS.filter(id => id.includes(q)).slice(0, 10);
+    const matches = ALL_IDS.filter(id => id.includes(q)).slice(0,10);
     ac.innerHTML = "";
     if (!matches.length) { ac.classList.remove("show"); return; }
     matches.forEach(id => {
-      const div  = document.createElement("div"); div.className = "ac-item";
-      const type = detectType(id) || "?";
-      const fc   = FW_CFG[type] || {};
-      div.innerHTML = `
-        <span style="color:${fc.text||'#ccc'}">${id}</span>
+      const div=document.createElement("div"); div.className="ac-item";
+      const type=detectType(id)||"?", fc=FW_CFG[type]||{};
+      div.innerHTML=`<span style="color:${fc.text||'#ccc'}">${id}</span>
         <span style="font-size:0.68rem;padding:2px 7px;border-radius:3px;
           background:rgba(0,0,0,0.4);color:${fc.text||'#ccc'};
           border:1px solid ${(fc.bg||'#555')+'44'}">${type}</span>`;
-      div.onclick = () => doSearch(id);
+      div.onclick=()=>doSearch(id);
       ac.appendChild(div);
     });
     ac.classList.add("show");
   }, 150);
 });
 
-si.addEventListener("keydown", e => { if (e.key === "Enter") doSearch(); });
+si.addEventListener("keydown", e => { if (e.key==="Enter") doSearch(); });
 sb.onclick = () => doSearch();
-document.addEventListener("click", e => {
-  if (!e.target.closest(".search-wrap")) ac.classList.remove("show");
-});
+document.addEventListener("click", e => { if (!e.target.closest(".search-wrap")) ac.classList.remove("show"); });
 
-function setError(msg)    { eb.textContent = msg; eb.style.display = msg ? "block" : "none"; }
-function setLoading(show) { ld.style.display = show ? "block" : "none"; }
+function setError(msg)    { eb.textContent=msg; eb.style.display=msg?"block":"none"; }
+function setLoading(show) { ld.style.display=show?"block":"none"; }
 </script>
 </body>
 </html>
