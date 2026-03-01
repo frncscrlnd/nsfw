@@ -167,6 +167,24 @@
   .cell-item.checked .cell-id { color: var(--cell-text); }
   .cell-item.checked .cell-id:hover { text-decoration: underline; }
 
+  /* ── KEV badge ── */
+  .kev-badge {
+    flex-shrink: 0;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 0.55rem; font-weight: 900; letter-spacing: 0.08em;
+    padding: 1px 5px; border-radius: 3px;
+    background: rgba(239, 68, 68, 0.12);
+    border: 1px solid rgba(239, 68, 68, 0.45);
+    color: #f87171;
+    cursor: default;
+    white-space: nowrap;
+    animation: kev-glow 2.5s ease-in-out infinite;
+  }
+  @keyframes kev-glow {
+    0%, 100% { box-shadow: 0 0 0px rgba(239,68,68,0); }
+    50%       { box-shadow: 0 0 6px rgba(239,68,68,0.35); }
+  }
+
   .col-empty {
     color: #1e1e1e; font-size: 0.7rem; font-style: italic;
     padding: 7px 12px; display: block; min-height: 34px; line-height: 20px;
@@ -213,58 +231,37 @@
     cursor: pointer;
     transition: background 0.12s, border-color 0.12s;
     font-family: inherit;
+    display: inline-flex; align-items: center; gap: 6px;
   }
   .cpe-cve-tab:hover { background: rgba(234,179,8,0.12); }
   .cpe-cve-tab.active { background: rgba(234,179,8,0.15); border-color: #eab308; color: #fde047; }
+  .cpe-cve-tab .kev-badge { animation: none; font-size: 0.5rem; padding: 1px 4px; }
 
-  .cpe-panel-body {
-    padding: 16px 18px;
-    background: #060a08;
-  }
+  .cpe-panel-body { padding: 16px 18px; background: #060a08; }
 
-  /* group by vendor/product */
   .cpe-group { margin-bottom: 18px; }
   .cpe-group:last-child { margin-bottom: 0; }
   .cpe-group-header {
-    font-size: 0.68rem;
-    color: #2a5a3a;
-    letter-spacing: 0.15em;
-    margin-bottom: 8px;
-    padding-bottom: 4px;
+    font-size: 0.68rem; color: #2a5a3a; letter-spacing: 0.15em;
+    margin-bottom: 8px; padding-bottom: 4px;
     border-bottom: 1px solid #0f1a14;
-    display: flex;
-    align-items: center;
-    gap: 8px;
+    display: flex; align-items: center; gap: 8px;
   }
   .cpe-vendor { color: var(--green); }
   .cpe-product { color: #aaa; }
   .cpe-sep { color: #2a3a2a; }
 
-  .cpe-versions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-  }
+  .cpe-versions { display: flex; flex-wrap: wrap; gap: 6px; }
 
   .cpe-version-tag {
-    font-size: 0.7rem;
-    padding: 3px 10px;
-    border-radius: 4px;
-    background: #0d1a10;
-    border: 1px solid #1a3020;
-    color: #4a8a5a;
-    white-space: nowrap;
-    transition: border-color 0.12s, color 0.12s;
+    font-size: 0.7rem; padding: 3px 10px; border-radius: 4px;
+    background: #0d1a10; border: 1px solid #1a3020; color: #4a8a5a;
+    white-space: nowrap; transition: border-color 0.12s, color 0.12s;
   }
   .cpe-version-tag:hover { border-color: var(--green); color: var(--green); }
   .cpe-version-tag.wildcard { color: #2a4a3a; border-color: #0f1a14; font-style: italic; }
 
-  .cpe-no-data {
-    color: #2a3a2a;
-    font-size: 0.75rem;
-    font-style: italic;
-    padding: 8px 0;
-  }
+  .cpe-no-data { color: #2a3a2a; font-size: 0.75rem; font-style: italic; padding: 8px 0; }
 
   /* ── empty state ── */
   .empty-state { text-align: center; color: #1a2a1a; margin-top: 100px; }
@@ -313,7 +310,6 @@
       </table>
     </div>
 
-    <!-- CPE panel lives inside #results, below the table -->
     <div id="cpe-panel">
       <div class="cpe-panel-header">
         <span class="cpe-panel-title">&#9658; AFFECTED PRODUCTS (CPE)</span>
@@ -353,9 +349,6 @@ const FW_CFG = {
 
 // ─────────────────────────────────────────────
 //  D3FEND: abbreviazione → nome completo per URL
-//  Il JSON contiene le abbreviazioni (es. "D3-DENCR").
-//  Questa tabella converte in nome completo per costruire
-//  l'URL corretto: https://d3fend.mitre.org/technique/d3f:DataEncryption/
 // ─────────────────────────────────────────────
 const D3FEND_ABBR_TO_FULL = {
   "D3-ACH":   "ApplicationConfigurationHardening",
@@ -430,8 +423,6 @@ function getUrl(id, type) {
       if (id.includes('.')) { const [b,s]=id.split('.'); return `https://attack.mitre.org/techniques/${b}/${s}/`; }
       return `https://attack.mitre.org/techniques/${id}/`;
     case "D3FEND": {
-      // id es: "D3-DENCR" → cerca in tabella → "DataEncryption"
-      // fallback: rimuove "D3-" e usa il resto così com'è
       const fullName = D3FEND_ABBR_TO_FULL[id] || id.replace(/^D3-/, '');
       return `https://d3fend.mitre.org/technique/d3f:${fullName}/`;
     }
@@ -444,21 +435,14 @@ function getUrl(id, type) {
 // ─────────────────────────────────────────────
 function parseCpe(cpe) {
   const parts = cpe.split(':');
-  return {
-    raw:     cpe,
-    type:    parts[2] || '*',
-    vendor:  parts[3] || '*',
-    product: parts[4] || '*',
-    version: parts[5] || '*',
-  };
+  return { raw:cpe, type:parts[2]||'*', vendor:parts[3]||'*', product:parts[4]||'*', version:parts[5]||'*' };
 }
 
 function groupCpes(cpes) {
   const groups = {};
   for (const cpe of cpes) {
-    const p   = parseCpe(cpe);
-    const key = `${p.vendor}:::${p.product}`;
-    if (!groups[key]) groups[key] = { vendor: p.vendor, product: p.product, versions: [] };
+    const p = parseCpe(cpe), key = `${p.vendor}:::${p.product}`;
+    if (!groups[key]) groups[key] = { vendor:p.vendor, product:p.product, versions:[] };
     groups[key].versions.push(p.version);
   }
   return Object.values(groups);
@@ -467,11 +451,12 @@ function groupCpes(cpes) {
 // ─────────────────────────────────────────────
 //  STATE
 // ─────────────────────────────────────────────
-let DB  = {}, INV = {}, ALL_IDS = [];
-let universe    = null;
-let checkedIds  = new Set();
+let DB = {}, INV = {}, ALL_IDS = [];
+let KEV = new Set();          // ← CVE presenti nel catalogo CISA KEV
+let universe     = null;
+let checkedIds   = new Set();
 let activeCpeCve = null;
-let acTimeout   = null;
+let acTimeout    = null;
 
 // ─────────────────────────────────────────────
 //  BOOT
@@ -506,6 +491,22 @@ async function loadDatabases() {
     }
     bootFill.style.width = `${Math.round((i+1)/keys.length*80)}%`;
   }
+
+  // ── Carica kevs.txt ───────────────────────────────────────────────
+  const kevLine = bootLine('kevs.txt');
+  try {
+    const res = await fetch(DATA_BASE + 'kevs.txt');
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const text = await res.text();
+    text.split('\n').forEach(line => {
+      const id = line.trim().toUpperCase();
+      if (id.startsWith('CVE-')) KEV.add(id);
+    });
+    kevLine.className = 'boot-log-line ok';
+  } catch(e) {
+    kevLine.textContent = `[SKIP] kevs.txt — ${e.message}`;
+  }
+  // ─────────────────────────────────────────────────────────────────
 
   const invertLine = bootLine('building index...');
   DB.cve_cwe       = DB.cve_cwe       || {};
@@ -565,6 +566,19 @@ function detectType(id) {
   return null;
 }
 
+// Controlla se la CVE è nel catalogo KEV
+function isKev(id) { return KEV.has(id.toUpperCase()); }
+
+// Crea il piccolo badge rosso "KEV"
+function makeKevBadge(small = false) {
+  const b = document.createElement('span');
+  b.className = 'kev-badge';
+  b.textContent = 'KEV';
+  b.title = 'Known Exploited Vulnerability — CISA KEV Catalog';
+  if (small) b.style.cssText = 'animation:none;font-size:0.5rem;padding:1px 4px;';
+  return b;
+}
+
 function getRelated(inputId) {
   const id = inputId.trim().toUpperCase(), tipo = detectType(id);
   if (!tipo) return null;
@@ -621,41 +635,29 @@ const cpePanel=$("cpe-panel"), cpeTabs=$("cpe-cve-tabs"), cpeBody=$("cpe-panel-b
 //  CPE PANEL
 // ─────────────────────────────────────────────
 function getCheckedCves() {
-  return [...checkedIds]
-    .filter(id => detectType(id) === "CVE")
-    .sort();
+  return [...checkedIds].filter(id => detectType(id) === "CVE").sort();
 }
 
 function renderCpePanel() {
   const cves = getCheckedCves();
-
-  if (!cves.length) {
-    cpePanel.style.display = "none";
-    activeCpeCve = null;
-    return;
-  }
-
+  if (!cves.length) { cpePanel.style.display="none"; activeCpeCve=null; return; }
   cpePanel.style.display = "block";
-
-  if (!activeCpeCve || !cves.includes(activeCpeCve)) {
-    activeCpeCve = cves[0];
-  }
+  if (!activeCpeCve || !cves.includes(activeCpeCve)) activeCpeCve = cves[0];
 
   cpeTabs.innerHTML = "";
   cves.forEach(cve => {
     const tab = document.createElement("button");
     tab.className = "cpe-cve-tab" + (cve === activeCpeCve ? " active" : "");
-    tab.textContent = cve;
-    tab.addEventListener("click", () => {
-      activeCpeCve = cve;
-      renderCpePanel();
-    });
+    const span = document.createElement('span');
+    span.textContent = cve;
+    tab.appendChild(span);
+    if (isKev(cve)) tab.appendChild(makeKevBadge(true));
+    tab.addEventListener("click", () => { activeCpeCve = cve; renderCpePanel(); });
     cpeTabs.appendChild(tab);
   });
 
   cpeBody.innerHTML = "";
   const cpes = DB.cve_cpe[activeCpeCve];
-
   if (!cpes || cpes.length === 0) {
     const msg = document.createElement("div");
     msg.className = "cpe-no-data";
@@ -664,32 +666,23 @@ function renderCpePanel() {
     return;
   }
 
-  const groups = groupCpes(cpes);
-
-  groups.forEach(g => {
+  groupCpes(cpes).forEach(g => {
     const grp = document.createElement("div");
     grp.className = "cpe-group";
-
     const hdr = document.createElement("div");
     hdr.className = "cpe-group-header";
-    hdr.innerHTML = `
-      <span class="cpe-vendor">${g.vendor}</span>
-      <span class="cpe-sep">/</span>
-      <span class="cpe-product">${g.product}</span>`;
+    hdr.innerHTML = `<span class="cpe-vendor">${g.vendor}</span><span class="cpe-sep">/</span><span class="cpe-product">${g.product}</span>`;
     grp.appendChild(hdr);
-
-    const versionWrap = document.createElement("div");
-    versionWrap.className = "cpe-versions";
-
+    const vw = document.createElement("div");
+    vw.className = "cpe-versions";
     g.versions.forEach(v => {
       const tag = document.createElement("span");
       tag.className = "cpe-version-tag" + (v === '*' ? " wildcard" : "");
       tag.textContent = v === '*' ? 'all versions' : v;
       tag.title = `Version: ${v}`;
-      versionWrap.appendChild(tag);
+      vw.appendChild(tag);
     });
-
-    grp.appendChild(versionWrap);
+    grp.appendChild(vw);
     cpeBody.appendChild(grp);
   });
 }
@@ -708,10 +701,8 @@ function doSearch(q) {
     checkedIds.add(val);
     const u = computeUniverse();
     if (!u || FW.every(fw => u[fw].length === 0)) {
-      checkedIds.delete(val);
-      setLoading(false);
-      setError(`"${val}" produces no results with the current selection.`);
-      return;
+      checkedIds.delete(val); setLoading(false);
+      setError(`"${val}" produces no results with the current selection.`); return;
     }
     universe = u; setLoading(false);
     renderTable(); renderCpePanel();
@@ -734,8 +725,7 @@ function toggleCheck(id) {
     const u = computeUniverse();
     if (!u || FW.every(fw => u[fw].length === 0)) {
       if (wasChecked) checkedIds.add(id); else checkedIds.delete(id);
-      setLoading(false);
-      setError(`No results for this combination — reverted.`); return;
+      setLoading(false); setError(`No results for this combination — reverted.`); return;
     }
     setError(""); universe = u; setLoading(false);
     renderTable(); renderCpePanel();
@@ -785,12 +775,20 @@ function renderTable() {
 
         const label=document.createElement("a");
         label.className="cell-id";
-        label.textContent=id;          // mostra SEMPRE l'abbreviazione (es. D3-DENCR)
+        label.textContent=id;
         label.title=`Open ${id} on MITRE`;
         if (url) { label.href=url; label.target="_blank"; label.rel="noopener noreferrer"; }
         label.addEventListener("click", e => e.stopPropagation());
 
-        item.appendChild(cb); item.appendChild(label); td.appendChild(item);
+        item.appendChild(cb);
+        item.appendChild(label);
+
+        // Badge KEV solo per CVE presenti nel catalogo
+        if (fw === "CVE" && isKev(id)) {
+          item.appendChild(makeKevBadge());
+        }
+
+        td.appendChild(item);
       } else { td.innerHTML=`<span class="col-empty">—</span>`; }
       tr.appendChild(td);
     });
@@ -814,8 +812,9 @@ si.addEventListener("input", () => {
     matches.forEach(id => {
       const div=document.createElement("div"); div.className="ac-item";
       const type=detectType(id)||"?", fc=FW_CFG[type]||{};
-      div.innerHTML=`<span style="color:${fc.text||'#ccc'}">${id}</span>
-        <span style="font-size:0.68rem;padding:2px 7px;border-radius:3px;
+      div.innerHTML=`
+        <span style="color:${fc.text||'#ccc'}">${id}</span>
+        <span style="font-size:0.68rem;padding:2px 7px;border-radius:3px;margin-left:auto;
           background:rgba(0,0,0,0.4);color:${fc.text||'#ccc'};
           border:1px solid ${(fc.bg||'#555')+'44'}">${type}</span>`;
       div.onclick=()=>doSearch(id);
