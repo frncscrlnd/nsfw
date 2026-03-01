@@ -520,11 +520,16 @@ async function loadDatabases() {
   INV.atk_capec = invertMap(DB.capec_attack);
   INV.d3_atk    = invertMap(DB.attack_defend);
 
+  // I D3FEND sono nei VALUES di attack_defend, non nelle chiavi
+  const d3fendIds = new Set();
+  Object.values(DB.attack_defend).forEach(arr => arr.forEach(id => d3fendIds.add(id)));
+
   ALL_IDS = Array.from(new Set([
     ...Object.keys(DB.cve_cwe),
     ...Object.keys(DB.cwe_capec),
     ...Object.keys(DB.capec_attack),
     ...Object.keys(DB.attack_defend),
+    ...d3fendIds,
   ])).sort();
 
   invertLine.className = 'boot-log-line ok';
