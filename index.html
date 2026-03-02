@@ -204,21 +204,21 @@
   .kev-filter-label {
     font-size: 0.55rem; font-weight: 900; letter-spacing: 0.08em;
     padding: 1px 5px; border-radius: 3px;
-    background: rgba(239,68,68,0.06);
-    border: 1px solid rgba(239,68,68,0.2);
-    color: #7a3a3a;
+    border: 1px solid #1a2030;
+    background: #080c12;
+    color: #3a5a7a;
     transition: background 0.12s, border-color 0.12s, color 0.12s;
   }
   .kev-filter-wrap:hover .kev-filter-label {
     background: rgba(239,68,68,0.1);
     border-color: rgba(239,68,68,0.45);
     color: #f87171;
+    animation: kev-glow 2.5s ease-in-out infinite;
   }
   .kev-filter-wrap.active .kev-filter-label {
-    background: rgba(239,68,68,0.15);
-    border-color: #f87171;
-    color: #fca5a5;
-    animation: kev-glow 2.5s ease-in-out infinite;
+    background: rgba(239,68,68,0.1);
+    border-color: rgba(239,68,68,0.45);
+    color: #f87171;
   }
 
   .col-empty {
@@ -315,8 +315,8 @@
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    font-size: 0.62rem;
-    padding: 3px 10px 3px 8px;
+    font-size: 0.55rem; font-weight: 900; letter-spacing: 0.08em;
+    padding: 1px 5px;
     border-radius: 3px;
     border: 1px solid #1a2030;
     background: #080c12;
@@ -885,32 +885,35 @@ function computeUniverse() {
 }
 
 /**
- * Apply the active tactic filter to a universe object.
- * Returns a NEW universe where ATT&CK is filtered, and D3FEND is re-derived from filtered ATT&CK.
- * All other columns cascade: CAPEC/CWE/CVE are filtered to only those linked to the filtered ATT&CK set.
+ * Apply the active tactic filter AND kev filter to a universe object.
+ *
+ * Tactic filter: filters ATT&CK → cascades forward (D3FEND) and backward (CAPEC → CWE → CVE).
+ * KEV filter:    filters CVE to KEV-only → cascades forward (CWE → CAPEC → ATT&CK → D3FEND).
+ *
+ * Both filters are applied independently and then intersected:
+ * the result is the intersection of both constraints.
  */
 function applyTacticFilter(u) {
   if (!u) return null;
 
-  let filteredAtk = u["ATT&CK"];
-  let filteredCve = u["CVE"];
-
-  // ── Tactic filter on ATT&CK ──
+  // ── Step 1: Tactic filter (ATT&CK → cascade both directions) ──
   if (activeTacticFilters.size > 0) {
-    filteredAtk = filteredAtk.filter(id => techniquePassesFilter(id));
-
+    const filteredAtk = u["ATT&CK"].filter(id => techniquePassesFilter(id));
     const atkSet = new Set(filteredAtk);
-    const filteredCapec = u["CAPEC"].filter(capecId => {
-      return (DB.capec_attack[capecId] || []).some(a => atkSet.has(a));
-    });
+
+    const filteredCapec = u["CAPEC"].filter(capecId =>
+      (DB.capec_attack[capecId] || []).some(a => atkSet.has(a))
+    );
     const capecSet = new Set(filteredCapec);
-    const filteredCwe = u["CWE"].filter(cweId => {
-      return (DB.cwe_capec[cweId] || []).some(c => capecSet.has(c));
-    });
+
+    const filteredCwe = u["CWE"].filter(cweId =>
+      (DB.cwe_capec[cweId] || []).some(c => capecSet.has(c))
+    );
     const cweSet = new Set(filteredCwe);
-    filteredCve = u["CVE"].filter(cveId => {
-      return (DB.cve_cwe[cveId] || []).some(c => cweSet.has(c));
-    });
+
+    const filteredCve = u["CVE"].filter(cveId =>
+      (DB.cve_cwe[cveId] || []).some(c => cweSet.has(c))
+    );
 
     const filteredD3 = [...expand(filteredAtk, DB.attack_defend)].sort();
 
@@ -921,13 +924,40 @@ function applyTacticFilter(u) {
       "ATT&CK": filteredAtk,
       "D3FEND": filteredD3,
     };
-    filteredCve = u["CVE"];
   }
 
-  // ── KEV filter on CVE ──
+  // ── Step 2: KEV filter (CVE → cascade forward: CWE → CAPEC → ATT&CK → D3FEND) ──
   if (kevFilterActive) {
-    filteredCve = u["CVE"].filter(id => isKev(id));
-    u = { ...u, "CVE": filteredCve };
+    const filteredCve = u["CVE"].filter(id => isKev(id));
+    const cveSet = new Set(filteredCve);
+
+    // CWE: keep only those linked to at least one remaining KEV CVE
+    const filteredCwe = u["CWE"].filter(cweId =>
+      (INV.cwe_cve[cweId] || []).some(cve => cveSet.has(cve))
+    );
+    const cweSet = new Set(filteredCwe);
+
+    // CAPEC: keep only those linked to at least one remaining CWE
+    const filteredCapec = u["CAPEC"].filter(capecId =>
+      (INV.capec_cwe[capecId] || []).some(cwe => cweSet.has(cwe))
+    );
+    const capecSet = new Set(filteredCapec);
+
+    // ATT&CK: keep only those linked to at least one remaining CAPEC
+    const filteredAtk = u["ATT&CK"].filter(atkId =>
+      (INV.atk_capec[atkId] || []).some(c => capecSet.has(c))
+    );
+
+    // D3FEND: re-derive from filtered ATT&CK
+    const filteredD3 = [...expand(filteredAtk, DB.attack_defend)].sort();
+
+    u = {
+      "CVE":    filteredCve,
+      "CWE":    filteredCwe,
+      "CAPEC":  filteredCapec,
+      "ATT&CK": filteredAtk,
+      "D3FEND": filteredD3,
+    };
   }
 
   return u;
@@ -1204,8 +1234,17 @@ function renderTable() {
   const total   = cols.reduce((s, c) => s + c.length, 0);
   const maxRows = Math.max(...cols.map(c => c.length), 0);
 
-  $("result-total").textContent = `${total} ${total===1?'result':'results'}` +
-    (activeTacticFilters.size > 0 ? ` (filtered by ${activeTacticFilters.size} tactic${activeTacticFilters.size!==1?'s':''})` : '');
+  const activeFiltersCount = (activeTacticFilters.size > 0 ? 1 : 0) + (kevFilterActive ? 1 : 0);
+  let filterLabel = '';
+  if (activeTacticFilters.size > 0 && kevFilterActive) {
+    filterLabel = ` (filtered by ${activeTacticFilters.size} tactic${activeTacticFilters.size!==1?'s':''} + KEV)`;
+  } else if (activeTacticFilters.size > 0) {
+    filterLabel = ` (filtered by ${activeTacticFilters.size} tactic${activeTacticFilters.size!==1?'s':''})`;
+  } else if (kevFilterActive) {
+    filterLabel = ` (filtered by KEV)`;
+  }
+
+  $("result-total").textContent = `${total} ${total===1?'result':'results'}${filterLabel}`;
 
   const thead = $("col-thead-row"); thead.innerHTML = "";
   FW.forEach((fw, ci) => {
