@@ -112,6 +112,7 @@
   /* ── table ── */
   .col-table-wrap {
     overflow-x: auto; border-radius: 8px; border: 1px solid var(--border);
+    overflow: visible;
   }
   .col-table {
     width: 100%; border-collapse: collapse; font-size: 0.82rem; table-layout: fixed;
@@ -121,12 +122,18 @@
     font-size: 0.72rem; letter-spacing: 0.12em; font-weight: 900;
     background: #0d1117; border-bottom: 2px solid var(--border);
     position: sticky; top: 0; z-index: 2;
+    overflow: visible;
   }
-  .col-header-inner { display: flex; align-items: center; gap: 8px; }
+  .col-header-inner { display: flex; align-items: center; gap: 8px; flex-wrap: nowrap; }
   .col-header-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
   .col-header-count {
     margin-left: auto; font-size: 0.65rem; font-weight: 400; opacity: 0.6;
     background: rgba(255,255,255,0.05); border-radius: 3px; padding: 2px 6px;
+  }
+  /* When a filter widget is present, it takes the auto margin — count stays flush right */
+  .col-header-inner:has(.tactics-filter-wrap) .col-header-count,
+  .col-header-inner:has(.kev-filter-wrap) .col-header-count {
+    margin-left: 0;
   }
   .col-table tbody tr td {
     padding: 0;
@@ -183,6 +190,35 @@
   @keyframes kev-glow {
     0%, 100% { box-shadow: 0 0 0px rgba(239,68,68,0); }
     50%       { box-shadow: 0 0 6px rgba(239,68,68,0.35); }
+  }
+
+  /* ── KEV FILTER ── */
+  .kev-filter-wrap {
+    display: inline-flex;
+    align-items: center;
+    margin-left: auto;
+    margin-right: 6px;
+    cursor: pointer;
+    user-select: none;
+  }
+  .kev-filter-label {
+    font-size: 0.55rem; font-weight: 900; letter-spacing: 0.08em;
+    padding: 1px 5px; border-radius: 3px;
+    background: rgba(239,68,68,0.06);
+    border: 1px solid rgba(239,68,68,0.2);
+    color: #7a3a3a;
+    transition: background 0.12s, border-color 0.12s, color 0.12s;
+  }
+  .kev-filter-wrap:hover .kev-filter-label {
+    background: rgba(239,68,68,0.1);
+    border-color: rgba(239,68,68,0.45);
+    color: #f87171;
+  }
+  .kev-filter-wrap.active .kev-filter-label {
+    background: rgba(239,68,68,0.15);
+    border-color: #f87171;
+    color: #fca5a5;
+    animation: kev-glow 2.5s ease-in-out infinite;
   }
 
   .col-empty {
@@ -267,6 +303,161 @@
   .empty-state { text-align: center; color: #1a2a1a; margin-top: 100px; }
   .empty-state .icon { font-size: 5rem; margin-bottom: 20px; }
 
+  /* ── TACTICS FILTER DROPDOWN ── */
+  .tactics-filter-wrap {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    margin-left: auto;
+    margin-right: 6px;
+  }
+  .tactics-dropdown-trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.62rem;
+    padding: 3px 10px 3px 8px;
+    border-radius: 3px;
+    border: 1px solid #1a2030;
+    background: #080c12;
+    color: #3a5a7a;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    transition: border-color 0.15s, color 0.15s, background 0.15s;
+    user-select: none;
+    white-space: nowrap;
+  }
+  .tactics-dropdown-trigger:hover {
+    border-color: #2a3a5a;
+    color: #6a9aba;
+    background: #0a1018;
+  }
+  .tactics-dropdown-trigger.has-active {
+    border-color: rgba(239,68,68,0.5);
+    color: #f87171;
+    background: rgba(239,68,68,0.08);
+  }
+  .tactics-dropdown-trigger .trigger-arrow {
+    font-size: 0.5rem;
+    transition: transform 0.15s;
+    opacity: 0.7;
+  }
+  .tactics-dropdown-trigger.open .trigger-arrow { transform: rotate(180deg); }
+  .tactics-dropdown-trigger .trigger-badge {
+    font-size: 0.55rem;
+    background: rgba(239,68,68,0.2);
+    border: 1px solid rgba(239,68,68,0.4);
+    color: #f87171;
+    padding: 0 5px;
+    border-radius: 2px;
+    font-weight: 900;
+  }
+
+  .tactics-dropdown-menu {
+    display: none;
+    position: fixed;
+    z-index: 9000;
+    min-width: 220px;
+    background: #07090f;
+    border: 1px solid #1a2030;
+    border-radius: 5px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.7), 0 0 0 1px rgba(239,68,68,0.05);
+    overflow: hidden;
+    animation: dropIn 0.12s ease;
+  }
+  @keyframes dropIn {
+    from { opacity:0; transform: translateY(-4px); }
+    to   { opacity:1; transform: translateY(0); }
+  }
+  .tactics-dropdown-menu.open { display: block; }
+
+  .tactics-dropdown-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 7px 12px;
+    border-bottom: 1px solid #111820;
+    font-size: 0.6rem;
+    color: #2a3a5a;
+    letter-spacing: 0.15em;
+  }
+  .tactics-dropdown-clear {
+    font-size: 0.58rem;
+    color: #3a5a7a;
+    cursor: pointer;
+    padding: 1px 6px;
+    border-radius: 2px;
+    border: 1px solid #1a2a3a;
+    background: transparent;
+    font-family: inherit;
+    letter-spacing: 0.08em;
+    transition: color 0.12s, border-color 0.12s;
+  }
+  .tactics-dropdown-clear:hover { color: #f87171; border-color: rgba(239,68,68,0.4); }
+
+  .tactics-dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 7px 12px;
+    cursor: pointer;
+    border-bottom: 1px solid #0c1018;
+    transition: background 0.1s;
+    user-select: none;
+  }
+  .tactics-dropdown-item:last-child { border-bottom: none; }
+  .tactics-dropdown-item:hover { background: rgba(239,68,68,0.04); }
+  .tactics-dropdown-item.active { background: rgba(239,68,68,0.07); }
+
+  .tactic-item-cb {
+    width: 12px; height: 12px; border-radius: 2px;
+    border: 1px solid #2a3a5a;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    font-size: 8px; font-weight: 900; color: #000;
+    transition: background 0.12s, border-color 0.12s;
+  }
+  .tactics-dropdown-item.active .tactic-item-cb {
+    background: #ef4444;
+    border-color: #ef4444;
+  }
+  .tactics-dropdown-item.active .tactic-item-cb::after { content: '✓'; }
+
+  .tactic-item-name {
+    flex: 1;
+    font-size: 0.68rem;
+    color: #4a6a8a;
+    letter-spacing: 0.05em;
+    transition: color 0.1s;
+  }
+  .tactics-dropdown-item.active .tactic-item-name { color: #fca5a5; }
+  .tactics-dropdown-item:hover .tactic-item-name  { color: #7a9aba; }
+  .tactics-dropdown-item.active:hover .tactic-item-name { color: #fca5a5; }
+
+  .tactic-item-id {
+    font-size: 0.58rem;
+    color: #1e2e40;
+    transition: color 0.1s;
+  }
+  .tactics-dropdown-item.active .tactic-item-id { color: #7a3a3a; }
+
+  .tactic-item-count {
+    font-size: 0.58rem;
+    color: #1e2e40;
+    background: rgba(0,0,0,0.3);
+    padding: 1px 5px;
+    border-radius: 2px;
+    min-width: 24px;
+    text-align: center;
+    transition: color 0.1s, background 0.1s;
+  }
+  .tactics-dropdown-item.active .tactic-item-count {
+    color: #f87171;
+    background: rgba(239,68,68,0.15);
+  }
+
   ::-webkit-scrollbar { width: 6px; height: 6px; }
   ::-webkit-scrollbar-thumb { background: #1a3a2a; border-radius: 3px; }
 </style>
@@ -331,11 +522,30 @@
 // ─────────────────────────────────────────────
 const DATA_BASE  = './data/';
 const DATA_FILES = {
-  cve_cwe:       'cve_cwe.json',
-  cwe_capec:     'cwe_capec.json',
-  capec_attack:  'capec_attack.json',
-  attack_defend: 'attack_defend.json',
-  cve_cpe:       'cve_cpe.json',
+  cve_cwe:           'cve_cwe.json',
+  cwe_capec:         'cwe_capec.json',
+  capec_attack:      'capec_attack.json',
+  attack_defend:     'attack_defend.json',
+  cve_cpe:           'cve_cpe.json',
+  tactics_techniques:'tactics_techniques.json',
+};
+
+// Known tactic names (TA ID → short label)
+const TACTIC_NAMES = {
+  "TA0001": "Initial Access",
+  "TA0002": "Execution",
+  "TA0003": "Persistence",
+  "TA0004": "Priv. Escalation",
+  "TA0005": "Defense Evasion",
+  "TA0006": "Credential Access",
+  "TA0007": "Discovery",
+  "TA0008": "Lateral Movement",
+  "TA0009": "Collection",
+  "TA0010": "Exfiltration",
+  "TA0011": "C2",
+  "TA0040": "Impact",
+  "TA0042": "Resource Dev.",
+  "TA0043": "Reconnaissance",
 };
 
 const FW = ["CVE","CWE","CAPEC","ATT&CK","D3FEND"];
@@ -452,7 +662,13 @@ function groupCpes(cpes) {
 //  STATE
 // ─────────────────────────────────────────────
 let DB = {}, INV = {}, ALL_IDS = [];
-let KEV = new Set();          // ← CVE presenti nel catalogo CISA KEV
+let KEV = new Set();
+// tactics_techniques: { TA0001: [T1059, ...], ... }
+// INV_TECHNIQUE_TACTICS: { T1059: ["TA0001", "TA0002"], ... }
+let INV_TECHNIQUE_TACTICS = {};
+let activeTacticFilters = new Set(); // set of TA#### currently selected (empty = show all)
+let kevFilterActive = false;         // show only KEV CVEs
+
 let universe     = null;
 let checkedIds   = new Set();
 let activeCpeCve = null;
@@ -492,7 +708,7 @@ async function loadDatabases() {
     bootFill.style.width = `${Math.round((i+1)/keys.length*80)}%`;
   }
 
-  // ── Carica kevs.txt ───────────────────────────────────────────────
+  // ── Carica kevs.txt ──────────────────────────────────────────────
   const kevLine = bootLine('kevs.txt');
   try {
     const res = await fetch(DATA_BASE + 'kevs.txt');
@@ -509,16 +725,27 @@ async function loadDatabases() {
   // ─────────────────────────────────────────────────────────────────
 
   const invertLine = bootLine('building index...');
-  DB.cve_cwe       = DB.cve_cwe       || {};
-  DB.cwe_capec     = DB.cwe_capec     || {};
-  DB.capec_attack  = DB.capec_attack  || {};
-  DB.attack_defend = DB.attack_defend || {};
-  DB.cve_cpe       = DB.cve_cpe       || {};
+  DB.cve_cwe           = DB.cve_cwe           || {};
+  DB.cwe_capec         = DB.cwe_capec         || {};
+  DB.capec_attack      = DB.capec_attack      || {};
+  DB.attack_defend     = DB.attack_defend     || {};
+  DB.cve_cpe           = DB.cve_cpe           || {};
+  DB.tactics_techniques = DB.tactics_techniques || {};
 
   INV.cwe_cve   = invertMap(DB.cve_cwe);
   INV.capec_cwe = invertMap(DB.cwe_capec);
   INV.atk_capec = invertMap(DB.capec_attack);
   INV.d3_atk    = invertMap(DB.attack_defend);
+
+  // Build inverse: technique → [tactics]
+  INV_TECHNIQUE_TACTICS = {};
+  for (const [ta, techniques] of Object.entries(DB.tactics_techniques)) {
+    for (const tech of techniques) {
+      const key = tech.toUpperCase();
+      if (!INV_TECHNIQUE_TACTICS[key]) INV_TECHNIQUE_TACTICS[key] = [];
+      if (!INV_TECHNIQUE_TACTICS[key].includes(ta)) INV_TECHNIQUE_TACTICS[key].push(ta);
+    }
+  }
 
   // I D3FEND sono nei VALUES di attack_defend, non nelle chiavi
   const d3fendIds = new Set();
@@ -571,10 +798,8 @@ function detectType(id) {
   return null;
 }
 
-// Controlla se la CVE è nel catalogo KEV
 function isKev(id) { return KEV.has(id.toUpperCase()); }
 
-// Crea il piccolo badge rosso "KEV"
 function makeKevBadge(small = false) {
   const b = document.createElement('span');
   b.className = 'kev-badge';
@@ -582,6 +807,37 @@ function makeKevBadge(small = false) {
   b.title = 'Known Exploited Vulnerability — CISA KEV Catalog';
   if (small) b.style.cssText = 'animation:none;font-size:0.5rem;padding:1px 4px;';
   return b;
+}
+
+// ─────────────────────────────────────────────
+//  TACTICS FILTER LOGIC
+// ─────────────────────────────────────────────
+
+/**
+ * Given an ATT&CK technique ID, return true if it passes the active tactic filter.
+ * If no tactics selected → all pass.
+ * Otherwise → technique must belong to at least one selected tactic.
+ */
+function techniquePassesFilter(techId) {
+  if (activeTacticFilters.size === 0) return true;
+  const tactics = INV_TECHNIQUE_TACTICS[techId.toUpperCase()] || [];
+  return tactics.some(ta => activeTacticFilters.has(ta));
+}
+
+/**
+ * Build the set of tactic IDs that appear in the current universe's ATT&CK column.
+ * Returns Map<taId, count> sorted by taId.
+ */
+function getRelevantTactics(attackIds) {
+  const counts = new Map();
+  for (const techId of attackIds) {
+    const tactics = INV_TECHNIQUE_TACTICS[techId.toUpperCase()] || [];
+    for (const ta of tactics) {
+      counts.set(ta, (counts.get(ta) || 0) + 1);
+    }
+  }
+  // Sort by TA id
+  return new Map([...counts.entries()].sort((a,b) => a[0].localeCompare(b[0])));
 }
 
 function getRelated(inputId) {
@@ -626,6 +882,55 @@ function computeUniverse() {
     FW.forEach(fw => { result[fw] = new Set([...result[fw]].filter(x => next[fw].has(x))); });
   }
   return Object.fromEntries(FW.map(fw => [fw, [...result[fw]].sort()]));
+}
+
+/**
+ * Apply the active tactic filter to a universe object.
+ * Returns a NEW universe where ATT&CK is filtered, and D3FEND is re-derived from filtered ATT&CK.
+ * All other columns cascade: CAPEC/CWE/CVE are filtered to only those linked to the filtered ATT&CK set.
+ */
+function applyTacticFilter(u) {
+  if (!u) return null;
+
+  let filteredAtk = u["ATT&CK"];
+  let filteredCve = u["CVE"];
+
+  // ── Tactic filter on ATT&CK ──
+  if (activeTacticFilters.size > 0) {
+    filteredAtk = filteredAtk.filter(id => techniquePassesFilter(id));
+
+    const atkSet = new Set(filteredAtk);
+    const filteredCapec = u["CAPEC"].filter(capecId => {
+      return (DB.capec_attack[capecId] || []).some(a => atkSet.has(a));
+    });
+    const capecSet = new Set(filteredCapec);
+    const filteredCwe = u["CWE"].filter(cweId => {
+      return (DB.cwe_capec[cweId] || []).some(c => capecSet.has(c));
+    });
+    const cweSet = new Set(filteredCwe);
+    filteredCve = u["CVE"].filter(cveId => {
+      return (DB.cve_cwe[cveId] || []).some(c => cweSet.has(c));
+    });
+
+    const filteredD3 = [...expand(filteredAtk, DB.attack_defend)].sort();
+
+    u = {
+      "CVE":    filteredCve,
+      "CWE":    filteredCwe,
+      "CAPEC":  filteredCapec,
+      "ATT&CK": filteredAtk,
+      "D3FEND": filteredD3,
+    };
+    filteredCve = u["CVE"];
+  }
+
+  // ── KEV filter on CVE ──
+  if (kevFilterActive) {
+    filteredCve = u["CVE"].filter(id => isKev(id));
+    u = { ...u, "CVE": filteredCve };
+  }
+
+  return u;
 }
 
 // ─────────────────────────────────────────────
@@ -693,6 +998,154 @@ function renderCpePanel() {
 }
 
 // ─────────────────────────────────────────────
+//  TACTIC FILTER RENDER (dropdown)
+// ─────────────────────────────────────────────
+let _tacticDropdownOpen = false;
+
+function closeTacticDropdown() {
+  _tacticDropdownOpen = false;
+  document.querySelectorAll('.tactics-dropdown-menu').forEach(m => m.classList.remove('open'));
+  document.querySelectorAll('.tactics-dropdown-trigger').forEach(t => t.classList.remove('open'));
+}
+
+function cleanupTacticMenus() {
+  // Remove all body-portaled menus (recreated on each renderTable)
+  document.querySelectorAll('body > .tactics-dropdown-menu').forEach(m => m.remove());
+}
+
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.tactics-filter-wrap')) closeTacticDropdown();
+});
+
+function renderTacticFilter(thElement, containerElement, allAttackIds) {
+  const old = thElement.querySelector('.tactics-filter-wrap');
+  if (old) old.remove();
+
+  const tacticsMap = getRelevantTactics(allAttackIds);
+  if (tacticsMap.size === 0) return;
+
+  const wrap = document.createElement('div');
+  wrap.className = 'tactics-filter-wrap';
+
+  // ── Trigger button ──
+  const trigger = document.createElement('div');
+  trigger.className = 'tactics-dropdown-trigger' +
+    (activeTacticFilters.size > 0 ? ' has-active' : '');
+
+  const triggerLabel = document.createElement('span');
+  triggerLabel.textContent = 'TACTIC';
+  trigger.appendChild(triggerLabel);
+
+  if (activeTacticFilters.size > 0) {
+    const badge = document.createElement('span');
+    badge.className = 'trigger-badge';
+    badge.textContent = activeTacticFilters.size;
+    trigger.appendChild(badge);
+  }
+
+  const arrow = document.createElement('span');
+  arrow.className = 'trigger-arrow';
+  arrow.textContent = '▼';
+  trigger.appendChild(arrow);
+
+  // ── Dropdown menu ──
+  const menu = document.createElement('div');
+  menu.className = 'tactics-dropdown-menu';
+
+  // Header row
+  const header = document.createElement('div');
+  header.className = 'tactics-dropdown-header';
+  const headerLabel = document.createElement('span');
+  headerLabel.textContent = 'FILTER BY TACTIC';
+  header.appendChild(headerLabel);
+
+  if (activeTacticFilters.size > 0) {
+    const clr = document.createElement('button');
+    clr.className = 'tactics-dropdown-clear';
+    clr.textContent = '✕ CLEAR ALL';
+    clr.addEventListener('click', (e) => {
+      e.stopPropagation();
+      activeTacticFilters.clear();
+      closeTacticDropdown();
+      renderTable();
+      renderCpePanel();
+    });
+    header.appendChild(clr);
+  }
+  menu.appendChild(header);
+
+  // Items
+  for (const [taId, count] of tacticsMap) {
+    const name = TACTIC_NAMES[taId] || taId;
+    const isActive = activeTacticFilters.has(taId);
+
+    const item = document.createElement('div');
+    item.className = 'tactics-dropdown-item' + (isActive ? ' active' : '');
+    item.title = `${taId}`;
+
+    const cb = document.createElement('div');
+    cb.className = 'tactic-item-cb';
+
+    const nameSpan = document.createElement('span');
+    nameSpan.className = 'tactic-item-name';
+    nameSpan.textContent = name;
+
+    const idSpan = document.createElement('span');
+    idSpan.className = 'tactic-item-id';
+    idSpan.textContent = taId;
+
+    const countSpan = document.createElement('span');
+    countSpan.className = 'tactic-item-count';
+    countSpan.textContent = count;
+
+    item.appendChild(cb);
+    item.appendChild(nameSpan);
+    item.appendChild(idSpan);
+    item.appendChild(countSpan);
+
+    item.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (activeTacticFilters.has(taId)) {
+        activeTacticFilters.delete(taId);
+      } else {
+        activeTacticFilters.add(taId);
+      }
+      renderTable();
+      renderCpePanel();
+      // Re-open dropdown after re-render by simulating a click on the new trigger
+      const newTrigger = document.querySelector('.tactics-dropdown-trigger');
+      if (newTrigger) newTrigger.click();
+    });
+
+    menu.appendChild(item);
+  }
+
+  trigger.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isOpen = menu.classList.contains('open');
+    closeTacticDropdown();
+    if (!isOpen) {
+      const rect = trigger.getBoundingClientRect();
+      menu.style.top  = (rect.bottom + 4) + 'px';
+      menu.style.left = rect.left + 'px';
+      // Adjust if it overflows right edge of viewport
+      setTimeout(() => {
+        const mRect = menu.getBoundingClientRect();
+        if (mRect.right > window.innerWidth - 8) {
+          menu.style.left = (rect.right - mRect.width) + 'px';
+        }
+      }, 0);
+      menu.classList.add('open');
+      trigger.classList.add('open');
+    }
+  });
+
+  wrap.appendChild(trigger);
+  document.body.appendChild(menu); // portal: escapes table overflow clipping
+  containerElement.appendChild(wrap);
+}
+
+// ─────────────────────────────────────────────
 //  SEARCH
 // ─────────────────────────────────────────────
 function doSearch(q) {
@@ -742,20 +1195,68 @@ function toggleCheck(id) {
 // ─────────────────────────────────────────────
 function renderTable() {
   if (!universe) return;
-  const cols    = FW.map(fw => universe[fw] || []);
+  cleanupTacticMenus();
+
+  // Apply tactic filter on top of universe
+  const filtered = applyTacticFilter(universe);
+
+  const cols    = FW.map(fw => filtered[fw] || []);
   const total   = cols.reduce((s, c) => s + c.length, 0);
   const maxRows = Math.max(...cols.map(c => c.length), 0);
 
-  $("result-total").textContent = `${total} ${total===1?'result':'results'}`;
+  $("result-total").textContent = `${total} ${total===1?'result':'results'}` +
+    (activeTacticFilters.size > 0 ? ` (filtered by ${activeTacticFilters.size} tactic${activeTacticFilters.size!==1?'s':''})` : '');
 
   const thead = $("col-thead-row"); thead.innerHTML = "";
   FW.forEach((fw, ci) => {
     const fc = FW_CFG[fw], th = document.createElement("th");
     th.style.cssText = `color:${fc.text}; border-top:3px solid ${fc.bg}; border-right:1px solid #111620;`;
-    th.innerHTML = `<div class="col-header-inner">
-      <span class="col-header-dot" style="background:${fc.bg}"></span>
-      <span>${fw}</span>
-      <span class="col-header-count">${cols[ci].length}</span></div>`;
+
+    const inner = document.createElement('div');
+    inner.className = 'col-header-inner';
+
+    const dot = document.createElement('span');
+    dot.className = 'col-header-dot';
+    dot.style.background = fc.bg;
+    inner.appendChild(dot);
+
+    const label = document.createElement('span');
+    label.textContent = fw;
+    inner.appendChild(label);
+
+    // Add tactic filter before count, only for ATT&CK column
+    if (fw === "ATT&CK") {
+      renderTacticFilter(th, inner, universe["ATT&CK"]);
+    }
+
+    // Add KEV filter before count, only for CVE column
+    if (fw === "CVE") {
+      const kevWrap = document.createElement('div');
+      kevWrap.className = 'kev-filter-wrap' + (kevFilterActive ? ' active' : '');
+      kevWrap.title = kevFilterActive ? 'Showing only KEV CVEs — click to remove filter' : 'Filter: show only CISA KEV CVEs';
+
+      const lbl = document.createElement('span');
+      lbl.className = 'kev-filter-label';
+      lbl.textContent = 'KEV';
+
+      kevWrap.appendChild(lbl);
+
+      kevWrap.addEventListener('click', (e) => {
+        e.stopPropagation();
+        kevFilterActive = !kevFilterActive;
+        renderTable();
+        renderCpePanel();
+      });
+
+      inner.appendChild(kevWrap);
+    }
+
+    const count = document.createElement('span');
+    count.className = 'col-header-count';
+    count.textContent = cols[ci].length;
+    inner.appendChild(count);
+
+    th.appendChild(inner);
     thead.appendChild(th);
   });
 
@@ -788,7 +1289,6 @@ function renderTable() {
         item.appendChild(cb);
         item.appendChild(label);
 
-        // Badge KEV solo per CVE presenti nel catalogo
         if (fw === "CVE" && isKev(id)) {
           item.appendChild(makeKevBadge());
         }
