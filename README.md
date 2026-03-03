@@ -2,9 +2,10 @@
 
 A security tool that maps relationships across the major cybersecurity knowledge bases: **CVE**, **CWE**, **CAPEC**, **ATT&CK**, and **D3FEND**. Heavily inspired from **galeax.github.io/CVE2CAPEC/**
 
----
 
 ## What it does
+
+![Diagram](img/diagram.drawio.png)
 
 Security frameworks don't exist in isolation — a vulnerability (CVE) maps to a weakness class (CWE), which maps to an attack pattern (CAPEC), which maps to an ATT&CK technique, which maps to a D3FEND defensive countermeasure. NSFW traverses this entire chain for you.
 
