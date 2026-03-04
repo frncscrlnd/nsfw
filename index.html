@@ -210,22 +210,17 @@
     user-select: none; white-space: nowrap;
   }
   .sev-dropdown-trigger:hover {
-    background: rgba(239,68,68,0.1);
-    border-color: rgba(239,68,68,0.45);
-    color: #f87171;
-    animation: kev-glow 2.5s ease-in-out infinite;
+    background: rgba(202,138,4,0.1); border-color: rgba(234,179,8,0.45); color: #fbbf24;
   }
   .sev-dropdown-trigger.has-active {
-    background: rgba(239,68,68,0.1);
-    border-color: rgba(239,68,68,0.45);
-    color: #f87171;
+    border-color: rgba(234,179,8,0.5); color: #fbbf24; background: rgba(202,138,4,0.1);
   }
   .sev-dropdown-trigger .trigger-arrow { font-size: 0.5rem; opacity: 0.7; transition: transform 0.15s; }
   .sev-dropdown-trigger.open .trigger-arrow { transform: rotate(180deg); }
   .sev-dropdown-trigger .trigger-badge {
-    background: rgba(239,68,68,0.1);
-    border-color: rgba(239,68,68,0.45);
-    color: #f87171;
+    font-size: 0.55rem; background: rgba(202,138,4,0.2);
+    border: 1px solid rgba(234,179,8,0.4); color: #fbbf24;
+    padding: 0 5px; border-radius: 2px; font-weight: 900;
   }
   .sev-dropdown-menu {
     display: none; position: fixed; z-index: 9000; min-width: 160px;
@@ -340,6 +335,7 @@
   .cpe-cve-tab:hover { background: rgba(234,179,8,0.12); }
   .cpe-cve-tab.active { background: rgba(234,179,8,0.15); border-color: #eab308; color: #fde047; }
   .cpe-cve-tab .kev-badge { animation: none; font-size: 0.5rem; padding: 1px 4px; }
+  .cpe-cve-tab .cvss-badge { font-size: 0.5rem; padding: 1px 5px; }
 
   .cpe-panel-body { padding: 16px 18px; background: #060a08; }
 
@@ -1141,6 +1137,7 @@ function renderCpePanel() {
     span.textContent = cve;
     tab.appendChild(span);
     if (isKev(cve)) tab.appendChild(makeKevBadge(true));
+    tab.appendChild(makeCvssBadge(cve));
     tab.addEventListener("click", () => { activeCpeCve = cve; renderCpePanel(); });
     cpeTabs.appendChild(tab);
   });
@@ -1511,7 +1508,7 @@ function renderSevFilter(allCveIds) {
     (activeSevFilters.size > 0 ? ' has-active' : '');
 
   const triggerLabel = document.createElement('span');
-  triggerLabel.textContent = 'SEVERITY';
+  triggerLabel.textContent = 'SEV';
   trigger.appendChild(triggerLabel);
 
   if (activeSevFilters.size > 0) {
