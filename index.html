@@ -82,20 +82,6 @@
   }
   .search-btn:hover { background: var(--green-bright); }
 
-  .autocomplete {
-    position: absolute; top: 100%; left: 0; right: 0;
-    background: #080f0a; border: 1px solid #1a3a2a;
-    border-top: none; border-radius: 0 0 6px 6px;
-    z-index: 100; display: none; max-height: 280px; overflow-y: auto;
-  }
-  .autocomplete.show { display: block; }
-  .ac-item {
-    padding: 10px 20px; cursor: pointer;
-    border-bottom: 1px solid #0f1a14;
-    display: flex; align-items: center; gap: 12px;
-  }
-  .ac-item:hover { background: #0d1a12; }
-
   /* ── feedback ── */
   .error-box {
     padding: 14px 20px; background: #1a0808;
@@ -485,7 +471,6 @@
              placeholder="Add a framework ID to start researching..." autocomplete="off">
       <button class="search-btn" id="search-btn">SEARCH</button>
     </div>
-    <div class="autocomplete" id="autocomplete"></div>
   </div>
 
   <div class="error-box" id="error-box" style="display:none;"></div>
@@ -530,10 +515,9 @@ const DATA_FILES = {
   attack_defend:     'attack_defend.json',
   cve_cpe:           'cve_cpe.json',
   tactics_techniques:'tactics_techniques.json',
-  d3fend_tactics:    'd3fend_tactics.json',   // ← NUOVO
+  d3fend_tactics:    'd3fend_tactics.json',
 };
 
-// Known ATT&CK tactic names (TA ID → short label)
 const TACTIC_NAMES = {
   "TA0001": "Initial Access",
   "TA0002": "Execution",
@@ -560,9 +544,6 @@ const FW_CFG = {
   "D3FEND": { bg:"#14b8a6", text:"#5eead4", dim:"rgba(20,184,166,0.07)" },
 };
 
-// ─────────────────────────────────────────────
-//  D3FEND: abbreviazione → nome completo per URL
-// ─────────────────────────────────────────────
 const D3FEND_ABBR_TO_FULL = {
   "D3-ACH":   "ApplicationConfigurationHardening",
   "D3-AH":    "ApplicationHardening",
@@ -664,19 +645,18 @@ function groupCpes(cpes) {
 // ─────────────────────────────────────────────
 //  STATE
 // ─────────────────────────────────────────────
-let DB = {}, INV = {}, ALL_IDS = [];
+let DB = {}, INV = {};
 let KEV = new Set();
-let INV_TECHNIQUE_TACTICS = {};  // ATT&CK technique → [TA####, ...]
-let INV_D3FEND_TACTICS = {};     // D3FEND id (upper) → tactic string  ← NUOVO
+let INV_TECHNIQUE_TACTICS = {};
+let INV_D3FEND_TACTICS = {};
 
-let activeTacticFilters   = new Set(); // ATT&CK tactic filter
-let activeD3TacticFilters = new Set(); // D3FEND tactic filter  ← NUOVO
+let activeTacticFilters   = new Set();
+let activeD3TacticFilters = new Set();
 let kevFilterActive = false;
 
 let universe     = null;
 let checkedIds   = new Set();
 let activeCpeCve = null;
-let acTimeout    = null;
 
 // ─────────────────────────────────────────────
 //  BOOT
@@ -735,7 +715,7 @@ async function loadDatabases() {
   DB.attack_defend      = DB.attack_defend      || {};
   DB.cve_cpe            = DB.cve_cpe            || {};
   DB.tactics_techniques = DB.tactics_techniques || {};
-  DB.d3fend_tactics     = DB.d3fend_tactics     || {};  // ← NUOVO
+  DB.d3fend_tactics     = DB.d3fend_tactics     || {};
 
   INV.cwe_cve   = invertMap(DB.cve_cwe);
   INV.capec_cwe = invertMap(DB.cwe_capec);
@@ -752,23 +732,11 @@ async function loadDatabases() {
     }
   }
 
-  // Build inverse: D3FEND id → tactic string  ← NUOVO
+  // Build inverse: D3FEND id → tactic string
   INV_D3FEND_TACTICS = {};
   for (const [d3Id, tactic] of Object.entries(DB.d3fend_tactics)) {
     INV_D3FEND_TACTICS[d3Id.toUpperCase()] = tactic;
   }
-
-  // I D3FEND sono nei VALUES di attack_defend, non nelle chiavi
-  const d3fendIds = new Set();
-  Object.values(DB.attack_defend).forEach(arr => arr.forEach(id => d3fendIds.add(id)));
-
-  ALL_IDS = Array.from(new Set([
-    ...Object.keys(DB.cve_cwe),
-    ...Object.keys(DB.cwe_capec),
-    ...Object.keys(DB.capec_attack),
-    ...Object.keys(DB.attack_defend),
-    ...d3fendIds,
-  ])).sort();
 
   invertLine.className = 'boot-log-line ok';
   bootFill.style.width = '100%';
@@ -841,7 +809,7 @@ function getRelevantTactics(attackIds) {
 }
 
 // ─────────────────────────────────────────────
-//  D3FEND TACTICS FILTER LOGIC  ← NUOVO
+//  D3FEND TACTICS FILTER LOGIC
 // ─────────────────────────────────────────────
 function d3TechniquePasses(d3Id) {
   if (activeD3TacticFilters.size === 0) return true;
@@ -905,108 +873,64 @@ function computeUniverse() {
   return Object.fromEntries(FW.map(fw => [fw, [...result[fw]].sort()]));
 }
 
-/**
- * Apply all active filters to a universe object.
- * Filters applied in order:
- *   1. ATT&CK tactic filter  → cascades forward (D3FEND) and backward (CAPEC→CWE→CVE)
- *   2. KEV filter            → cascades forward (CWE→CAPEC→ATT&CK→D3FEND)
- *   3. D3FEND tactic filter  → cascades backward (ATT&CK→CAPEC→CWE→CVE)  ← NUOVO
- */
 function applyTacticFilter(u) {
   if (!u) return null;
 
-  // ── Step 1: ATT&CK tactic filter ──────────────────────────────────
   if (activeTacticFilters.size > 0) {
     const filteredAtk = u["ATT&CK"].filter(id => techniquePassesFilter(id));
     const atkSet = new Set(filteredAtk);
-
     const filteredCapec = u["CAPEC"].filter(capecId =>
       (DB.capec_attack[capecId] || []).some(a => atkSet.has(a))
     );
     const capecSet = new Set(filteredCapec);
-
     const filteredCwe = u["CWE"].filter(cweId =>
       (DB.cwe_capec[cweId] || []).some(c => capecSet.has(c))
     );
     const cweSet = new Set(filteredCwe);
-
     const filteredCve = u["CVE"].filter(cveId =>
       (DB.cve_cwe[cveId] || []).some(c => cweSet.has(c))
     );
-
     const filteredD3 = [...expand(filteredAtk, DB.attack_defend)].sort();
-
-    u = {
-      "CVE":    filteredCve,
-      "CWE":    filteredCwe,
-      "CAPEC":  filteredCapec,
-      "ATT&CK": filteredAtk,
-      "D3FEND": filteredD3,
-    };
+    u = { "CVE":filteredCve, "CWE":filteredCwe, "CAPEC":filteredCapec, "ATT&CK":filteredAtk, "D3FEND":filteredD3 };
   }
 
-  // ── Step 2: KEV filter ────────────────────────────────────────────
   if (kevFilterActive) {
     const filteredCve = u["CVE"].filter(id => isKev(id));
     const cveSet = new Set(filteredCve);
-
     const filteredCwe = u["CWE"].filter(cweId =>
       (INV.cwe_cve[cweId] || []).some(cve => cveSet.has(cve))
     );
     const cweSet = new Set(filteredCwe);
-
     const filteredCapec = u["CAPEC"].filter(capecId =>
       (INV.capec_cwe[capecId] || []).some(cwe => cweSet.has(cwe))
     );
     const capecSet = new Set(filteredCapec);
-
     const filteredAtk = u["ATT&CK"].filter(atkId =>
       (INV.atk_capec[atkId] || []).some(c => capecSet.has(c))
     );
-
     const filteredD3 = [...expand(filteredAtk, DB.attack_defend)].sort();
-
-    u = {
-      "CVE":    filteredCve,
-      "CWE":    filteredCwe,
-      "CAPEC":  filteredCapec,
-      "ATT&CK": filteredAtk,
-      "D3FEND": filteredD3,
-    };
+    u = { "CVE":filteredCve, "CWE":filteredCwe, "CAPEC":filteredCapec, "ATT&CK":filteredAtk, "D3FEND":filteredD3 };
   }
 
-  // ── Step 3: D3FEND tactic filter  ← NUOVO ────────────────────────
   if (activeD3TacticFilters.size > 0) {
     const filteredD3 = u["D3FEND"].filter(id => d3TechniquePasses(id));
     const d3Set = new Set(filteredD3);
-
-    // ATT&CK: keep only those that map to at least one remaining D3FEND
     const filteredAtk = u["ATT&CK"].filter(atkId =>
       (DB.attack_defend[atkId] || []).some(d3 => d3Set.has(d3))
     );
     const atkSet = new Set(filteredAtk);
-
     const filteredCapec = u["CAPEC"].filter(capecId =>
       (DB.capec_attack[capecId] || []).some(a => atkSet.has(a))
     );
     const capecSet = new Set(filteredCapec);
-
     const filteredCwe = u["CWE"].filter(cweId =>
       (DB.cwe_capec[cweId] || []).some(c => capecSet.has(c))
     );
     const cweSet = new Set(filteredCwe);
-
     const filteredCve = u["CVE"].filter(cveId =>
       (DB.cve_cwe[cveId] || []).some(c => cweSet.has(c))
     );
-
-    u = {
-      "CVE":    filteredCve,
-      "CWE":    filteredCwe,
-      "CAPEC":  filteredCapec,
-      "ATT&CK": filteredAtk,
-      "D3FEND": filteredD3,
-    };
+    u = { "CVE":filteredCve, "CWE":filteredCwe, "CAPEC":filteredCapec, "ATT&CK":filteredAtk, "D3FEND":filteredD3 };
   }
 
   return u;
@@ -1016,7 +940,7 @@ function applyTacticFilter(u) {
 //  DOM refs
 // ─────────────────────────────────────────────
 const $ = id => document.getElementById(id);
-const si=$("search-input"), sb=$("search-btn"), ac=$("autocomplete");
+const si=$("search-input"), sb=$("search-btn");
 const eb=$("error-box"), ld=$("loading"), rs=$("results"), es=$("empty-state");
 const cpePanel=$("cpe-panel"), cpeTabs=$("cpe-cve-tabs"), cpeBody=$("cpe-panel-body");
 
@@ -1181,11 +1105,8 @@ function renderTacticFilter(thElement, containerElement, allAttackIds) {
 
     item.addEventListener('click', (e) => {
       e.stopPropagation();
-      if (activeTacticFilters.has(taId)) {
-        activeTacticFilters.delete(taId);
-      } else {
-        activeTacticFilters.add(taId);
-      }
+      if (activeTacticFilters.has(taId)) activeTacticFilters.delete(taId);
+      else activeTacticFilters.add(taId);
       renderTable();
       renderCpePanel();
       const newTrigger = document.querySelector('.tactics-filter-wrap .tactics-dropdown-trigger');
@@ -1219,7 +1140,7 @@ function renderTacticFilter(thElement, containerElement, allAttackIds) {
 }
 
 // ─────────────────────────────────────────────
-//  D3FEND TACTIC FILTER RENDER (dropdown)  ← NUOVO
+//  D3FEND TACTIC FILTER RENDER (dropdown)
 // ─────────────────────────────────────────────
 function renderD3TacticFilter(thElement, containerElement, allD3Ids) {
   const old = thElement.querySelector('.d3-filter-wrap');
@@ -1298,11 +1219,8 @@ function renderD3TacticFilter(thElement, containerElement, allD3Ids) {
 
     item.addEventListener('click', (e) => {
       e.stopPropagation();
-      if (activeD3TacticFilters.has(tactic)) {
-        activeD3TacticFilters.delete(tactic);
-      } else {
-        activeD3TacticFilters.add(tactic);
-      }
+      if (activeD3TacticFilters.has(tactic)) activeD3TacticFilters.delete(tactic);
+      else activeD3TacticFilters.add(tactic);
       renderTable();
       renderCpePanel();
       const newTrigger = document.querySelector('.d3-filter-wrap .tactics-dropdown-trigger');
@@ -1341,7 +1259,7 @@ function renderD3TacticFilter(thElement, containerElement, allD3Ids) {
 function doSearch(q) {
   const val = (q || si.value).trim().toUpperCase();
   if (!val) return;
-  si.value = ""; ac.classList.remove("show");
+  si.value = "";
   if (!detectType(val)) { setError(`Unrecognized ID: "${val}"`); return; }
   if (checkedIds.has(val)) return;
   setError(""); setLoading(true);
@@ -1393,7 +1311,6 @@ function renderTable() {
   const total   = cols.reduce((s, c) => s + c.length, 0);
   const maxRows = Math.max(...cols.map(c => c.length), 0);
 
-  // Build filter label
   const parts = [];
   if (activeTacticFilters.size > 0)
     parts.push(`${activeTacticFilters.size} ATT&CK tactic${activeTacticFilters.size !== 1 ? 's' : ''}`);
@@ -1422,28 +1339,18 @@ function renderTable() {
     label.textContent = fw;
     inner.appendChild(label);
 
-    // ATT&CK tactic filter dropdown
-    if (fw === "ATT&CK") {
-      renderTacticFilter(th, inner, universe["ATT&CK"]);
-    }
+    if (fw === "ATT&CK") renderTacticFilter(th, inner, universe["ATT&CK"]);
+    if (fw === "D3FEND")  renderD3TacticFilter(th, inner, universe["D3FEND"]);
 
-    // D3FEND tactic filter dropdown  ← NUOVO
-    if (fw === "D3FEND") {
-      renderD3TacticFilter(th, inner, universe["D3FEND"]);
-    }
-
-    // KEV filter toggle
     if (fw === "CVE") {
       const kevWrap = document.createElement('div');
       kevWrap.className = 'kev-filter-wrap' + (kevFilterActive ? ' active' : '');
       kevWrap.title = kevFilterActive
         ? 'Showing only KEV CVEs — click to remove filter'
         : 'Filter: show only CISA KEV CVEs';
-
       const lbl = document.createElement('span');
       lbl.className = 'kev-filter-label';
       lbl.textContent = 'KEV';
-
       kevWrap.appendChild(lbl);
       kevWrap.addEventListener('click', (e) => {
         e.stopPropagation();
@@ -1451,7 +1358,6 @@ function renderTable() {
         renderTable();
         renderCpePanel();
       });
-
       inner.appendChild(kevWrap);
     }
 
@@ -1493,10 +1399,7 @@ function renderTable() {
         item.appendChild(cb);
         item.appendChild(lnk);
 
-        if (fw === "CVE" && isKev(id)) {
-          item.appendChild(makeKevBadge());
-        }
-
+        if (fw === "CVE" && isKev(id)) item.appendChild(makeKevBadge());
         td.appendChild(item);
       } else { td.innerHTML=`<span class="col-empty">—</span>`; }
       tr.appendChild(td);
@@ -1508,36 +1411,10 @@ function renderTable() {
 }
 
 // ─────────────────────────────────────────────
-//  AUTOCOMPLETE
+//  EVENT LISTENERS
 // ─────────────────────────────────────────────
-si.addEventListener("input", () => {
-  clearTimeout(acTimeout);
-  const q = si.value.trim().toUpperCase();
-  if (q.length < 2) { ac.classList.remove("show"); return; }
-  acTimeout = setTimeout(() => {
-    const matches = ALL_IDS.filter(id => id.includes(q)).slice(0,10);
-    ac.innerHTML = "";
-    if (!matches.length) { ac.classList.remove("show"); return; }
-    matches.forEach(id => {
-      const div=document.createElement("div"); div.className="ac-item";
-      const type=detectType(id)||"?", fc=FW_CFG[type]||{};
-      div.innerHTML=`
-        <span style="color:${fc.text||'#ccc'}">${id}</span>
-        <span style="font-size:0.68rem;padding:2px 7px;border-radius:3px;margin-left:auto;
-          background:rgba(0,0,0,0.4);color:${fc.text||'#ccc'};
-          border:1px solid ${(fc.bg||'#555')+'44'}">${type}</span>`;
-      div.onclick=()=>doSearch(id);
-      ac.appendChild(div);
-    });
-    ac.classList.add("show");
-  }, 150);
-});
-
 si.addEventListener("keydown", e => { if (e.key==="Enter") doSearch(); });
 sb.onclick = () => doSearch();
-document.addEventListener("click", e => {
-  if (!e.target.closest(".search-wrap")) ac.classList.remove("show");
-});
 
 function setError(msg)    { eb.textContent=msg; eb.style.display=msg?"block":"none"; }
 function setLoading(show) { ld.style.display=show?"block":"none"; }
