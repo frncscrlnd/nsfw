@@ -178,6 +178,23 @@
     50%       { box-shadow: 0 0 6px rgba(239,68,68,0.35); }
   }
 
+  /* ── CVSS badge ── */
+  .cvss-badge {
+    flex-shrink: 0;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 0.6rem; font-weight: 900; letter-spacing: 0.04em;
+    padding: 1px 6px; border-radius: 3px;
+    cursor: default; white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+  /* severity colours */
+  .cvss-CRITICAL { background: rgba(180,0,0,0.18);   border: 1px solid rgba(220,38,38,0.55);  color: #f87171; }
+  .cvss-HIGH     { background: rgba(234,88,12,0.15);  border: 1px solid rgba(249,115,22,0.5); color: #fb923c; }
+  .cvss-MEDIUM   { background: rgba(202,138,4,0.15);  border: 1px solid rgba(234,179,8,0.45); color: #fbbf24; }
+  .cvss-LOW      { background: rgba(37,99,235,0.12);  border: 1px solid rgba(59,130,246,0.4); color: #93c5fd; }
+  .cvss-NONE     { background: rgba(75,85,99,0.12);   border: 1px solid rgba(107,114,128,0.3);color: #9ca3af; }
+  .cvss-UNKNOWN  { background: rgba(55,65,81,0.10);   border: 1px solid #1e2a38;              color: #374151; }
+
   /* ── KEV FILTER ── */
   .kev-filter-wrap {
     display: inline-flex;
@@ -514,6 +531,7 @@ const DATA_FILES = {
   capec_attack:      'capec_attack.json',
   attack_defend:     'attack_defend.json',
   cve_cpe:           'cve_cpe.json',
+  cve_cvss:          'cve_cvss.json',         // ← NEW
   tactics_techniques:'tactics_techniques.json',
   d3fend_tactics:    'd3fend_tactics.json',
 };
@@ -643,6 +661,74 @@ function groupCpes(cpes) {
 }
 
 // ─────────────────────────────────────────────
+//  CVSS HELPERS  ← NEW
+// ─────────────────────────────────────────────
+// Priority order: v40 > v31 > v30 > v2
+const CVSS_PRIORITY = ['v40', 'v31', 'v30', 'v2'];
+
+/**
+ * Returns the best available CVSS entry for a CVE id,
+ * or null if no data is present.
+ * result: { version, score, severity, vector }
+ */
+function getBestCvss(cveId) {
+  const entry = DB.cve_cvss[cveId];
+  if (!entry) return null;
+  for (const ver of CVSS_PRIORITY) {
+    if (entry[ver] && entry[ver].baseScore != null) {
+      const d = entry[ver];
+      // v2 has no baseSeverity in the JSON → derive it
+      const sev = d.baseSeverity
+        ? d.baseSeverity.toUpperCase()
+        : scoreToSeverityV2(d.baseScore);
+      return {
+        version:  ver,
+        score:    d.baseScore,
+        severity: sev,
+        vector:   d.vectorString || null,
+      };
+    }
+  }
+  return null;
+}
+
+function scoreToSeverityV2(score) {
+  if (score == null) return 'UNKNOWN';
+  if (score === 0)   return 'NONE';
+  if (score < 4.0)   return 'LOW';
+  if (score < 7.0)   return 'MEDIUM';
+  if (score < 9.0)   return 'HIGH';
+  return 'CRITICAL';   // v2 max is 10.0; treat 9+ as critical for colouring
+}
+
+const CVSS_VER_LABEL = { v40:'4.0', v31:'3.1', v30:'3.0', v2:'2.0' };
+
+function makeCvssBadge(cveId) {
+  const cvss = getBestCvss(cveId);
+  const badge = document.createElement('span');
+  badge.className = 'cvss-badge';
+
+  if (!cvss) {
+    badge.classList.add('cvss-UNKNOWN');
+    badge.textContent = 'N/A';
+    badge.title = 'No CVSS data available';
+    return badge;
+  }
+
+  const sev = cvss.severity || 'UNKNOWN';
+  badge.classList.add(`cvss-${sev}`);
+  badge.textContent = cvss.score.toFixed(1);
+  badge.title = [
+    `CVSSv${CVSS_VER_LABEL[cvss.version] || cvss.version}`,
+    `Score: ${cvss.score}`,
+    `Severity: ${sev}`,
+    cvss.vector ? `Vector: ${cvss.vector}` : null,
+  ].filter(Boolean).join('\n');
+
+  return badge;
+}
+
+// ─────────────────────────────────────────────
 //  STATE
 // ─────────────────────────────────────────────
 let DB = {}, INV = {};
@@ -714,6 +800,7 @@ async function loadDatabases() {
   DB.capec_attack       = DB.capec_attack       || {};
   DB.attack_defend      = DB.attack_defend      || {};
   DB.cve_cpe            = DB.cve_cpe            || {};
+  DB.cve_cvss           = DB.cve_cvss           || {};  // ← NEW
   DB.tactics_techniques = DB.tactics_techniques || {};
   DB.d3fend_tactics     = DB.d3fend_tactics     || {};
 
@@ -1400,6 +1487,9 @@ function renderTable() {
         item.appendChild(lnk);
 
         if (fw === "CVE" && isKev(id)) item.appendChild(makeKevBadge());
+
+        // ── CVSS badge (CVE column only) ─────────────────────────────
+        if (fw === "CVE") item.appendChild(makeCvssBadge(id));
         td.appendChild(item);
       } else { td.innerHTML=`<span class="col-empty">—</span>`; }
       tr.appendChild(td);
