@@ -195,6 +195,71 @@
   .cvss-NONE     { background: rgba(75,85,99,0.12);   border: 1px solid rgba(107,114,128,0.3);color: #9ca3af; }
   .cvss-UNKNOWN  { background: rgba(55,65,81,0.10);   border: 1px solid #1e2a38;              color: #374151; }
 
+  /* ── SEVERITY FILTER ── */
+  .sev-filter-wrap {
+    display: inline-flex; align-items: center; margin-right: 6px;
+    cursor: pointer; user-select: none;
+  }
+  .sev-dropdown-trigger {
+    display: inline-flex; align-items: center; gap: 4px;
+    font-size: 0.55rem; font-weight: 900; letter-spacing: 0.08em;
+    padding: 1px 5px; border-radius: 3px;
+    border: 1px solid #1a2030; background: #080c12; color: #3a5a7a;
+    cursor: pointer; font-family: inherit;
+    transition: border-color 0.15s, color 0.15s, background 0.15s;
+    user-select: none; white-space: nowrap;
+  }
+  .sev-dropdown-trigger:hover {
+    background: rgba(239,68,68,0.1);
+    border-color: rgba(239,68,68,0.45);
+    color: #f87171;
+    animation: kev-glow 2.5s ease-in-out infinite;
+  }
+  .sev-dropdown-trigger.has-active {
+    background: rgba(239,68,68,0.1);
+    border-color: rgba(239,68,68,0.45);
+    color: #f87171;
+  }
+  .sev-dropdown-trigger .trigger-arrow { font-size: 0.5rem; opacity: 0.7; transition: transform 0.15s; }
+  .sev-dropdown-trigger.open .trigger-arrow { transform: rotate(180deg); }
+  .sev-dropdown-trigger .trigger-badge {
+    background: rgba(239,68,68,0.1);
+    border-color: rgba(239,68,68,0.45);
+    color: #f87171;
+  }
+  .sev-dropdown-menu {
+    display: none; position: fixed; z-index: 9000; min-width: 160px;
+    background: #07090f; border: 1px solid #1a2030; border-radius: 5px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.7); overflow: hidden; animation: dropIn 0.12s ease;
+  }
+  .sev-dropdown-menu.open { display: block; }
+  .sev-dropdown-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 7px 12px; border-bottom: 1px solid #111820;
+    font-size: 0.6rem; color: #2a3a5a; letter-spacing: 0.15em;
+  }
+  .sev-dropdown-item {
+    display: flex; align-items: center; gap: 10px; padding: 6px 12px;
+    cursor: pointer; border-bottom: 1px solid #0c1018;
+    transition: background 0.1s; user-select: none;
+  }
+  .sev-dropdown-item:last-child { border-bottom: none; }
+  .sev-dropdown-item:hover { background: rgba(255,255,255,0.03); }
+  .sev-item-cb {
+    width: 12px; height: 12px; border-radius: 2px; border: 1px solid #2a3a5a;
+    flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+    font-size: 8px; font-weight: 900; color: #000;
+    transition: background 0.12s, border-color 0.12s;
+  }
+  .sev-dropdown-item.active .sev-item-cb::after { content: '\2713'; }
+  .sev-item-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .sev-item-label { font-size: 0.68rem; flex: 1; letter-spacing: 0.05em; }
+  .sev-item-count {
+    font-size: 0.58rem; color: #1e2e40; background: rgba(0,0,0,0.3);
+    padding: 1px 5px; border-radius: 2px; min-width: 24px; text-align: center;
+  }
+  .sev-dropdown-item.active .sev-item-count { background: rgba(202,138,4,0.15); color: #fbbf24; }
+
   /* ── KEV FILTER ── */
   .kev-filter-wrap {
     display: inline-flex;
@@ -739,6 +804,7 @@ let INV_D3FEND_TACTICS = {};
 let activeTacticFilters   = new Set();
 let activeD3TacticFilters = new Set();
 let kevFilterActive = false;
+let activeSevFilters  = new Set(); // "CRITICAL" | "HIGH" | "MEDIUM" | "LOW" | "NONE"
 
 let universe     = null;
 let checkedIds   = new Set();
@@ -1020,6 +1086,29 @@ function applyTacticFilter(u) {
     u = { "CVE":filteredCve, "CWE":filteredCwe, "CAPEC":filteredCapec, "ATT&CK":filteredAtk, "D3FEND":filteredD3 };
   }
 
+  // ── Severity filter ────────────────────────────────────────────────
+  if (activeSevFilters.size > 0) {
+    const filteredCve = u["CVE"].filter(id => {
+      const cvss = getBestCvss(id);
+      const sev  = cvss ? (cvss.severity || 'UNKNOWN') : 'UNKNOWN';
+      return activeSevFilters.has(sev);
+    });
+    const cveSet = new Set(filteredCve);
+    const filteredCwe = u["CWE"].filter(cweId =>
+      (INV.cwe_cve[cweId] || []).some(cve => cveSet.has(cve))
+    );
+    const cweSet = new Set(filteredCwe);
+    const filteredCapec = u["CAPEC"].filter(capecId =>
+      (INV.capec_cwe[capecId] || []).some(cwe => cweSet.has(cwe))
+    );
+    const capecSet = new Set(filteredCapec);
+    const filteredAtk = u["ATT&CK"].filter(atkId =>
+      (INV.atk_capec[atkId] || []).some(c => capecSet.has(c))
+    );
+    const filteredD3 = [...expand(filteredAtk, DB.attack_defend)].sort();
+    u = { "CVE":filteredCve, "CWE":filteredCwe, "CAPEC":filteredCapec, "ATT&CK":filteredAtk, "D3FEND":filteredD3 };
+  }
+
   return u;
 }
 
@@ -1091,16 +1180,18 @@ function renderCpePanel() {
 //  SHARED: close all dropdown menus
 // ─────────────────────────────────────────────
 function closeTacticDropdown() {
-  document.querySelectorAll('.tactics-dropdown-menu').forEach(m => m.classList.remove('open'));
-  document.querySelectorAll('.tactics-dropdown-trigger').forEach(t => t.classList.remove('open'));
+  document.querySelectorAll('.tactics-dropdown-menu, .sev-dropdown-menu').forEach(m => m.classList.remove('open'));
+  document.querySelectorAll('.tactics-dropdown-trigger, .sev-dropdown-trigger').forEach(t => t.classList.remove('open'));
 }
 
 function cleanupTacticMenus() {
-  document.querySelectorAll('body > .tactics-dropdown-menu').forEach(m => m.remove());
+  document.querySelectorAll('body > .tactics-dropdown-menu, body > .sev-dropdown-menu').forEach(m => m.remove());
 }
 
 document.addEventListener('click', (e) => {
-  if (!e.target.closest('.tactics-filter-wrap') && !e.target.closest('.d3-filter-wrap')) {
+  if (!e.target.closest('.tactics-filter-wrap') &&
+      !e.target.closest('.d3-filter-wrap') &&
+      !e.target.closest('.sev-filter-wrap')) {
     closeTacticDropdown();
   }
 });
@@ -1386,6 +1477,146 @@ function toggleCheck(id) {
 }
 
 // ─────────────────────────────────────────────
+//  SEVERITY FILTER RENDER
+// ─────────────────────────────────────────────
+const SEV_ORDER = ['CRITICAL','HIGH','MEDIUM','LOW','NONE'];
+const SEV_CFG = {
+  CRITICAL: { dot:'#ef4444', label:'CRITICAL', itemColor:'#f87171' },
+  HIGH:     { dot:'#f97316', label:'HIGH',     itemColor:'#fb923c' },
+  MEDIUM:   { dot:'#eab308', label:'MEDIUM',   itemColor:'#fbbf24' },
+  LOW:      { dot:'#3b82f6', label:'LOW',      itemColor:'#93c5fd' },
+  NONE:     { dot:'#6b7280', label:'NONE',     itemColor:'#9ca3af' },
+};
+
+function getSevCounts(cveIds) {
+  const counts = new Map();
+  for (const id of cveIds) {
+    const cvss = getBestCvss(id);
+    const sev  = cvss ? (cvss.severity || 'UNKNOWN') : 'UNKNOWN';
+    if (sev === 'UNKNOWN') continue; // don't offer filter for N/A
+    counts.set(sev, (counts.get(sev) || 0) + 1);
+  }
+  return counts;
+}
+
+function renderSevFilter(allCveIds) {
+  const counts = getSevCounts(allCveIds);
+  if (counts.size === 0) return null;
+
+  const wrap = document.createElement('div');
+  wrap.className = 'sev-filter-wrap';
+
+  const trigger = document.createElement('div');
+  trigger.className = 'sev-dropdown-trigger' +
+    (activeSevFilters.size > 0 ? ' has-active' : '');
+
+  const triggerLabel = document.createElement('span');
+  triggerLabel.textContent = 'SEVERITY';
+  trigger.appendChild(triggerLabel);
+
+  if (activeSevFilters.size > 0) {
+    const badge = document.createElement('span');
+    badge.className = 'trigger-badge';
+    badge.textContent = activeSevFilters.size;
+    trigger.appendChild(badge);
+  }
+
+  const arrow = document.createElement('span');
+  arrow.className = 'trigger-arrow';
+  arrow.textContent = '\u25BC';
+  trigger.appendChild(arrow);
+
+  const menu = document.createElement('div');
+  menu.className = 'sev-dropdown-menu';
+
+  const header = document.createElement('div');
+  header.className = 'sev-dropdown-header';
+  const headerLabel = document.createElement('span');
+  headerLabel.textContent = 'FILTER BY SEVERITY';
+  header.appendChild(headerLabel);
+
+  if (activeSevFilters.size > 0) {
+    const clr = document.createElement('button');
+    clr.className = 'tactics-dropdown-clear';
+    clr.textContent = '\u2715 CLEAR ALL';
+    clr.addEventListener('click', e => {
+      e.stopPropagation();
+      activeSevFilters.clear();
+      closeTacticDropdown();
+      renderTable(); renderCpePanel();
+    });
+    header.appendChild(clr);
+  }
+  menu.appendChild(header);
+
+  for (const sev of SEV_ORDER) {
+    const count = counts.get(sev);
+    if (!count) continue;
+    const cfg = SEV_CFG[sev];
+    const isActive = activeSevFilters.has(sev);
+
+    const item = document.createElement('div');
+    item.className = 'sev-dropdown-item' + (isActive ? ' active' : '');
+
+    const cb = document.createElement('div');
+    cb.className = 'sev-item-cb';
+    if (isActive) cb.style.cssText = `background:${cfg.dot};border-color:${cfg.dot};`;
+    else cb.style.borderColor = cfg.dot + '88';
+
+    const dot = document.createElement('span');
+    dot.className = 'sev-item-dot';
+    dot.style.background = cfg.dot;
+
+    const lbl = document.createElement('span');
+    lbl.className = 'sev-item-label';
+    lbl.textContent = cfg.label;
+    lbl.style.color = isActive ? cfg.itemColor : '#4a6a8a';
+
+    const cnt = document.createElement('span');
+    cnt.className = 'sev-item-count';
+    cnt.textContent = count;
+
+    item.appendChild(cb); item.appendChild(dot); item.appendChild(lbl); item.appendChild(cnt);
+
+    item.addEventListener('click', e => {
+      e.stopPropagation();
+      if (activeSevFilters.has(sev)) activeSevFilters.delete(sev);
+      else activeSevFilters.add(sev);
+      renderTable(); renderCpePanel();
+      // reopen dropdown
+      setTimeout(() => {
+        const t = document.querySelector('.sev-dropdown-trigger');
+        if (t) t.click();
+      }, 0);
+    });
+
+    menu.appendChild(item);
+  }
+
+  trigger.addEventListener('click', e => {
+    e.stopPropagation();
+    const isOpen = menu.classList.contains('open');
+    closeTacticDropdown();
+    if (!isOpen) {
+      const rect = trigger.getBoundingClientRect();
+      menu.style.top  = (rect.bottom + 4) + 'px';
+      menu.style.left = rect.left + 'px';
+      setTimeout(() => {
+        const mRect = menu.getBoundingClientRect();
+        if (mRect.right > window.innerWidth - 8)
+          menu.style.left = (rect.right - mRect.width) + 'px';
+      }, 0);
+      menu.classList.add('open');
+      trigger.classList.add('open');
+    }
+  });
+
+  wrap.appendChild(trigger);
+  document.body.appendChild(menu);
+  return wrap;
+}
+
+// ─────────────────────────────────────────────
 //  RENDER TABLE
 // ─────────────────────────────────────────────
 function renderTable() {
@@ -1405,6 +1636,8 @@ function renderTable() {
     parts.push(`${activeD3TacticFilters.size} D3FEND tactic${activeD3TacticFilters.size !== 1 ? 's' : ''}`);
   if (kevFilterActive)
     parts.push('KEV');
+  if (activeSevFilters.size > 0)
+    parts.push([...activeSevFilters].join('/'));
   const filterLabel = parts.length > 0 ? ` (filtered by ${parts.join(' + ')})` : '';
 
   $("result-total").textContent = `${total} ${total===1?'result':'results'}${filterLabel}`;
@@ -1446,6 +1679,10 @@ function renderTable() {
         renderCpePanel();
       });
       inner.appendChild(kevWrap);
+
+      // ── Severity filter dropdown ─────────────────────────────────
+      const sevWrap = renderSevFilter(universe["CVE"]);
+      if (sevWrap) inner.appendChild(sevWrap);
     }
 
     const count = document.createElement('span');
