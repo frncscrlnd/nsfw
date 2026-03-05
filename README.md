@@ -1,6 +1,6 @@
 # **N**avigator for **S**ecurity **F**rame**w**orks
 
-A security tool that maps relationships across the major cybersecurity knowledge bases: **CVE**, **CWE**, **CAPEC**, **ATT&CK**, and **D3FEND**. Heavily inspired from **galeax.github.io/CVE2CAPEC/**
+A security tool that maps relationships across the major cybersecurity knowledge bases: **CVE**, **CWE**, **CAPEC**, **ATT&CK**, and **D3FEND**. Heavily inspired from https://galeax.github.io/CVE2CAPEC/ and https://d3fend.mitre.org/tools/extractor/
 
 
 ## What it does
