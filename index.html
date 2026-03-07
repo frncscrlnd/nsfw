@@ -187,7 +187,6 @@
     cursor: default; white-space: nowrap;
     font-variant-numeric: tabular-nums;
   }
-  /* severity colours */
   .cvss-CRITICAL { background: rgba(180,0,0,0.18);   border: 1px solid rgba(220,38,38,0.55);  color: #f87171; }
   .cvss-HIGH     { background: rgba(234,88,12,0.15);  border: 1px solid rgba(249,115,22,0.5); color: #fb923c; }
   .cvss-MEDIUM   { background: rgba(202,138,4,0.15);  border: 1px solid rgba(234,179,8,0.45); color: #fbbf24; }
@@ -213,7 +212,8 @@
     background: rgba(239,68,68,0.1);
     border-color: rgba(239,68,68,0.45);
     color: #f87171;
-    animation: kev-glow 2.5s ease-in-out infinite;  }
+    animation: kev-glow 2.5s ease-in-out infinite;
+  }
   .sev-dropdown-trigger.has-active {
     background: rgba(239,68,68,0.1);
     border-color: rgba(239,68,68,0.45);
@@ -261,31 +261,22 @@
 
   /* ── KEV FILTER ── */
   .kev-filter-wrap {
-    display: inline-flex;
-    align-items: center;
-    margin-left: auto;
-    margin-right: 6px;
-    cursor: pointer;
-    user-select: none;
+    display: inline-flex; align-items: center;
+    margin-left: auto; margin-right: 6px;
+    cursor: pointer; user-select: none;
   }
   .kev-filter-label {
     font-size: 0.55rem; font-weight: 900; letter-spacing: 0.08em;
     padding: 1px 5px; border-radius: 3px;
-    border: 1px solid #1a2030;
-    background: #080c12;
-    color: #3a5a7a;
+    border: 1px solid #1a2030; background: #080c12; color: #3a5a7a;
     transition: background 0.12s, border-color 0.12s, color 0.12s;
   }
   .kev-filter-wrap:hover .kev-filter-label {
-    background: rgba(239,68,68,0.1);
-    border-color: rgba(239,68,68,0.45);
-    color: #f87171;
+    background: rgba(239,68,68,0.1); border-color: rgba(239,68,68,0.45); color: #f87171;
     animation: kev-glow 2.5s ease-in-out infinite;
   }
   .kev-filter-wrap.active .kev-filter-label {
-    background: rgba(239,68,68,0.1);
-    border-color: rgba(239,68,68,0.45);
-    color: #f87171;
+    background: rgba(239,68,68,0.1); border-color: rgba(239,68,68,0.45); color: #f87171;
   }
 
   .col-empty {
@@ -295,46 +286,23 @@
 
   /* ── CPE PANEL ── */
   #cpe-panel {
-    display: none;
-    margin-top: 28px;
-    border: 1px solid #1a2a1a;
-    border-radius: 8px;
-    overflow: hidden;
+    display: none; margin-top: 28px;
+    border: 1px solid #1a2a1a; border-radius: 8px; overflow: hidden;
     animation: fadeIn 0.2s ease;
   }
   @keyframes fadeIn { from { opacity:0; transform: translateY(6px); } to { opacity:1; transform: translateY(0); } }
 
   .cpe-panel-header {
-    background: #080f0a;
-    border-bottom: 1px solid #1a2a1a;
-    padding: 12px 18px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    flex-wrap: wrap;
+    background: #080f0a; border-bottom: 1px solid #1a2a1a;
+    padding: 12px 18px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
   }
-  .cpe-panel-title {
-    font-size: 0.68rem;
-    letter-spacing: 0.2em;
-    color: #2a5a3a;
-    font-weight: 900;
-  }
-  .cpe-panel-cve-list {
-    display: flex;
-    gap: 6px;
-    flex-wrap: wrap;
-  }
+  .cpe-panel-title { font-size: 0.68rem; letter-spacing: 0.2em; color: #2a5a3a; font-weight: 900; }
+  .cpe-panel-cve-list { display: flex; gap: 6px; flex-wrap: wrap; }
   .cpe-cve-tab {
-    font-size: 0.72rem;
-    padding: 3px 10px;
-    border-radius: 4px;
-    border: 1px solid #eab30844;
-    background: rgba(234,179,8,0.06);
-    color: #eab308;
-    cursor: pointer;
-    transition: background 0.12s, border-color 0.12s;
-    font-family: inherit;
-    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 0.72rem; padding: 3px 10px; border-radius: 4px;
+    border: 1px solid #eab30844; background: rgba(234,179,8,0.06); color: #eab308;
+    cursor: pointer; transition: background 0.12s, border-color 0.12s;
+    font-family: inherit; display: inline-flex; align-items: center; gap: 6px;
   }
   .cpe-cve-tab:hover { background: rgba(234,179,8,0.12); }
   .cpe-cve-tab.active { background: rgba(234,179,8,0.15); border-color: #eab308; color: #fde047; }
@@ -355,8 +323,14 @@
   .cpe-product { color: #aaa; }
   .cpe-sep { color: #2a3a2a; }
 
-  .cpe-versions { display: flex; flex-wrap: wrap; gap: 6px; }
+  /* ── inferred badge (fallback CPE) ── */
+  .cpe-inferred-badge {
+    font-size: 0.55rem; padding: 1px 5px; border-radius: 3px;
+    border: 1px solid #2a3a2a; color: #3a5a3a; font-style: italic;
+    white-space: nowrap; cursor: default;
+  }
 
+  .cpe-versions { display: flex; flex-wrap: wrap; gap: 6px; }
   .cpe-version-tag {
     font-size: 0.7rem; padding: 3px 10px; border-radius: 4px;
     background: #0d1a10; border: 1px solid #1a3020; color: #4a8a5a;
@@ -365,168 +339,95 @@
   .cpe-version-tag:hover { border-color: var(--green); color: var(--green); }
   .cpe-version-tag.wildcard { color: #2a4a3a; border-color: #0f1a14; font-style: italic; }
 
+  /* inferred version tags slightly different color */
+  .cpe-group.inferred .cpe-version-tag {
+    background: #0d1408; border-color: #1a2a18; color: #3a6a3a;
+  }
+  .cpe-group.inferred .cpe-version-tag:hover { border-color: #3a7a3a; color: #5a9a5a; }
+
   .cpe-no-data { color: #2a3a2a; font-size: 0.75rem; font-style: italic; padding: 8px 0; }
 
   /* ── empty state ── */
   .empty-state { text-align: center; color: #1a2a1a; margin-top: 100px; }
   .empty-state .icon { font-size: 5rem; margin-bottom: 20px; }
 
-  /* ── TACTICS FILTER DROPDOWN (shared by ATT&CK and D3FEND) ── */
+  /* ── TACTICS FILTER DROPDOWN ── */
   .tactics-filter-wrap,
   .d3-filter-wrap {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    margin-left: auto;
-    margin-right: 6px;
+    position: relative; display: inline-flex; align-items: center;
+    margin-left: auto; margin-right: 6px;
   }
   .tactics-dropdown-trigger {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 0.55rem; font-weight: 900; letter-spacing: 0.08em;
-    padding: 1px 5px;
-    border-radius: 3px;
-    border: 1px solid #1a2030;
-    background: #080c12;
-    color: #3a5a7a;
-    cursor: pointer;
-    font-family: inherit;
-    font-weight: 700;
-    letter-spacing: 0.1em;
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 0.55rem; font-weight: 700; letter-spacing: 0.1em;
+    padding: 1px 5px; border-radius: 3px;
+    border: 1px solid #1a2030; background: #080c12; color: #3a5a7a;
+    cursor: pointer; font-family: inherit;
     transition: border-color 0.15s, color 0.15s, background 0.15s;
-    user-select: none;
-    white-space: nowrap;
+    user-select: none; white-space: nowrap;
   }
   .tactics-dropdown-trigger:hover {
-    background: rgba(239,68,68,0.1);
-    border-color: rgba(239,68,68,0.45);
-    color: #f87171;
+    background: rgba(239,68,68,0.1); border-color: rgba(239,68,68,0.45); color: #f87171;
     animation: kev-glow 2.5s ease-in-out infinite;
   }
   .tactics-dropdown-trigger.has-active {
-    border-color: rgba(239,68,68,0.5);
-    color: #f87171;
-    background: rgba(239,68,68,0.08);
+    border-color: rgba(239,68,68,0.5); color: #f87171; background: rgba(239,68,68,0.08);
   }
-  .tactics-dropdown-trigger .trigger-arrow {
-    font-size: 0.5rem;
-    transition: transform 0.15s;
-    opacity: 0.7;
-  }
+  .tactics-dropdown-trigger .trigger-arrow { font-size: 0.5rem; transition: transform 0.15s; opacity: 0.7; }
   .tactics-dropdown-trigger.open .trigger-arrow { transform: rotate(180deg); }
   .tactics-dropdown-trigger .trigger-badge {
-    font-size: 0.55rem;
-    background: rgba(239,68,68,0.2);
-    border: 1px solid rgba(239,68,68,0.4);
-    color: #f87171;
-    padding: 0 5px;
-    border-radius: 2px;
-    font-weight: 900;
+    font-size: 0.55rem; background: rgba(239,68,68,0.2);
+    border: 1px solid rgba(239,68,68,0.4); color: #f87171;
+    padding: 0 5px; border-radius: 2px; font-weight: 900;
   }
-
   .tactics-dropdown-menu {
-    display: none;
-    position: fixed;
-    z-index: 9000;
-    min-width: 220px;
-    background: #07090f;
-    border: 1px solid #1a2030;
-    border-radius: 5px;
+    display: none; position: fixed; z-index: 9000; min-width: 220px;
+    background: #07090f; border: 1px solid #1a2030; border-radius: 5px;
     box-shadow: 0 8px 32px rgba(0,0,0,0.7), 0 0 0 1px rgba(239,68,68,0.05);
-    overflow: hidden;
-    animation: dropIn 0.12s ease;
+    overflow: hidden; animation: dropIn 0.12s ease;
   }
-  @keyframes dropIn {
-    from { opacity:0; transform: translateY(-4px); }
-    to   { opacity:1; transform: translateY(0); }
-  }
+  @keyframes dropIn { from { opacity:0; transform: translateY(-4px); } to { opacity:1; transform: translateY(0); } }
   .tactics-dropdown-menu.open { display: block; }
-
   .tactics-dropdown-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 7px 12px;
-    border-bottom: 1px solid #111820;
-    font-size: 0.6rem;
-    color: #2a3a5a;
-    letter-spacing: 0.15em;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 7px 12px; border-bottom: 1px solid #111820;
+    font-size: 0.6rem; color: #2a3a5a; letter-spacing: 0.15em;
   }
   .tactics-dropdown-clear {
-    font-size: 0.58rem;
-    color: #3a5a7a;
-    cursor: pointer;
-    padding: 1px 6px;
-    border-radius: 2px;
-    border: 1px solid #1a2a3a;
-    background: transparent;
-    font-family: inherit;
-    letter-spacing: 0.08em;
+    font-size: 0.58rem; color: #3a5a7a; cursor: pointer;
+    padding: 1px 6px; border-radius: 2px; border: 1px solid #1a2a3a;
+    background: transparent; font-family: inherit; letter-spacing: 0.08em;
     transition: color 0.12s, border-color 0.12s;
   }
   .tactics-dropdown-clear:hover { color: #f87171; border-color: rgba(239,68,68,0.4); }
-
   .tactics-dropdown-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 7px 12px;
-    cursor: pointer;
-    border-bottom: 1px solid #0c1018;
-    transition: background 0.1s;
-    user-select: none;
+    display: flex; align-items: center; gap: 10px; padding: 7px 12px;
+    cursor: pointer; border-bottom: 1px solid #0c1018;
+    transition: background 0.1s; user-select: none;
   }
   .tactics-dropdown-item:last-child { border-bottom: none; }
   .tactics-dropdown-item:hover { background: rgba(239,68,68,0.04); }
   .tactics-dropdown-item.active { background: rgba(239,68,68,0.07); }
-
   .tactic-item-cb {
-    width: 12px; height: 12px; border-radius: 2px;
-    border: 1px solid #2a3a5a;
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
+    width: 12px; height: 12px; border-radius: 2px; border: 1px solid #2a3a5a;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
     font-size: 8px; font-weight: 900; color: #000;
     transition: background 0.12s, border-color 0.12s;
   }
-  .tactics-dropdown-item.active .tactic-item-cb {
-    background: #ef4444;
-    border-color: #ef4444;
-  }
+  .tactics-dropdown-item.active .tactic-item-cb { background: #ef4444; border-color: #ef4444; }
   .tactics-dropdown-item.active .tactic-item-cb::after { content: '✓'; }
-
-  .tactic-item-name {
-    flex: 1;
-    font-size: 0.68rem;
-    color: #4a6a8a;
-    letter-spacing: 0.05em;
-    transition: color 0.1s;
-  }
+  .tactic-item-name { flex: 1; font-size: 0.68rem; color: #4a6a8a; letter-spacing: 0.05em; transition: color 0.1s; }
   .tactics-dropdown-item.active .tactic-item-name { color: #fca5a5; }
   .tactics-dropdown-item:hover .tactic-item-name  { color: #7a9aba; }
   .tactics-dropdown-item.active:hover .tactic-item-name { color: #fca5a5; }
-
-  .tactic-item-id {
-    font-size: 0.58rem;
-    color: #1e2e40;
-    transition: color 0.1s;
-  }
+  .tactic-item-id { font-size: 0.58rem; color: #1e2e40; transition: color 0.1s; }
   .tactics-dropdown-item.active .tactic-item-id { color: #7a3a3a; }
-
   .tactic-item-count {
-    font-size: 0.58rem;
-    color: #1e2e40;
-    background: rgba(0,0,0,0.3);
-    padding: 1px 5px;
-    border-radius: 2px;
-    min-width: 24px;
-    text-align: center;
+    font-size: 0.58rem; color: #1e2e40; background: rgba(0,0,0,0.3);
+    padding: 1px 5px; border-radius: 2px; min-width: 24px; text-align: center;
     transition: color 0.1s, background 0.1s;
   }
-  .tactics-dropdown-item.active .tactic-item-count {
-    color: #f87171;
-    background: rgba(239,68,68,0.15);
-  }
+  .tactics-dropdown-item.active .tactic-item-count { color: #f87171; background: rgba(239,68,68,0.15); }
 
   ::-webkit-scrollbar { width: 6px; height: 6px; }
   ::-webkit-scrollbar-thumb { background: #1a3a2a; border-radius: 3px; }
@@ -544,7 +445,14 @@
   <div style="margin-bottom:40px;">
     <h1 class="header-title">NSFW</h1>
     <div class="header-sub">&#9658; NAVIGATOR for SECURITY FRAMEWORKS</div>
-    <div class="header-desc"><a href="https://www.cve.org/" target="_blank" style="color: #fde047;">CVE</a> · <a href="https://cwe.mitre.org/" target="_blank" style="color: #93c5fd;">CWE</a> · <a href="https://cpe.mitre.org/" target="_blank" style="color: #eab308">CPE</a> · <a href="https://capec.mitre.org/" target="_blank" style="color: #fdba74;">CAPEC</a> · <a href="https://attack.mitre.org/" target="_blank" style="color: #fca5a5;">ATT&amp;CK</a> · <a href="https://d3fend.mitre.org/" target="_blank" style="color: #5eead4;">D3FEND</a></div>
+    <div class="header-desc">
+      <a href="https://www.cve.org/" target="_blank" style="color:#fde047;">CVE</a> ·
+      <a href="https://cwe.mitre.org/" target="_blank" style="color:#93c5fd;">CWE</a> ·
+      <a href="https://cpe.mitre.org/" target="_blank" style="color:#eab308">CPE</a> ·
+      <a href="https://capec.mitre.org/" target="_blank" style="color:#fdba74;">CAPEC</a> ·
+      <a href="https://attack.mitre.org/" target="_blank" style="color:#fca5a5;">ATT&amp;CK</a> ·
+      <a href="https://d3fend.mitre.org/" target="_blank" style="color:#5eead4;">D3FEND</a>
+    </div>
   </div>
 
   <div class="search-wrap">
@@ -562,14 +470,12 @@
     <div class="result-header">
       <div style="color:#555;font-size:0.75rem;" id="result-total"></div>
     </div>
-
     <div class="col-table-wrap">
       <table class="col-table" id="col-table">
         <thead><tr id="col-thead-row"></tr></thead>
         <tbody id="col-tbody"></tbody>
       </table>
     </div>
-
     <div id="cpe-panel">
       <div class="cpe-panel-header">
         <span class="cpe-panel-title">&#9658; AFFECTED PRODUCTS (CPE)</span>
@@ -591,31 +497,22 @@
 // ─────────────────────────────────────────────
 const DATA_BASE  = './data/';
 const DATA_FILES = {
-  cve_cwe:           'cve_cwe.json',
-  cwe_capec:         'cwe_capec.json',
-  capec_attack:      'capec_attack.json',
-  attack_defend:     'attack_defend.json',
-  cve_cpe:           'cve_cpe.json',
-  cve_cvss:          'cve_cvss.json',         // ← NEW
-  tactics_techniques:'tactics_techniques.json',
-  d3fend_tactics:    'd3fend_tactics.json',
+  cve_cwe:            'cve_cwe.json',
+  cwe_capec:          'cwe_capec.json',
+  capec_attack:       'capec_attack.json',
+  attack_defend:      'attack_defend.json',
+  cve_cpe:            'cve_cpe.json',
+  cve_cvss:           'cve_cvss.json',
+  tactics_techniques: 'tactics_techniques.json',
+  d3fend_tactics:     'd3fend_tactics.json',
 };
 
 const TACTIC_NAMES = {
-  "TA0001": "Initial Access",
-  "TA0002": "Execution",
-  "TA0003": "Persistence",
-  "TA0004": "Priv. Escalation",
-  "TA0005": "Defense Evasion",
-  "TA0006": "Credential Access",
-  "TA0007": "Discovery",
-  "TA0008": "Lateral Movement",
-  "TA0009": "Collection",
-  "TA0010": "Exfiltration",
-  "TA0011": "C2",
-  "TA0040": "Impact",
-  "TA0042": "Resource Dev.",
-  "TA0043": "Reconnaissance",
+  "TA0001":"Initial Access","TA0002":"Execution","TA0003":"Persistence",
+  "TA0004":"Priv. Escalation","TA0005":"Defense Evasion","TA0006":"Credential Access",
+  "TA0007":"Discovery","TA0008":"Lateral Movement","TA0009":"Collection",
+  "TA0010":"Exfiltration","TA0011":"C2","TA0040":"Impact",
+  "TA0042":"Resource Dev.","TA0043":"Reconnaissance",
 };
 
 const FW = ["CVE","CWE","CAPEC","ATT&CK","D3FEND"];
@@ -628,63 +525,29 @@ const FW_CFG = {
 };
 
 const D3FEND_ABBR_TO_FULL = {
-  "D3-ACH":   "ApplicationConfigurationHardening",
-  "D3-AH":    "ApplicationHardening",
-  "D3-AL":    "AccountLocking",
-  "D3-ANCI":  "AuthenticationCacheInvalidation",
-  "D3-ANET":  "AuthenticationEventThresholding",
-  "D3-AZET":  "AuthorizationEventThresholding",
-  "D3-BA":    "BootloaderAuthentication",
-  "D3-BDI":   "BroadcastDomainIsolation",
-  "D3-CP":    "CertificatePinning",
-  "D3-DA":    "DynamicAnalysis",
-  "D3-DAM":   "DomainAccountMonitoring",
-  "D3-DE":    "DecoyEnvironment",
-  "D3-DENCR": "DiskEncryption",
-  "D3-DLIC":  "DriverLoadIntegrityChecking",
-  "D3-DNSAL": "DNSAllowlisting",
-  "D3-DNSDL": "DNSDenylisting",
-  "D3-DO":    "DecoyObject",
-  "D3-DTP":   "DomainTrustPolicy",
-  "D3-EAL":   "ExecutableAllowlisting",
-  "D3-EDL":   "ExecutableDenylisting",
-  "D3-EHPV":  "ExceptionHandlerPointerValidation",
-  "D3-ET":    "EncryptedTunnels",
-  "D3-FA":    "FileAnalysis",
-  "D3-FCR":   "FileContentRules",
-  "D3-FE":    "FileEncryption",
-  "D3-FH":    "FileHashing",
-  "D3-HBPI":  "Hardware-basedProcessIsolation",
-  "D3-IOPR":  "IOPortRestriction",
-  "D3-ISVA":  "InboundSessionVolumeAnalysis",
-  "D3-ITF":   "InboundTrafficFiltering",
-  "D3-JFAPA": "JobFunctionAccessPatternAnalysis",
-  "D3-LAM":   "LocalAccountMonitoring",
-  "D3-LFP":   "LocalFilePermissions",
-  "D3-MENCR": "MessageEncryption",
-  "D3-MFA":   "Multi-factorAuthentication",
-  "D3-NI":    "NetworkIsolation",
-  "D3-NTA":   "NetworkTrafficAnalysis",
-  "D3-OTF":   "OutboundTrafficFiltering",
-  "D3-OTP":   "One-timePassword",
-  "D3-PA":    "ProcessAnalysis",
-  "D3-PH":    "PlatformHardening",
-  "D3-PSEP":  "ProcessSegmentExecutionPrevention",
-  "D3-RAPA":  "ResourceAccessPatternAnalysis",
-  "D3-SBV":   "ServiceBinaryVerification",
-  "D3-SCF":   "SystemCallFiltering",
-  "D3-SCP":   "SystemConfigurationPermissions",
-  "D3-SDA":   "SessionDurationAnalysis",
-  "D3-SFA":   "SystemFileAnalysis",
-  "D3-SPP":   "StrongPasswordPolicy",
-  "D3-SSC":   "ShadowStackComparisons",
-  "D3-SU":    "SoftwareUpdate",
-  "D3-TBI":   "TPMBootIntegrity",
-  "D3-UA":    "URLAnalysis",
-  "D3-UAP":   "UserAccountPermissions",
-  "D3-UDTA":  "UserDataTransferAnalysis",
-  "D3-UGLPA": "UserGeolocationLogonPatternAnalysis",
-  "D3-WSAA":  "WebSessionActivityAnalysis",
+  "D3-ACH":"ApplicationConfigurationHardening","D3-AH":"ApplicationHardening",
+  "D3-AL":"AccountLocking","D3-ANCI":"AuthenticationCacheInvalidation",
+  "D3-ANET":"AuthenticationEventThresholding","D3-AZET":"AuthorizationEventThresholding",
+  "D3-BA":"BootloaderAuthentication","D3-BDI":"BroadcastDomainIsolation",
+  "D3-CP":"CertificatePinning","D3-DA":"DynamicAnalysis","D3-DAM":"DomainAccountMonitoring",
+  "D3-DE":"DecoyEnvironment","D3-DENCR":"DiskEncryption","D3-DLIC":"DriverLoadIntegrityChecking",
+  "D3-DNSAL":"DNSAllowlisting","D3-DNSDL":"DNSDenylisting","D3-DO":"DecoyObject",
+  "D3-DTP":"DomainTrustPolicy","D3-EAL":"ExecutableAllowlisting","D3-EDL":"ExecutableDenylisting",
+  "D3-EHPV":"ExceptionHandlerPointerValidation","D3-ET":"EncryptedTunnels",
+  "D3-FA":"FileAnalysis","D3-FCR":"FileContentRules","D3-FE":"FileEncryption",
+  "D3-FH":"FileHashing","D3-HBPI":"Hardware-basedProcessIsolation","D3-IOPR":"IOPortRestriction",
+  "D3-ISVA":"InboundSessionVolumeAnalysis","D3-ITF":"InboundTrafficFiltering",
+  "D3-JFAPA":"JobFunctionAccessPatternAnalysis","D3-LAM":"LocalAccountMonitoring",
+  "D3-LFP":"LocalFilePermissions","D3-MENCR":"MessageEncryption","D3-MFA":"Multi-factorAuthentication",
+  "D3-NI":"NetworkIsolation","D3-NTA":"NetworkTrafficAnalysis","D3-OTF":"OutboundTrafficFiltering",
+  "D3-OTP":"One-timePassword","D3-PA":"ProcessAnalysis","D3-PH":"PlatformHardening",
+  "D3-PSEP":"ProcessSegmentExecutionPrevention","D3-RAPA":"ResourceAccessPatternAnalysis",
+  "D3-SBV":"ServiceBinaryVerification","D3-SCF":"SystemCallFiltering",
+  "D3-SCP":"SystemConfigurationPermissions","D3-SDA":"SessionDurationAnalysis",
+  "D3-SFA":"SystemFileAnalysis","D3-SPP":"StrongPasswordPolicy",
+  "D3-SSC":"ShadowStackComparisons","D3-SU":"SoftwareUpdate","D3-TBI":"TPMBootIntegrity",
+  "D3-UA":"URLAnalysis","D3-UAP":"UserAccountPermissions","D3-UDTA":"UserDataTransferAnalysis",
+  "D3-UGLPA":"UserGeolocationLogonPatternAnalysis","D3-WSAA":"WebSessionActivityAnalysis",
 };
 
 // ─────────────────────────────────────────────
@@ -707,50 +570,72 @@ function getUrl(id, type) {
 }
 
 // ─────────────────────────────────────────────
-//  CPE PARSING
+//  CPE PARSING — gestisce sia cpe:2.3:... che product:vendor:product:ver
 // ─────────────────────────────────────────────
 function parseCpe(cpe) {
-  const parts = cpe.split(':');
-  return { raw:cpe, type:parts[2]||'*', vendor:parts[3]||'*', product:parts[4]||'*', version:parts[5]||'*' };
+  // CPE reale: cpe:2.3:type:vendor:product:version:...
+  if (cpe.startsWith("cpe:")) {
+    const parts = cpe.split(':');
+    return {
+      raw:        cpe,
+      isFallback: false,
+      type:       parts[2] || '*',
+      vendor:     parts[3] || '*',
+      product:    parts[4] || '*',
+      version:    parts[5] || '*',
+    };
+  }
+
+  // Fallback dallo script Python: product:vendor:product[:version]
+  if (cpe.startsWith("product:")) {
+    const parts = cpe.split(':');
+    return {
+      raw:        cpe,
+      isFallback: true,
+      type:       'a',
+      vendor:     parts[1] || '*',
+      product:    parts[2] || '*',
+      version:    parts[3] || '*',   // può mancare → '*'
+    };
+  }
+
+  // Formato sconosciuto — mostra raw come vendor
+  return { raw: cpe, isFallback: false, type: '*', vendor: cpe, product: '*', version: '*' };
 }
 
 function groupCpes(cpes) {
   const groups = {};
   for (const cpe of cpes) {
-    const p = parseCpe(cpe), key = `${p.vendor}:::${p.product}`;
-    if (!groups[key]) groups[key] = { vendor:p.vendor, product:p.product, versions:[] };
-    groups[key].versions.push(p.version);
+    const p   = parseCpe(cpe);
+    const key = `${p.vendor}:::${p.product}`;
+    if (!groups[key]) {
+      groups[key] = {
+        vendor:     p.vendor,
+        product:    p.product,
+        versions:   [],
+        isFallback: p.isFallback,
+      };
+    }
+    groups[key].versions.push({ version: p.version, isFallback: p.isFallback });
   }
   return Object.values(groups);
 }
 
 // ─────────────────────────────────────────────
-//  CVSS HELPERS  ← NEW
+//  CVSS HELPERS
 // ─────────────────────────────────────────────
-// Priority order: v40 > v31 > v30 > v2
 const CVSS_PRIORITY = ['v40', 'v31', 'v30', 'v2'];
 
-/**
- * Returns the best available CVSS entry for a CVE id,
- * or null if no data is present.
- * result: { version, score, severity, vector }
- */
 function getBestCvss(cveId) {
   const entry = DB.cve_cvss[cveId];
   if (!entry) return null;
   for (const ver of CVSS_PRIORITY) {
     if (entry[ver] && entry[ver].baseScore != null) {
       const d = entry[ver];
-      // v2 has no baseSeverity in the JSON → derive it
       const sev = d.baseSeverity
         ? d.baseSeverity.toUpperCase()
         : scoreToSeverityV2(d.baseScore);
-      return {
-        version:  ver,
-        score:    d.baseScore,
-        severity: sev,
-        vector:   d.vectorString || null,
-      };
+      return { version: ver, score: d.baseScore, severity: sev, vector: d.vectorString || null };
     }
   }
   return null;
@@ -762,23 +647,21 @@ function scoreToSeverityV2(score) {
   if (score < 4.0)   return 'LOW';
   if (score < 7.0)   return 'MEDIUM';
   if (score < 9.0)   return 'HIGH';
-  return 'CRITICAL';   // v2 max is 10.0; treat 9+ as critical for colouring
+  return 'CRITICAL';
 }
 
 const CVSS_VER_LABEL = { v40:'4.0', v31:'3.1', v30:'3.0', v2:'2.0' };
 
 function makeCvssBadge(cveId) {
-  const cvss = getBestCvss(cveId);
+  const cvss  = getBestCvss(cveId);
   const badge = document.createElement('span');
   badge.className = 'cvss-badge';
-
   if (!cvss) {
     badge.classList.add('cvss-UNKNOWN');
     badge.textContent = 'N/A';
     badge.title = 'No CVSS data available';
     return badge;
   }
-
   const sev = cvss.severity || 'UNKNOWN';
   badge.classList.add(`cvss-${sev}`);
   badge.textContent = cvss.score.toFixed(1);
@@ -788,7 +671,6 @@ function makeCvssBadge(cveId) {
     `Severity: ${sev}`,
     cvss.vector ? `Vector: ${cvss.vector}` : null,
   ].filter(Boolean).join('\n');
-
   return badge;
 }
 
@@ -802,8 +684,8 @@ let INV_D3FEND_TACTICS = {};
 
 let activeTacticFilters   = new Set();
 let activeD3TacticFilters = new Set();
-let kevFilterActive = false;
-let activeSevFilters  = new Set(); // "CRITICAL" | "HIGH" | "MEDIUM" | "LOW" | "NONE"
+let kevFilterActive       = false;
+let activeSevFilters      = new Set();
 
 let universe     = null;
 let checkedIds   = new Set();
@@ -824,7 +706,7 @@ function bootLine(text, status='wait') {
 }
 
 async function loadDatabases() {
-  const keys = Object.keys(DATA_FILES);
+  const keys  = Object.keys(DATA_FILES);
   const lines = {};
   keys.forEach(k => { lines[k] = bootLine(DATA_FILES[k]); });
 
@@ -836,14 +718,14 @@ async function loadDatabases() {
       DB[k] = await res.json();
       lines[k].className = 'boot-log-line ok';
     } catch(e) {
-      lines[k].className = 'boot-log-line';
+      lines[k].className = '';
       await new Promise(r => setTimeout(r, 400));
       lines[k].textContent = `[ERR] ${DATA_FILES[k]} — ${e.message}`;
     }
     bootFill.style.width = `${Math.round((i+1)/keys.length*80)}%`;
   }
 
-  // ── Carica kevs.txt ──────────────────────────────────────────────
+  // ── Carica kevs.txt ──
   const kevLine = bootLine('kevs.txt');
   try {
     const res = await fetch(DATA_BASE + 'kevs.txt');
@@ -857,7 +739,6 @@ async function loadDatabases() {
   } catch(e) {
     kevLine.textContent = `[SKIP] kevs.txt — ${e.message}`;
   }
-  // ─────────────────────────────────────────────────────────────────
 
   const invertLine = bootLine('building index...');
   DB.cve_cwe            = DB.cve_cwe            || {};
@@ -865,7 +746,7 @@ async function loadDatabases() {
   DB.capec_attack       = DB.capec_attack       || {};
   DB.attack_defend      = DB.attack_defend      || {};
   DB.cve_cpe            = DB.cve_cpe            || {};
-  DB.cve_cvss           = DB.cve_cvss           || {};  // ← NEW
+  DB.cve_cvss           = DB.cve_cvss           || {};
   DB.tactics_techniques = DB.tactics_techniques || {};
   DB.d3fend_tactics     = DB.d3fend_tactics     || {};
 
@@ -874,7 +755,6 @@ async function loadDatabases() {
   INV.atk_capec = invertMap(DB.capec_attack);
   INV.d3_atk    = invertMap(DB.attack_defend);
 
-  // Build inverse: ATT&CK technique → [tactics]
   INV_TECHNIQUE_TACTICS = {};
   for (const [ta, techniques] of Object.entries(DB.tactics_techniques)) {
     for (const tech of techniques) {
@@ -884,7 +764,6 @@ async function loadDatabases() {
     }
   }
 
-  // Build inverse: D3FEND id → tactic string
   INV_D3FEND_TACTICS = {};
   for (const [d3Id, tactic] of Object.entries(DB.d3fend_tactics)) {
     INV_D3FEND_TACTICS[d3Id.toUpperCase()] = tactic;
@@ -952,10 +831,8 @@ function techniquePassesFilter(techId) {
 function getRelevantTactics(attackIds) {
   const counts = new Map();
   for (const techId of attackIds) {
-    const tactics = INV_TECHNIQUE_TACTICS[techId.toUpperCase()] || [];
-    for (const ta of tactics) {
+    for (const ta of (INV_TECHNIQUE_TACTICS[techId.toUpperCase()] || []))
       counts.set(ta, (counts.get(ta) || 0) + 1);
-    }
   }
   return new Map([...counts.entries()].sort((a,b) => a[0].localeCompare(b[0])));
 }
@@ -975,7 +852,7 @@ function getRelevantD3Tactics(d3Ids) {
     const tactic = INV_D3FEND_TACTICS[id.toUpperCase()];
     if (tactic) counts.set(tactic, (counts.get(tactic) || 0) + 1);
   }
-  return new Map([...counts.entries()].sort((a, b) => a[0].localeCompare(b[0])));
+  return new Map([...counts.entries()].sort((a,b) => a[0].localeCompare(b[0])));
 }
 
 // ─────────────────────────────────────────────
@@ -1032,60 +909,49 @@ function applyTacticFilter(u) {
     const filteredAtk = u["ATT&CK"].filter(id => techniquePassesFilter(id));
     const atkSet = new Set(filteredAtk);
     const filteredCapec = u["CAPEC"].filter(capecId =>
-      (DB.capec_attack[capecId] || []).some(a => atkSet.has(a))
-    );
+      (DB.capec_attack[capecId] || []).some(a => atkSet.has(a)));
     const capecSet = new Set(filteredCapec);
     const filteredCwe = u["CWE"].filter(cweId =>
-      (DB.cwe_capec[cweId] || []).some(c => capecSet.has(c))
-    );
+      (DB.cwe_capec[cweId] || []).some(c => capecSet.has(c)));
     const cweSet = new Set(filteredCwe);
     const filteredCve = u["CVE"].filter(cveId =>
-      (DB.cve_cwe[cveId] || []).some(c => cweSet.has(c))
-    );
+      (DB.cve_cwe[cveId] || []).some(c => cweSet.has(c)));
     const filteredD3 = [...expand(filteredAtk, DB.attack_defend)].sort();
-    u = { "CVE":filteredCve, "CWE":filteredCwe, "CAPEC":filteredCapec, "ATT&CK":filteredAtk, "D3FEND":filteredD3 };
+    u = { "CVE":filteredCve,"CWE":filteredCwe,"CAPEC":filteredCapec,"ATT&CK":filteredAtk,"D3FEND":filteredD3 };
   }
 
   if (kevFilterActive) {
     const filteredCve = u["CVE"].filter(id => isKev(id));
     const cveSet = new Set(filteredCve);
     const filteredCwe = u["CWE"].filter(cweId =>
-      (INV.cwe_cve[cweId] || []).some(cve => cveSet.has(cve))
-    );
+      (INV.cwe_cve[cweId] || []).some(cve => cveSet.has(cve)));
     const cweSet = new Set(filteredCwe);
     const filteredCapec = u["CAPEC"].filter(capecId =>
-      (INV.capec_cwe[capecId] || []).some(cwe => cweSet.has(cwe))
-    );
+      (INV.capec_cwe[capecId] || []).some(cwe => cweSet.has(cwe)));
     const capecSet = new Set(filteredCapec);
     const filteredAtk = u["ATT&CK"].filter(atkId =>
-      (INV.atk_capec[atkId] || []).some(c => capecSet.has(c))
-    );
+      (INV.atk_capec[atkId] || []).some(c => capecSet.has(c)));
     const filteredD3 = [...expand(filteredAtk, DB.attack_defend)].sort();
-    u = { "CVE":filteredCve, "CWE":filteredCwe, "CAPEC":filteredCapec, "ATT&CK":filteredAtk, "D3FEND":filteredD3 };
+    u = { "CVE":filteredCve,"CWE":filteredCwe,"CAPEC":filteredCapec,"ATT&CK":filteredAtk,"D3FEND":filteredD3 };
   }
 
   if (activeD3TacticFilters.size > 0) {
     const filteredD3 = u["D3FEND"].filter(id => d3TechniquePasses(id));
     const d3Set = new Set(filteredD3);
     const filteredAtk = u["ATT&CK"].filter(atkId =>
-      (DB.attack_defend[atkId] || []).some(d3 => d3Set.has(d3))
-    );
+      (DB.attack_defend[atkId] || []).some(d3 => d3Set.has(d3)));
     const atkSet = new Set(filteredAtk);
     const filteredCapec = u["CAPEC"].filter(capecId =>
-      (DB.capec_attack[capecId] || []).some(a => atkSet.has(a))
-    );
+      (DB.capec_attack[capecId] || []).some(a => atkSet.has(a)));
     const capecSet = new Set(filteredCapec);
     const filteredCwe = u["CWE"].filter(cweId =>
-      (DB.cwe_capec[cweId] || []).some(c => capecSet.has(c))
-    );
+      (DB.cwe_capec[cweId] || []).some(c => capecSet.has(c)));
     const cweSet = new Set(filteredCwe);
     const filteredCve = u["CVE"].filter(cveId =>
-      (DB.cve_cwe[cveId] || []).some(c => cweSet.has(c))
-    );
-    u = { "CVE":filteredCve, "CWE":filteredCwe, "CAPEC":filteredCapec, "ATT&CK":filteredAtk, "D3FEND":filteredD3 };
+      (DB.cve_cwe[cveId] || []).some(c => cweSet.has(c)));
+    u = { "CVE":filteredCve,"CWE":filteredCwe,"CAPEC":filteredCapec,"ATT&CK":filteredAtk,"D3FEND":filteredD3 };
   }
 
-  // ── Severity filter ────────────────────────────────────────────────
   if (activeSevFilters.size > 0) {
     const filteredCve = u["CVE"].filter(id => {
       const cvss = getBestCvss(id);
@@ -1094,18 +960,15 @@ function applyTacticFilter(u) {
     });
     const cveSet = new Set(filteredCve);
     const filteredCwe = u["CWE"].filter(cweId =>
-      (INV.cwe_cve[cweId] || []).some(cve => cveSet.has(cve))
-    );
+      (INV.cwe_cve[cweId] || []).some(cve => cveSet.has(cve)));
     const cweSet = new Set(filteredCwe);
     const filteredCapec = u["CAPEC"].filter(capecId =>
-      (INV.capec_cwe[capecId] || []).some(cwe => cweSet.has(cwe))
-    );
+      (INV.capec_cwe[capecId] || []).some(cwe => cweSet.has(cwe)));
     const capecSet = new Set(filteredCapec);
     const filteredAtk = u["ATT&CK"].filter(atkId =>
-      (INV.atk_capec[atkId] || []).some(c => capecSet.has(c))
-    );
+      (INV.atk_capec[atkId] || []).some(c => capecSet.has(c)));
     const filteredD3 = [...expand(filteredAtk, DB.attack_defend)].sort();
-    u = { "CVE":filteredCve, "CWE":filteredCwe, "CAPEC":filteredCapec, "ATT&CK":filteredAtk, "D3FEND":filteredD3 };
+    u = { "CVE":filteredCve,"CWE":filteredCwe,"CAPEC":filteredCapec,"ATT&CK":filteredAtk,"D3FEND":filteredD3 };
   }
 
   return u;
@@ -1157,20 +1020,49 @@ function renderCpePanel() {
 
   groupCpes(cpes).forEach(g => {
     const grp = document.createElement("div");
-    grp.className = "cpe-group";
+    grp.className = "cpe-group" + (g.isFallback ? " inferred" : "");
+
     const hdr = document.createElement("div");
     hdr.className = "cpe-group-header";
-    hdr.innerHTML = `<span class="cpe-vendor">${g.vendor}</span><span class="cpe-sep">/</span><span class="cpe-product">${g.product}</span>`;
+
+    const vendorSpan = document.createElement('span');
+    vendorSpan.className = 'cpe-vendor';
+    vendorSpan.textContent = g.vendor;
+    hdr.appendChild(vendorSpan);
+
+    const sepSpan = document.createElement('span');
+    sepSpan.className = 'cpe-sep';
+    sepSpan.textContent = '/';
+    hdr.appendChild(sepSpan);
+
+    const productSpan = document.createElement('span');
+    productSpan.className = 'cpe-product';
+    productSpan.textContent = g.product;
+    hdr.appendChild(productSpan);
+
+    // Badge "inferred" per CPE derivate dal fallback product:vendor:product:version
+    if (g.isFallback) {
+      const badge = document.createElement('span');
+      badge.className = 'cpe-inferred-badge';
+      badge.textContent = 'inferred';
+      badge.title = 'No official CPE — derived from vendor/product fields in CVE data';
+      hdr.appendChild(badge);
+    }
+
     grp.appendChild(hdr);
+
     const vw = document.createElement("div");
     vw.className = "cpe-versions";
-    g.versions.forEach(v => {
+
+    g.versions.forEach(({ version }) => {
       const tag = document.createElement("span");
-      tag.className = "cpe-version-tag" + (v === '*' ? " wildcard" : "");
-      tag.textContent = v === '*' ? 'all versions' : v;
-      tag.title = `Version: ${v}`;
+      const isWild = version === '*' || !version;
+      tag.className = "cpe-version-tag" + (isWild ? " wildcard" : "");
+      tag.textContent = isWild ? 'all versions' : version;
+      tag.title = `Version: ${version}`;
       vw.appendChild(tag);
     });
+
     grp.appendChild(vw);
     cpeBody.appendChild(grp);
   });
@@ -1197,100 +1089,53 @@ document.addEventListener('click', (e) => {
 });
 
 // ─────────────────────────────────────────────
-//  ATT&CK TACTIC FILTER RENDER (dropdown)
+//  ATT&CK TACTIC FILTER RENDER
 // ─────────────────────────────────────────────
 function renderTacticFilter(thElement, containerElement, allAttackIds) {
   const old = thElement.querySelector('.tactics-filter-wrap');
   if (old) old.remove();
-
   const tacticsMap = getRelevantTactics(allAttackIds);
   if (tacticsMap.size === 0) return;
 
-  const wrap = document.createElement('div');
-  wrap.className = 'tactics-filter-wrap';
-
+  const wrap    = document.createElement('div'); wrap.className = 'tactics-filter-wrap';
   const trigger = document.createElement('div');
-  trigger.className = 'tactics-dropdown-trigger' +
-    (activeTacticFilters.size > 0 ? ' has-active' : '');
+  trigger.className = 'tactics-dropdown-trigger' + (activeTacticFilters.size > 0 ? ' has-active' : '');
 
-  const triggerLabel = document.createElement('span');
-  triggerLabel.textContent = 'TACTIC';
+  const triggerLabel = document.createElement('span'); triggerLabel.textContent = 'TACTIC';
   trigger.appendChild(triggerLabel);
-
   if (activeTacticFilters.size > 0) {
-    const badge = document.createElement('span');
-    badge.className = 'trigger-badge';
-    badge.textContent = activeTacticFilters.size;
-    trigger.appendChild(badge);
+    const badge = document.createElement('span'); badge.className = 'trigger-badge';
+    badge.textContent = activeTacticFilters.size; trigger.appendChild(badge);
   }
-
-  const arrow = document.createElement('span');
-  arrow.className = 'trigger-arrow';
-  arrow.textContent = '▼';
+  const arrow = document.createElement('span'); arrow.className = 'trigger-arrow'; arrow.textContent = '▼';
   trigger.appendChild(arrow);
 
-  const menu = document.createElement('div');
-  menu.className = 'tactics-dropdown-menu';
-
-  const header = document.createElement('div');
-  header.className = 'tactics-dropdown-header';
-  const headerLabel = document.createElement('span');
-  headerLabel.textContent = 'FILTER BY TACTIC';
+  const menu = document.createElement('div'); menu.className = 'tactics-dropdown-menu';
+  const header = document.createElement('div'); header.className = 'tactics-dropdown-header';
+  const headerLabel = document.createElement('span'); headerLabel.textContent = 'FILTER BY TACTIC';
   header.appendChild(headerLabel);
-
   if (activeTacticFilters.size > 0) {
-    const clr = document.createElement('button');
-    clr.className = 'tactics-dropdown-clear';
-    clr.textContent = '✕ CLEAR ALL';
-    clr.addEventListener('click', (e) => {
-      e.stopPropagation();
-      activeTacticFilters.clear();
-      closeTacticDropdown();
-      renderTable();
-      renderCpePanel();
-    });
+    const clr = document.createElement('button'); clr.className = 'tactics-dropdown-clear'; clr.textContent = '✕ CLEAR ALL';
+    clr.addEventListener('click', (e) => { e.stopPropagation(); activeTacticFilters.clear(); closeTacticDropdown(); renderTable(); renderCpePanel(); });
     header.appendChild(clr);
   }
   menu.appendChild(header);
 
   for (const [taId, count] of tacticsMap) {
-    const name = TACTIC_NAMES[taId] || taId;
-    const isActive = activeTacticFilters.has(taId);
-
-    const item = document.createElement('div');
-    item.className = 'tactics-dropdown-item' + (isActive ? ' active' : '');
-    item.title = taId;
-
-    const cb = document.createElement('div');
-    cb.className = 'tactic-item-cb';
-
-    const nameSpan = document.createElement('span');
-    nameSpan.className = 'tactic-item-name';
-    nameSpan.textContent = name;
-
-    const idSpan = document.createElement('span');
-    idSpan.className = 'tactic-item-id';
-    idSpan.textContent = taId;
-
-    const countSpan = document.createElement('span');
-    countSpan.className = 'tactic-item-count';
-    countSpan.textContent = count;
-
-    item.appendChild(cb);
-    item.appendChild(nameSpan);
-    item.appendChild(idSpan);
-    item.appendChild(countSpan);
-
+    const name = TACTIC_NAMES[taId] || taId, isActive = activeTacticFilters.has(taId);
+    const item = document.createElement('div'); item.className = 'tactics-dropdown-item' + (isActive ? ' active' : ''); item.title = taId;
+    const cb = document.createElement('div'); cb.className = 'tactic-item-cb';
+    const nameSpan = document.createElement('span'); nameSpan.className = 'tactic-item-name'; nameSpan.textContent = name;
+    const idSpan = document.createElement('span'); idSpan.className = 'tactic-item-id'; idSpan.textContent = taId;
+    const countSpan = document.createElement('span'); countSpan.className = 'tactic-item-count'; countSpan.textContent = count;
+    item.appendChild(cb); item.appendChild(nameSpan); item.appendChild(idSpan); item.appendChild(countSpan);
     item.addEventListener('click', (e) => {
       e.stopPropagation();
-      if (activeTacticFilters.has(taId)) activeTacticFilters.delete(taId);
-      else activeTacticFilters.add(taId);
-      renderTable();
-      renderCpePanel();
+      if (activeTacticFilters.has(taId)) activeTacticFilters.delete(taId); else activeTacticFilters.add(taId);
+      renderTable(); renderCpePanel();
       const newTrigger = document.querySelector('.tactics-filter-wrap .tactics-dropdown-trigger');
       if (newTrigger) newTrigger.click();
     });
-
     menu.appendChild(item);
   }
 
@@ -1300,111 +1145,62 @@ function renderTacticFilter(thElement, containerElement, allAttackIds) {
     closeTacticDropdown();
     if (!isOpen) {
       const rect = trigger.getBoundingClientRect();
-      menu.style.top  = (rect.bottom + 4) + 'px';
-      menu.style.left = rect.left + 'px';
-      setTimeout(() => {
-        const mRect = menu.getBoundingClientRect();
-        if (mRect.right > window.innerWidth - 8)
-          menu.style.left = (rect.right - mRect.width) + 'px';
-      }, 0);
-      menu.classList.add('open');
-      trigger.classList.add('open');
+      menu.style.top = (rect.bottom + 4) + 'px'; menu.style.left = rect.left + 'px';
+      setTimeout(() => { const mRect = menu.getBoundingClientRect(); if (mRect.right > window.innerWidth - 8) menu.style.left = (rect.right - mRect.width) + 'px'; }, 0);
+      menu.classList.add('open'); trigger.classList.add('open');
     }
   });
 
-  wrap.appendChild(trigger);
-  document.body.appendChild(menu);
-  containerElement.appendChild(wrap);
+  wrap.appendChild(trigger); document.body.appendChild(menu); containerElement.appendChild(wrap);
 }
 
 // ─────────────────────────────────────────────
-//  D3FEND TACTIC FILTER RENDER (dropdown)
+//  D3FEND TACTIC FILTER RENDER
 // ─────────────────────────────────────────────
 function renderD3TacticFilter(thElement, containerElement, allD3Ids) {
   const old = thElement.querySelector('.d3-filter-wrap');
   if (old) old.remove();
-
   const tacticsMap = getRelevantD3Tactics(allD3Ids);
   if (tacticsMap.size === 0) return;
 
-  const wrap = document.createElement('div');
-  wrap.className = 'd3-filter-wrap';
-
+  const wrap    = document.createElement('div'); wrap.className = 'd3-filter-wrap';
   const trigger = document.createElement('div');
-  trigger.className = 'tactics-dropdown-trigger' +
-    (activeD3TacticFilters.size > 0 ? ' has-active' : '');
+  trigger.className = 'tactics-dropdown-trigger' + (activeD3TacticFilters.size > 0 ? ' has-active' : '');
 
-  const triggerLabel = document.createElement('span');
-  triggerLabel.textContent = 'TACTIC';
+  const triggerLabel = document.createElement('span'); triggerLabel.textContent = 'TACTIC';
   trigger.appendChild(triggerLabel);
-
   if (activeD3TacticFilters.size > 0) {
-    const badge = document.createElement('span');
-    badge.className = 'trigger-badge';
-    badge.textContent = activeD3TacticFilters.size;
-    trigger.appendChild(badge);
+    const badge = document.createElement('span'); badge.className = 'trigger-badge';
+    badge.textContent = activeD3TacticFilters.size; trigger.appendChild(badge);
   }
-
-  const arrow = document.createElement('span');
-  arrow.className = 'trigger-arrow';
-  arrow.textContent = '▼';
+  const arrow = document.createElement('span'); arrow.className = 'trigger-arrow'; arrow.textContent = '▼';
   trigger.appendChild(arrow);
 
-  const menu = document.createElement('div');
-  menu.className = 'tactics-dropdown-menu';
-
-  const header = document.createElement('div');
-  header.className = 'tactics-dropdown-header';
-  const headerLabel = document.createElement('span');
-  headerLabel.textContent = 'FILTER BY D3FEND TACTIC';
+  const menu = document.createElement('div'); menu.className = 'tactics-dropdown-menu';
+  const header = document.createElement('div'); header.className = 'tactics-dropdown-header';
+  const headerLabel = document.createElement('span'); headerLabel.textContent = 'FILTER BY D3FEND TACTIC';
   header.appendChild(headerLabel);
-
   if (activeD3TacticFilters.size > 0) {
-    const clr = document.createElement('button');
-    clr.className = 'tactics-dropdown-clear';
-    clr.textContent = '✕ CLEAR ALL';
-    clr.addEventListener('click', (e) => {
-      e.stopPropagation();
-      activeD3TacticFilters.clear();
-      closeTacticDropdown();
-      renderTable();
-      renderCpePanel();
-    });
+    const clr = document.createElement('button'); clr.className = 'tactics-dropdown-clear'; clr.textContent = '✕ CLEAR ALL';
+    clr.addEventListener('click', (e) => { e.stopPropagation(); activeD3TacticFilters.clear(); closeTacticDropdown(); renderTable(); renderCpePanel(); });
     header.appendChild(clr);
   }
   menu.appendChild(header);
 
   for (const [tactic, count] of tacticsMap) {
     const isActive = activeD3TacticFilters.has(tactic);
-
-    const item = document.createElement('div');
-    item.className = 'tactics-dropdown-item' + (isActive ? ' active' : '');
-
-    const cb = document.createElement('div');
-    cb.className = 'tactic-item-cb';
-
-    const nameSpan = document.createElement('span');
-    nameSpan.className = 'tactic-item-name';
-    nameSpan.textContent = tactic;
-
-    const countSpan = document.createElement('span');
-    countSpan.className = 'tactic-item-count';
-    countSpan.textContent = count;
-
-    item.appendChild(cb);
-    item.appendChild(nameSpan);
-    item.appendChild(countSpan);
-
+    const item = document.createElement('div'); item.className = 'tactics-dropdown-item' + (isActive ? ' active' : '');
+    const cb = document.createElement('div'); cb.className = 'tactic-item-cb';
+    const nameSpan = document.createElement('span'); nameSpan.className = 'tactic-item-name'; nameSpan.textContent = tactic;
+    const countSpan = document.createElement('span'); countSpan.className = 'tactic-item-count'; countSpan.textContent = count;
+    item.appendChild(cb); item.appendChild(nameSpan); item.appendChild(countSpan);
     item.addEventListener('click', (e) => {
       e.stopPropagation();
-      if (activeD3TacticFilters.has(tactic)) activeD3TacticFilters.delete(tactic);
-      else activeD3TacticFilters.add(tactic);
-      renderTable();
-      renderCpePanel();
+      if (activeD3TacticFilters.has(tactic)) activeD3TacticFilters.delete(tactic); else activeD3TacticFilters.add(tactic);
+      renderTable(); renderCpePanel();
       const newTrigger = document.querySelector('.d3-filter-wrap .tactics-dropdown-trigger');
       if (newTrigger) newTrigger.click();
     });
-
     menu.appendChild(item);
   }
 
@@ -1414,21 +1210,13 @@ function renderD3TacticFilter(thElement, containerElement, allD3Ids) {
     closeTacticDropdown();
     if (!isOpen) {
       const rect = trigger.getBoundingClientRect();
-      menu.style.top  = (rect.bottom + 4) + 'px';
-      menu.style.left = rect.left + 'px';
-      setTimeout(() => {
-        const mRect = menu.getBoundingClientRect();
-        if (mRect.right > window.innerWidth - 8)
-          menu.style.left = (rect.right - mRect.width) + 'px';
-      }, 0);
-      menu.classList.add('open');
-      trigger.classList.add('open');
+      menu.style.top = (rect.bottom + 4) + 'px'; menu.style.left = rect.left + 'px';
+      setTimeout(() => { const mRect = menu.getBoundingClientRect(); if (mRect.right > window.innerWidth - 8) menu.style.left = (rect.right - mRect.width) + 'px'; }, 0);
+      menu.classList.add('open'); trigger.classList.add('open');
     }
   });
 
-  wrap.appendChild(trigger);
-  document.body.appendChild(menu);
-  containerElement.appendChild(wrap);
+  wrap.appendChild(trigger); document.body.appendChild(menu); containerElement.appendChild(wrap);
 }
 
 // ─────────────────────────────────────────────
@@ -1462,8 +1250,7 @@ function toggleCheck(id) {
   setLoading(true);
   setTimeout(() => {
     if (checkedIds.size === 0) {
-      universe = null;
-      rs.style.display = "none"; es.style.display = "block";
+      universe = null; rs.style.display="none"; es.style.display="block";
       setLoading(false); renderCpePanel(); return;
     }
     const u = computeUniverse();
@@ -1493,7 +1280,7 @@ function getSevCounts(cveIds) {
   for (const id of cveIds) {
     const cvss = getBestCvss(id);
     const sev  = cvss ? (cvss.severity || 'UNKNOWN') : 'UNKNOWN';
-    if (sev === 'UNKNOWN') continue; // don't offer filter for N/A
+    if (sev === 'UNKNOWN') continue;
     counts.set(sev, (counts.get(sev) || 0) + 1);
   }
   return counts;
@@ -1503,93 +1290,47 @@ function renderSevFilter(allCveIds) {
   const counts = getSevCounts(allCveIds);
   if (counts.size === 0) return null;
 
-  const wrap = document.createElement('div');
-  wrap.className = 'sev-filter-wrap';
-
+  const wrap    = document.createElement('div'); wrap.className = 'sev-filter-wrap';
   const trigger = document.createElement('div');
-  trigger.className = 'sev-dropdown-trigger' +
-    (activeSevFilters.size > 0 ? ' has-active' : '');
+  trigger.className = 'sev-dropdown-trigger' + (activeSevFilters.size > 0 ? ' has-active' : '');
 
-  const triggerLabel = document.createElement('span');
-  triggerLabel.textContent = 'SEVERITY';
+  const triggerLabel = document.createElement('span'); triggerLabel.textContent = 'SEVERITY';
   trigger.appendChild(triggerLabel);
-
   if (activeSevFilters.size > 0) {
-    const badge = document.createElement('span');
-    badge.className = 'trigger-badge';
-    badge.textContent = activeSevFilters.size;
-    trigger.appendChild(badge);
+    const badge = document.createElement('span'); badge.className = 'trigger-badge';
+    badge.textContent = activeSevFilters.size; trigger.appendChild(badge);
   }
-
-  const arrow = document.createElement('span');
-  arrow.className = 'trigger-arrow';
-  arrow.textContent = '\u25BC';
+  const arrow = document.createElement('span'); arrow.className = 'trigger-arrow'; arrow.textContent = '▼';
   trigger.appendChild(arrow);
 
-  const menu = document.createElement('div');
-  menu.className = 'sev-dropdown-menu';
-
-  const header = document.createElement('div');
-  header.className = 'sev-dropdown-header';
-  const headerLabel = document.createElement('span');
-  headerLabel.textContent = 'FILTER BY SEVERITY';
+  const menu = document.createElement('div'); menu.className = 'sev-dropdown-menu';
+  const header = document.createElement('div'); header.className = 'sev-dropdown-header';
+  const headerLabel = document.createElement('span'); headerLabel.textContent = 'FILTER BY SEVERITY';
   header.appendChild(headerLabel);
-
   if (activeSevFilters.size > 0) {
-    const clr = document.createElement('button');
-    clr.className = 'tactics-dropdown-clear';
-    clr.textContent = '\u2715 CLEAR ALL';
-    clr.addEventListener('click', e => {
-      e.stopPropagation();
-      activeSevFilters.clear();
-      closeTacticDropdown();
-      renderTable(); renderCpePanel();
-    });
+    const clr = document.createElement('button'); clr.className = 'tactics-dropdown-clear'; clr.textContent = '✕ CLEAR ALL';
+    clr.addEventListener('click', e => { e.stopPropagation(); activeSevFilters.clear(); closeTacticDropdown(); renderTable(); renderCpePanel(); });
     header.appendChild(clr);
   }
   menu.appendChild(header);
 
   for (const sev of SEV_ORDER) {
-    const count = counts.get(sev);
-    if (!count) continue;
-    const cfg = SEV_CFG[sev];
-    const isActive = activeSevFilters.has(sev);
-
-    const item = document.createElement('div');
-    item.className = 'sev-dropdown-item' + (isActive ? ' active' : '');
-
-    const cb = document.createElement('div');
-    cb.className = 'sev-item-cb';
+    const count = counts.get(sev); if (!count) continue;
+    const cfg = SEV_CFG[sev], isActive = activeSevFilters.has(sev);
+    const item = document.createElement('div'); item.className = 'sev-dropdown-item' + (isActive ? ' active' : '');
+    const cb = document.createElement('div'); cb.className = 'sev-item-cb';
     if (isActive) cb.style.cssText = `background:${cfg.dot};border-color:${cfg.dot};`;
     else cb.style.borderColor = cfg.dot + '88';
-
-    const dot = document.createElement('span');
-    dot.className = 'sev-item-dot';
-    dot.style.background = cfg.dot;
-
-    const lbl = document.createElement('span');
-    lbl.className = 'sev-item-label';
-    lbl.textContent = cfg.label;
-    lbl.style.color = isActive ? cfg.itemColor : '#4a6a8a';
-
-    const cnt = document.createElement('span');
-    cnt.className = 'sev-item-count';
-    cnt.textContent = count;
-
+    const dot = document.createElement('span'); dot.className = 'sev-item-dot'; dot.style.background = cfg.dot;
+    const lbl = document.createElement('span'); lbl.className = 'sev-item-label'; lbl.textContent = cfg.label; lbl.style.color = isActive ? cfg.itemColor : '#4a6a8a';
+    const cnt = document.createElement('span'); cnt.className = 'sev-item-count'; cnt.textContent = count;
     item.appendChild(cb); item.appendChild(dot); item.appendChild(lbl); item.appendChild(cnt);
-
     item.addEventListener('click', e => {
       e.stopPropagation();
-      if (activeSevFilters.has(sev)) activeSevFilters.delete(sev);
-      else activeSevFilters.add(sev);
+      if (activeSevFilters.has(sev)) activeSevFilters.delete(sev); else activeSevFilters.add(sev);
       renderTable(); renderCpePanel();
-      // reopen dropdown
-      setTimeout(() => {
-        const t = document.querySelector('.sev-dropdown-trigger');
-        if (t) t.click();
-      }, 0);
+      setTimeout(() => { const t = document.querySelector('.sev-dropdown-trigger'); if (t) t.click(); }, 0);
     });
-
     menu.appendChild(item);
   }
 
@@ -1599,20 +1340,13 @@ function renderSevFilter(allCveIds) {
     closeTacticDropdown();
     if (!isOpen) {
       const rect = trigger.getBoundingClientRect();
-      menu.style.top  = (rect.bottom + 4) + 'px';
-      menu.style.left = rect.left + 'px';
-      setTimeout(() => {
-        const mRect = menu.getBoundingClientRect();
-        if (mRect.right > window.innerWidth - 8)
-          menu.style.left = (rect.right - mRect.width) + 'px';
-      }, 0);
-      menu.classList.add('open');
-      trigger.classList.add('open');
+      menu.style.top = (rect.bottom + 4) + 'px'; menu.style.left = rect.left + 'px';
+      setTimeout(() => { const mRect = menu.getBoundingClientRect(); if (mRect.right > window.innerWidth - 8) menu.style.left = (rect.right - mRect.width) + 'px'; }, 0);
+      menu.classList.add('open'); trigger.classList.add('open');
     }
   });
 
-  wrap.appendChild(trigger);
-  document.body.appendChild(menu);
+  wrap.appendChild(trigger); document.body.appendChild(menu);
   return wrap;
 }
 
@@ -1624,22 +1358,16 @@ function renderTable() {
   cleanupTacticMenus();
 
   const filtered = applyTacticFilter(universe);
-
-  const cols    = FW.map(fw => filtered[fw] || []);
-  const total   = cols.reduce((s, c) => s + c.length, 0);
-  const maxRows = Math.max(...cols.map(c => c.length), 0);
+  const cols     = FW.map(fw => filtered[fw] || []);
+  const total    = cols.reduce((s,c) => s + c.length, 0);
+  const maxRows  = Math.max(...cols.map(c => c.length), 0);
 
   const parts = [];
-  if (activeTacticFilters.size > 0)
-    parts.push(`${activeTacticFilters.size} ATT&CK tactic${activeTacticFilters.size !== 1 ? 's' : ''}`);
-  if (activeD3TacticFilters.size > 0)
-    parts.push(`${activeD3TacticFilters.size} D3FEND tactic${activeD3TacticFilters.size !== 1 ? 's' : ''}`);
-  if (kevFilterActive)
-    parts.push('KEV');
-  if (activeSevFilters.size > 0)
-    parts.push([...activeSevFilters].join('/'));
+  if (activeTacticFilters.size > 0)   parts.push(`${activeTacticFilters.size} ATT&CK tactic${activeTacticFilters.size!==1?'s':''}`);
+  if (activeD3TacticFilters.size > 0) parts.push(`${activeD3TacticFilters.size} D3FEND tactic${activeD3TacticFilters.size!==1?'s':''}`);
+  if (kevFilterActive)                parts.push('KEV');
+  if (activeSevFilters.size > 0)      parts.push([...activeSevFilters].join('/'));
   const filterLabel = parts.length > 0 ? ` (filtered by ${parts.join(' + ')})` : '';
-
   $("result-total").textContent = `${total} ${total===1?'result':'results'}${filterLabel}`;
 
   const thead = $("col-thead-row"); thead.innerHTML = "";
@@ -1647,16 +1375,10 @@ function renderTable() {
     const fc = FW_CFG[fw], th = document.createElement("th");
     th.style.cssText = `color:${fc.text}; border-top:3px solid ${fc.bg}; border-right:1px solid #111620;`;
 
-    const inner = document.createElement('div');
-    inner.className = 'col-header-inner';
-
-    const dot = document.createElement('span');
-    dot.className = 'col-header-dot';
-    dot.style.background = fc.bg;
+    const inner = document.createElement('div'); inner.className = 'col-header-inner';
+    const dot = document.createElement('span'); dot.className = 'col-header-dot'; dot.style.background = fc.bg;
     inner.appendChild(dot);
-
-    const label = document.createElement('span');
-    label.textContent = fw;
+    const label = document.createElement('span'); label.textContent = fw;
     inner.appendChild(label);
 
     if (fw === "ATT&CK") renderTacticFilter(th, inner, universe["ATT&CK"]);
@@ -1665,31 +1387,18 @@ function renderTable() {
     if (fw === "CVE") {
       const kevWrap = document.createElement('div');
       kevWrap.className = 'kev-filter-wrap' + (kevFilterActive ? ' active' : '');
-      kevWrap.title = kevFilterActive
-        ? 'Showing only KEV CVEs — click to remove filter'
-        : 'Filter: show only CISA KEV CVEs';
-      const lbl = document.createElement('span');
-      lbl.className = 'kev-filter-label';
-      lbl.textContent = 'KEV';
+      kevWrap.title = kevFilterActive ? 'Showing only KEV CVEs — click to remove filter' : 'Filter: show only CISA KEV CVEs';
+      const lbl = document.createElement('span'); lbl.className = 'kev-filter-label'; lbl.textContent = 'KEV';
       kevWrap.appendChild(lbl);
-      kevWrap.addEventListener('click', (e) => {
-        e.stopPropagation();
-        kevFilterActive = !kevFilterActive;
-        renderTable();
-        renderCpePanel();
-      });
+      kevWrap.addEventListener('click', (e) => { e.stopPropagation(); kevFilterActive = !kevFilterActive; renderTable(); renderCpePanel(); });
       inner.appendChild(kevWrap);
 
-      // ── Severity filter dropdown ─────────────────────────────────
       const sevWrap = renderSevFilter(universe["CVE"]);
       if (sevWrap) inner.appendChild(sevWrap);
     }
 
-    const count = document.createElement('span');
-    count.className = 'col-header-count';
-    count.textContent = cols[ci].length;
+    const count = document.createElement('span'); count.className = 'col-header-count'; count.textContent = cols[ci].length;
     inner.appendChild(count);
-
     th.appendChild(inner);
     thead.appendChild(th);
   });
@@ -1708,27 +1417,22 @@ function renderTable() {
         item.style.setProperty('--cell-border',fc.bg+"55");
         item.style.setProperty('--cell-dim',   fc.dim);
 
-        const cb=document.createElement("div");
-        cb.className="cell-cb";
+        const cb=document.createElement("div"); cb.className="cell-cb";
         cb.title=checked?"Remove from filter":"Add to filter";
         cb.addEventListener("click", e => { e.stopPropagation(); toggleCheck(id); });
 
-        const lnk=document.createElement("a");
-        lnk.className="cell-id";
-        lnk.textContent=id;
-        lnk.title=`Open ${id} on MITRE`;
+        const lnk=document.createElement("a"); lnk.className="cell-id";
+        lnk.textContent=id; lnk.title=`Open ${id} on MITRE`;
         if (url) { lnk.href=url; lnk.target="_blank"; lnk.rel="noopener noreferrer"; }
         lnk.addEventListener("click", e => e.stopPropagation());
 
-        item.appendChild(cb);
-        item.appendChild(lnk);
-
+        item.appendChild(cb); item.appendChild(lnk);
         if (fw === "CVE" && isKev(id)) item.appendChild(makeKevBadge());
-
-        // ── CVSS badge (CVE column only) ─────────────────────────────
         if (fw === "CVE") item.appendChild(makeCvssBadge(id));
         td.appendChild(item);
-      } else { td.innerHTML=`<span class="col-empty">—</span>`; }
+      } else {
+        td.innerHTML = `<span class="col-empty">—</span>`;
+      }
       tr.appendChild(td);
     });
     tbody.appendChild(tr);
