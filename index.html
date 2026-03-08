@@ -570,7 +570,7 @@ function getUrl(id, type) {
 }
 
 // ─────────────────────────────────────────────
-//  CPE PARSING — gestisce sia cpe:2.3:... che product:vendor:product:ver
+//  CPE PARSING
 // ─────────────────────────────────────────────
 function parseCpe(cpe) {
   // CPE reale: cpe:2.3:type:vendor:product:version:...
@@ -587,15 +587,22 @@ function parseCpe(cpe) {
   }
 
   // Fallback dallo script Python: product:vendor:product[:version]
+  // Usiamo indexOf per non spezzare stringhe di versione come "< 0.3.0"
   if (cpe.startsWith("product:")) {
-    const parts = cpe.split(':');
+    const idx0 = cpe.indexOf(':');                               // fine "product"
+    const idx1 = idx0 !== -1 ? cpe.indexOf(':', idx0 + 1) : -1; // fine vendor
+    const idx2 = idx1 !== -1 ? cpe.indexOf(':', idx1 + 1) : -1; // fine product name
+    const vendor  = idx1 !== -1 ? cpe.slice(idx0 + 1, idx1) : '*';
+    const product = idx2 !== -1 ? cpe.slice(idx1 + 1, idx2) :
+                    idx1 !== -1 ? cpe.slice(idx1 + 1)        : '*';
+    const version = idx2 !== -1 ? cpe.slice(idx2 + 1) || '*' : '*';
     return {
       raw:        cpe,
       isFallback: true,
       type:       'a',
-      vendor:     parts[1] || '*',
-      product:    parts[2] || '*',
-      version:    parts[3] || '*',   // può mancare → '*'
+      vendor,
+      product,
+      version,
     };
   }
 
@@ -1040,7 +1047,6 @@ function renderCpePanel() {
     productSpan.textContent = g.product;
     hdr.appendChild(productSpan);
 
-    // Badge "inferred" per CPE derivate dal fallback product:vendor:product:version
     if (g.isFallback) {
       const badge = document.createElement('span');
       badge.className = 'cpe-inferred-badge';
